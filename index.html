@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Jordan Leopold | 21ST CENTURION</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light only">
+  <meta name="description" content="Jordan Leopold | Entrepreneur, Advocate &amp; Gentleman">
+  <meta property="og:site_name" content="Jordan Leopold | 21ST CENTURION">
+  <meta property="og:title" content="Jordan Leopold | 21ST CENTURION">
+  <meta property="og:type" content="website">
+  <meta property="og:description" content="Jordan Leopold | Entrepreneur, Advocate &amp; Gentleman">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <link href="https://fonts.googleapis.com/css2?display=swap&family=Bebas+Neue:ital,wght@0,400;1,400&family=Alexandria:ital,wght@0,300;1,300" rel="stylesheet" type="text/css">
+  <style>
+    /* Reset */
+    html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
+    article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}
+    body{line-height:1;}
+    ol,ul{list-style:none;}
+    blockquote,q{quotes:none;}
+    blockquote::before,blockquote::after,q::before,q::after{content:'';content:none;}
+    table{border-collapse:collapse;border-spacing:0;}
+    body{-webkit-text-size-adjust:none}
+    mark{background-color:transparent;color:inherit}
+    input::-moz-focus-inner{border:0;padding:0}
+    input[type="text"],input[type="email"],select,textarea{-moz-appearance:none;-webkit-appearance:none;appearance:none}
+    *,*::before,*::after{box-sizing:border-box;}
+
+    /* Root variables */
+    :root {
+      --background-height: 100vh;
+      --viewport-height: 100vh;
+      --site-language-alignment: left;
+      --site-language-direction: ltr;
+      --site-language-flex-alignment: flex-start;
+    }
+
+    html {
+      font-size: 16pt;
+    }
+
+    /* Body */
+    body {
+      line-height: 1.0;
+      min-height: var(--viewport-height);
+      min-width: 320px;
+      overflow-x: hidden;
+      word-wrap: break-word;
+      background-color: #000000;
+    }
+
+    /* Fade-in overlay */
+    body::after {
+      background-color: #F7F7F7;
+      content: '';
+      display: block;
+      pointer-events: none;
+      position: fixed;
+      z-index: 2;
+      height: 100%;
+      left: 0;
+      opacity: 0;
+      top: 0;
+      transition: opacity 3.75s ease-in-out 0s, visibility 3.75s 0s;
+      visibility: hidden;
+      width: 100%;
+    }
+    body.is-loading::after {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Background video */
+    .site-bg {
+      background-attachment: scroll;
+      height: var(--background-height);
+      left: 0;
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      width: 100vw;
+      z-index: 0;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    .site-bg video {
+      bottom: 0;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+
+    /* Site wrapper */
+    .site-wrapper {
+      -webkit-overflow-scrolling: touch;
+      align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: var(--viewport-height);
+      overflow: hidden;
+      position: relative;
+      z-index: 2;
+      padding: 3rem 3rem 3rem 0;
+    }
+
+    /* Main card */
+    .site-main {
+      --alignment: left;
+      --flex-alignment: flex-start;
+      --border-radius-tl: 0;
+      --border-radius-tr: 1rem;
+      --border-radius-br: 1rem;
+      --border-radius-bl: 0;
+      align-items: center;
+      display: flex;
+      flex-grow: 0;
+      flex-shrink: 0;
+      justify-content: center;
+      max-width: 100%;
+      position: relative;
+      text-align: var(--alignment);
+      z-index: 1;
+      background-image: linear-gradient(90deg, rgba(255,255,255,0.859) 58%, rgba(255,255,255,0.412) 100%);
+      background-position: 0% 0%;
+      background-repeat: repeat;
+      background-size: cover;
+      box-shadow: 0rem 1.75rem 2rem 0rem rgba(0,0,0,0.051);
+      border-radius: var(--border-radius-tl) var(--border-radius-tr) var(--border-radius-br) var(--border-radius-bl);
+      border-top: solid 1px rgba(0,0,0,0.09);
+      border-right: solid 1px rgba(0,0,0,0.09);
+      border-bottom: solid 1px rgba(0,0,0,0.09);
+      transition: opacity 1s ease 0s, transform 1s ease 0s;
+    }
+
+    .site-main > .inner {
+      --border-radius-tl: 0;
+      --border-radius-tr: calc(1rem - 1px);
+      --border-radius-br: calc(1rem - 1px);
+      --border-radius-bl: 0;
+      --padding-horizontal: 4rem;
+      --padding-vertical: 4.5rem;
+      --spacing: 1.5rem;
+      --width: 35rem;
+      border-radius: var(--border-radius-tl) var(--border-radius-tr) var(--border-radius-br) var(--border-radius-bl);
+      max-width: 100%;
+      position: relative;
+      width: var(--width);
+      z-index: 1;
+      padding: var(--padding-vertical) var(--padding-horizontal);
+    }
+
+    .site-main > .inner > * {
+      margin-top: var(--spacing);
+      margin-bottom: var(--spacing);
+    }
+    .site-main > .inner > :first-child { margin-top: 0 !important; }
+    .site-main > .inner > :last-child { margin-bottom: 0 !important; }
+
+    body.is-loading .site-main {
+      opacity: 0;
+      transform: translateX(-1.6875rem);
+    }
+
+    /* Logo image */
+    .image-component {
+      display: block;
+      line-height: 0;
+      max-width: 100%;
+      position: relative;
+    }
+    .image-component > .frame {
+      -webkit-backface-visibility: hidden;
+      display: inline-block;
+      max-width: 100%;
+      overflow: hidden;
+      vertical-align: top;
+      width: 100%;
+    }
+    .image-component > .frame > img {
+      border-radius: 0 !important;
+      max-width: 100%;
+      vertical-align: top;
+      width: inherit;
+    }
+    .image-component.style-1:not(:first-child) { margin-top: 3rem !important; }
+    .image-component.style-1:not(:last-child) { margin-bottom: 3rem !important; }
+    .image-component.style-1 > .frame {
+      width: 7rem;
+      border-radius: 100%;
+      border-color: rgba(0,0,0,0.09);
+      border-style: solid;
+      border-width: 1px;
+    }
+    .image-component.style-1 > .frame > img {
+      border-radius: inherit !important;
+      padding: 0.25rem;
+    }
+
+    /* Heading text */
+    .text-component {
+      direction: var(--site-language-direction);
+      position: relative;
+    }
+    .text-component span.p {
+      display: block;
+      position: relative;
+    }
+
+    .text-component.style-2:not(:first-child) { margin-top: 2rem !important; }
+    .text-component.style-2:not(:last-child) { margin-bottom: 2rem !important; }
+    .text-component.style-2 {
+      color: #1C1C1C;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.375em;
+      line-height: 1;
+      font-weight: 400;
+    }
+
+    /* Body text */
+    .text-component.style-1 {
+      color: #1C1C1C;
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.875em;
+      line-height: 1.75;
+      font-weight: 300;
+    }
+    .text-component.style-1 a {
+      color: #33ADA9;
+      text-decoration: underline;
+    }
+    .text-component.style-1 a:hover { text-decoration: none; }
+    .text-component.style-1 span.p:nth-child(n + 2) { margin-top: 1.5rem; }
+
+    /* Buttons */
+    .buttons-component {
+      cursor: default;
+      display: flex;
+      justify-content: var(--flex-alignment, flex-start);
+      letter-spacing: 0;
+      padding: 0;
+    }
+    .buttons-component > li {
+      max-width: 100%;
+      text-align: var(--alignment, left);
+    }
+    .buttons-component > li > a {
+      align-items: center;
+      justify-content: center;
+      max-width: 100%;
+      text-align: center;
+      text-decoration: none;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    .buttons-component.style-1 {
+      gap: 0.75rem;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .buttons-component.style-1 > li > a {
+      display: inline-flex;
+      width: auto;
+      height: 2.25rem;
+      line-height: 2.25rem;
+      padding: 0 1.125rem;
+      vertical-align: middle;
+      font-family: '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
+      font-size: 1em;
+      font-weight: 400;
+      border-radius: 3rem;
+      background-color: #1C1C1C;
+      color: #FFFFFF;
+      transition: transform 0.25s ease, color 0.25s ease, background-color 0.25s ease;
+    }
+    .buttons-component.style-1 > li > a > svg {
+      display: block;
+      fill: #FFFFFF;
+      flex-grow: 0;
+      flex-shrink: 0;
+      height: 100%;
+      min-width: 16px;
+      pointer-events: none;
+      width: 1em;
+      margin-left: -0.125em;
+      margin-right: calc(1rem + 0rem);
+      transition: fill 0.25s ease;
+    }
+    .buttons-component.style-1 > li > a > .label {
+      direction: var(--site-language-direction);
+      overflow: hidden;
+    }
+    .buttons-component.style-1 > li > a:hover {
+      background-color: #33ADA9 !important;
+      transform: scale(1.025);
+    }
+
+    /* Responsive */
+    @media (max-width: 1680px) { html { font-size: 12pt; } }
+    @media (max-width: 1280px) { html { font-size: 12pt; } }
+    @media (max-width: 980px)  { html { font-size: 10pt; } }
+    @media (max-width: 736px) {
+      html { font-size: 10pt; }
+      .site-wrapper { padding: 3rem 3rem 3rem 0; }
+      .site-main > .inner {
+        --padding-horizontal: 2rem;
+        --padding-vertical: 3.5rem;
+        --spacing: 1.5rem;
+      }
+      .image-component.style-1:not(:first-child) { margin-top: 2.25rem !important; }
+      .image-component.style-1:not(:last-child) { margin-bottom: 2.25rem !important; }
+      .image-component.style-1 > .frame { width: 7rem; }
+      .text-component.style-2 { font-size: 3em; line-height: 1; width: 100%; }
+      .text-component.style-1 { font-size: 0.875em; line-height: 1.75; width: 100%; }
+    }
+    @media (max-width: 480px) {
+      .site-wrapper { padding: 2.25rem 2.25rem 2.25rem 0; }
+      .site-main > .inner { --spacing: 1.3125rem; }
+      .buttons-component.style-1 { flex-direction: column; flex-wrap: nowrap; }
+      .buttons-component.style-1 > li > a { max-width: 32rem; width: 100%; }
+    }
+    @media (max-width: 360px) {
+      .site-wrapper { padding: 2.0625rem 2.0625rem 2.0625rem 0; }
+      .site-main > .inner {
+        --padding-horizontal: 1.5rem;
+        --padding-vertical: 2.625rem;
+        --spacing: 1.125rem;
+      }
+      .text-component.style-2 { font-size: 3em; }
+      .text-component.style-1 { font-size: 0.875em; }
+      .buttons-component.style-1 { gap: 0.5625rem; }
+    }
+  </style>
+</head>
+<body class="is-loading">
+
+  <!-- Background video -->
+  <div class="site-bg">
+    <video src="assets/videos/bg.mp4" autoplay preload="auto" loop playsinline disablepictureinpicture disableremoteplayback webkit-playsinline muted></video>
+  </div>
+
+  <!-- SVG icon defs -->
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 40 40" display="none" width="0" height="0">
+    <!-- LinkedIn -->
+    <symbol id="icon-linkedin" viewBox="0 0 40 40">
+      <path d="M12.1,13.8v19.1H5.7V13.8C5.7,13.8,12.1,13.8,12.1,13.8z M12.5,7.9c0,0.9-0.3,1.7-1,2.4c-0.7,0.6-1.5,0.9-2.6,0.9h0 c-1.1,0-1.9-0.3-2.5-0.9c-0.6-0.6-1-1.4-1-2.4c0-1,0.3-1.7,1-2.4S7.9,4.6,9,4.6s1.9,0.3,2.6,0.9S12.5,6.9,12.5,7.9z M35,22v11h-6.4 V22.7c0-1.4-0.3-2.4-0.8-3.2c-0.5-0.8-1.3-1.1-2.4-1.1c-0.8,0-1.5,0.2-2,0.7c-0.5,0.4-1,1-1.2,1.7c-0.1,0.4-0.2,0.9-0.2,1.6v10.7 h-6.4c0-5.1,0-9.3,0-12.5s0-5.1,0-5.7l0-0.9H22v2.8h0c0.3-0.4,0.5-0.8,0.8-1.1c0.3-0.3,0.6-0.6,1.1-1c0.5-0.4,1-0.6,1.7-0.8 c0.7-0.2,1.4-0.3,2.2-0.3c2.2,0,4,0.7,5.3,2.2C34.4,17,35,19.1,35,22L35,22z"></path>
+    </symbol>
+    <!-- Instagram -->
+    <symbol id="icon-instagram" viewBox="0 0 40 40">
+      <path d="M20,7c4.2,0,4.7,0,6.3,0.1c1.5,0.1,2.3,0.3,3,0.5C30,8,30.5,8.3,31.1,8.9c0.5,0.5,0.9,1.1,1.2,1.8c0.2,0.5,0.5,1.4,0.5,3 C33,15.3,33,15.8,33,20s0,4.7-0.1,6.3c-0.1,1.5-0.3,2.3-0.5,3c-0.3,0.7-0.6,1.2-1.2,1.8c-0.5,0.5-1.1,0.9-1.8,1.2 c-0.5,0.2-1.4,0.5-3,0.5C24.7,33,24.2,33,20,33s-4.7,0-6.3-0.1c-1.5-0.1-2.3-0.3-3-0.5C10,32,9.5,31.7,8.9,31.1 C8.4,30.6,8,30,7.7,29.3c-0.2-0.5-0.5-1.4-0.5-3C7,24.7,7,24.2,7,20s0-4.7,0.1-6.3c0.1-1.5,0.3-2.3,0.5-3C8,10,8.3,9.5,8.9,8.9 C9.4,8.4,10,8,10.7,7.7c0.5-0.2,1.4-0.5,3-0.5C15.3,7.1,15.8,7,20,7z M20,4.3c-4.3,0-4.8,0-6.5,0.1c-1.6,0-2.8,0.3-3.8,0.7 C8.7,5.5,7.8,6,6.9,6.9C6,7.8,5.5,8.7,5.1,9.7c-0.4,1-0.6,2.1-0.7,3.8c-0.1,1.7-0.1,2.2-0.1,6.5s0,4.8,0.1,6.5 c0,1.6,0.3,2.8,0.7,3.8c0.4,1,0.9,1.9,1.8,2.8c0.9,0.9,1.7,1.4,2.8,1.8c1,0.4,2.1,0.6,3.8,0.7c1.6,0.1,2.2,0.1,6.5,0.1 s4.8,0,6.5-0.1c1.6-0.1,2.9-0.3,3.8-0.7c1-0.4,1.9-0.9,2.8-1.8c0.9-0.9,1.4-1.7,1.8-2.8c0.4-1,0.6-2.1,0.7-3.8 c0.1-1.6,0.1-2.2,0.1-6.5s0-4.8-0.1-6.5c-0.1-1.6-0.3-2.9-0.7-3.8c-0.4-1-0.9-1.9-1.8-2.8c-0.9-0.9-1.7-1.4-2.8-1.8 c-1-0.4-2.1-0.6-3.8-0.7C24.8,4.3,24.3,4.3,20,4.3L20,4.3L20,4.3z"></path>
+      <path d="M20,11.9c-4.5,0-8.1,3.7-8.1,8.1s3.7,8.1,8.1,8.1s8.1-3.7,8.1-8.1S24.5,11.9,20,11.9z M20,25.2c-2.9,0-5.2-2.3-5.2-5.2 s2.3-5.2,5.2-5.2s5.2,2.3,5.2,5.2S22.9,25.2,20,25.2z"></path>
+      <path d="M30.6,11.6c0,1-0.8,1.9-1.9,1.9c-1,0-1.9-0.8-1.9-1.9s0.8-1.9,1.9-1.9C29.8,9.7,30.6,10.5,30.6,11.6z"></path>
+    </symbol>
+    <!-- YouTube -->
+    <symbol id="icon-youtube" viewBox="0 0 40 40">
+      <path d="M24.3,27v4.2c0,0.9-0.3,1.3-0.8,1.3c-0.3,0-0.6-0.1-0.9-0.4v-6c0.3-0.3,0.6-0.4,0.9-0.4C24,25.6,24.3,26.1,24.3,27L24.3,27z M31.1,27v0.9h-1.8V27c0-0.9,0.3-1.4,0.9-1.4C30.8,25.6,31.1,26.1,31.1,27L31.1,27z M11.7,22.6h2.1v-1.9H7.6v1.9h2.1v11.4h2 L11.7,22.6L11.7,22.6z M17.5,34.1h1.8v-9.9h-1.8v7.6c-0.4,0.6-0.8,0.8-1.1,0.8c-0.2,0-0.4-0.1-0.4-0.4c0,0,0-0.3,0-0.7v-7.3h-1.8V32 c0,0.7,0.1,1.1,0.2,1.5c0.2,0.5,0.5,0.7,1.2,0.7c0.6,0,1.3-0.4,2-1.2L17.5,34.1L17.5,34.1z M26.1,31.1v-4c0-1-0.1-1.6-0.2-2 c-0.2-0.7-0.7-1.1-1.4-1.1c-0.7,0-1.3,0.4-1.9,1.1v-4.4h-1.8v13.3h1.8v-1c0.6,0.7,1.2,1.1,1.9,1.1c0.7,0,1.2-0.4,1.4-1.1 C26,32.7,26.1,32.1,26.1,31.1L26.1,31.1z M32.9,30.9v-0.3H31c0,0.7,0,1.1,0,1.2c-0.1,0.5-0.4,0.7-0.8,0.7c-0.6,0-0.9-0.5-0.9-1.4 v-1.7h3.6v-2.1c0-1.1-0.2-1.8-0.5-2.3c-0.5-0.7-1.2-1-2.1-1c-0.9,0-1.6,0.3-2.1,1c-0.4,0.5-0.6,1.3-0.6,2.3v3.5 c0,1.1,0.2,1.8,0.6,2.3c0.5,0.7,1.2,1,2.2,1c1,0,1.7-0.4,2.2-1.1c0.2-0.4,0.4-0.7,0.4-1.1C32.9,31.9,32.9,31.5,32.9,30.9L32.9,30.9z M20.7,12.5V8.3c0-0.9-0.3-1.4-0.9-1.4c-0.6,0-0.9,0.5-0.9,1.4v4.2c0,0.9,0.3,1.4,0.9,1.4C20.4,14,20.7,13.5,20.7,12.5z M35.1,27.6 c0,3.1-0.2,5.5-0.5,7c-0.2,0.8-0.6,1.5-1.2,2c-0.6,0.5-1.3,0.8-2,0.9c-2.5,0.3-6.2,0.4-11.1,0.4s-8.7-0.1-11.1-0.4 c-0.8-0.1-1.5-0.4-2.1-0.9c-0.6-0.5-1-1.2-1.2-2c-0.3-1.5-0.5-3.8-0.5-7c0-3.1,0.2-5.5,0.5-7c0.2-0.8,0.6-1.5,1.2-2 c0.6-0.5,1.3-0.9,2.1-0.9c2.5-0.3,6.2-0.4,11.1-0.4s8.7,0.1,11.1,0.4c0.8,0.1,1.5,0.4,2.1,0.9c0.6,0.5,1,1.2,1.2,2 C34.9,22.1,35.1,24.4,35.1,27.6z M15.1,2h2l-2.4,8v5.4h-2V10c-0.2-1-0.6-2.4-1.2-4.3c-0.5-1.4-0.9-2.6-1.3-3.8h2.1l1.4,5.3L15.1,2z M22.5,8.7v3.5c0,1.1-0.2,1.9-0.6,2.4c-0.5,0.7-1.2,1-2.1,1c-0.9,0-1.6-0.3-2.1-1c-0.4-0.5-0.6-1.3-0.6-2.4V8.7 c0-1.1,0.2-1.9,0.6-2.3c0.5-0.7,1.2-1,2.1-1c0.9,0,1.6,0.3,2.1,1C22.3,6.8,22.5,7.6,22.5,8.7z M29.2,5.4v10h-1.8v-1.1 c-0.7,0.8-1.4,1.2-2.1,1.2c-0.6,0-1-0.2-1.2-0.7C24,14.5,24,14,24,13.4V5.4h1.8v7.4c0,0.4,0,0.7,0,0.7c0,0.3,0.2,0.4,0.4,0.4 c0.4,0,0.7-0.3,1.1-0.9V5.4C27.4,5.4,29.2,5.4,29.2,5.4z"></path>
+    </symbol>
+  </svg>
+
+  <!-- Page content -->
+  <div class="site-wrapper">
+    <div class="site-main">
+      <div class="inner">
+
+        <!-- Logo -->
+        <div class="image-component style-1">
+          <span class="frame">
+            <img src="assets/images/image01.jpg" alt="Jordan Leopold Logo">
+          </span>
+        </div>
+
+        <!-- Heading -->
+        <h1 class="text-component style-2">
+          <span class="p">Hi, I'm Jordan Leopold.</span>
+        </h1>
+
+        <!-- Social buttons -->
+        <ul class="buttons-component style-1">
+          <li>
+            <a href="https://www.linkedin.com/in/jordanleopold/" role="button">
+              <svg aria-label="LinkedIn"><use xlink:href="#icon-linkedin"></use></svg>
+              <span class="label">LinkedIn</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/jordan.leopold" role="button">
+              <svg aria-label="Instagram"><use xlink:href="#icon-instagram"></use></svg>
+              <span class="label">Instagram</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" role="button">
+              <svg aria-label="YouTube"><use xlink:href="#icon-youtube"></use></svg>
+              <span class="label">YouTube</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Bio -->
+        <p class="text-component style-1">
+          <span class="p">Jordan is a seasoned business professional with extensive experience in enterprise sales, venture capital investing, and political strategy &amp; advocacy. He is currently teaching himself Agentic AI software development while building CLIENTEL - enabling the one man sales team.</span>
+          <span class="p">Jordan is from Hayward, a city within the East Bay of the San Francisco Bay Area. It was there after graduating Impact Academy of Arts &amp; Technology, Jordan studied Economics &amp; Political Science at Cal State East Bay.</span>
+          <span class="p">His sales acumen was honed at First Republic Bank, Sentry.io and Crunchbase, where he consistently refined his sales skills by implementing successful outbound campaigns. At First Republic, Jordan learned the value of consultative selling while providing white glove support for affluent clients in need of a quality digital banking experience. At Sentry.io, Jordan challenged himself by selling technical product development software to engineering and product teams looking to catch code errors, expanding his technical knowledge and his inbound and outbound selling capabilities. Jordan was promoted in his first 6 months, and exceeded his new quota by 170%. At Crunchbase, Jordan sold industry data that included startup funding to Venture Capital firms, Private Equity firms and Corporate Innovation teams looking to find promising business opportunities.</span>
+          <span class="p">He would later apply his sales and relationship management skills in venture capital, working as an Analyst at The BFM Fund (Emerging Fund) and Keyhorse Capital (State Backed Fund), where he sourced and managed investment deals in early stage startups. At The BFM Fund, Jordan took an impact lens to investing in diverse founders, while at Keyhorse, taking an ecosystem approach to venture funding as a means of economic development for the state of Kentucky. He would then join Newchip, an early-stage startup accelerator as an Investor Relations Associate, where he connected Newchip's portfolio companies to investors in his network. Jordan made 660+ introductions, all while mentoring founders on fundraising and go-to-market strategies.</span>
+          <span class="p">With a strong foundation in finance, sales and relationship management, Jordan excels in creating valuable connections that drive business growth, external impact and a deeper sense of pride in our work.</span>
+          <span class="p">In addition, Jordan also has years of experience in government affairs and community development. From candidate canvassing, to federal and state legislative research and lobbying, to local community service and policy-based advocacy &amp; activism.</span>
+        </p>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Fade in on load
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.body.classList.remove('is-loading');
+      }, 100);
+    });
+
+    // Mobile viewport height fix
+    (function() {
+      var ua = navigator.userAgent;
+      var isMobile = /android|iphone|ipad/i.test(ua);
+      if (isMobile) {
+        var setVh = function() {
+          document.documentElement.style.setProperty('--viewport-height', window.innerHeight + 'px');
+          document.documentElement.style.setProperty('--background-height', (window.innerHeight + 250) + 'px');
+        };
+        window.addEventListener('load', setVh);
+        window.addEventListener('orientationchange', function() {
+          setTimeout(setVh, 100);
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>
