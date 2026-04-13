@@ -4,7 +4,7 @@
   <title>Jordan Leopold | 21ST CENTURION</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light only">
+  <meta name="color-scheme" content="light dark">
   <meta name="description" content="Jordan Leopold | Entrepreneur, Advocate &amp; Gentleman">
   <meta property="og:site_name" content="Jordan Leopold | 21ST CENTURION">
   <meta property="og:title" content="Jordan Leopold | 21ST CENTURION">
@@ -145,8 +145,8 @@
     body.is-loading .site-main { opacity: 0; transform: translateX(-1.6875rem); }
 
     .site-main > .inner {
-      --padding-horizontal: 4rem;
-      --padding-vertical: 4.5rem;
+      --padding-horizontal: 2.75rem;
+      --padding-vertical: 2.75rem;
       --spacing: 1.5rem;
       --width: 35rem;
       display: flex;
@@ -206,7 +206,7 @@
       line-height: 1;
       font-weight: 400;
       margin-top: 2rem !important;
-      margin-bottom: 2rem !important;
+      margin-bottom: 1rem !important;
     }
     .text-component.style-1 {
       color: var(--text);
@@ -322,6 +322,54 @@
       font-weight: 300;
       margin-bottom: 1.25rem;
     }
+
+    /* === SECTION: SERVICES === */
+    .services-section { margin-top: 1.5rem; }
+    .services-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5em;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      margin-bottom: 0.875rem;
+    }
+    .services-grid { display: flex; flex-direction: column; gap: 0; }
+    .service-item {
+      padding: 0.875rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .service-item:last-child { border-bottom: none; }
+    .service-item-top { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.3rem; }
+    .service-name {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.9em;
+      font-weight: 400;
+      color: var(--text);
+    }
+    .service-desc {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.8em;
+      font-weight: 300;
+      color: rgba(28,28,28,0.55);
+      line-height: 1.55;
+    }
+    .service-cta {
+      flex-shrink: 0;
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.65em;
+      font-weight: 400;
+      color: #fff;
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 99px;
+      padding: 3px 10px;
+      white-space: nowrap;
+      text-decoration: none;
+      transition: opacity 150ms;
+    }
+    .service-cta:hover { opacity: 0.85; }
+    body.dark .service-item { border-bottom-color: rgba(255,255,255,0.07); }
+    body.dark .service-desc { color: rgba(240,240,240,0.55); }
 
     /* === SECTION: RESUME === */
     .resume-section {
@@ -725,6 +773,79 @@
       line-height: 1.6;
     }
 
+    /* === DARK MODE TOGGLE === */
+    .dark-toggle {
+      position: absolute;
+      bottom: 1.5rem;
+      /* centered in the left margin strip */
+      left: calc(var(--padding-horizontal) / 2);
+      transform: translateX(-50%);
+      z-index: 3;
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 50%;
+      border: 2px solid rgba(0,0,0,0.25);
+      color: rgba(28,28,28,0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 150ms, color 150ms;
+    }
+    .dark-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .dark-toggle .icon-sun { display: none; }
+
+    /* === DARK MODE === */
+    body.dark { --text: #F0F0F0; --accent: #2EC4BE; }
+    body.dark .site-main {
+      /* Solid near-black on left (content area), photo bleeds through on right */
+      background-image: linear-gradient(90deg, rgba(10,10,10,0.98) 52%, rgba(10,10,10,0.72) 100%);
+      border-top-color: rgba(255,255,255,0.06);
+      border-right-color: rgba(255,255,255,0.06);
+      border-bottom-color: rgba(255,255,255,0.06);
+    }
+    body.dark .site-main > .inner::after {
+      background: linear-gradient(to bottom, transparent, rgba(10,10,10,0.95));
+    }
+    body.dark .image-component.style-1 > .frame { border-color: rgba(255,255,255,0.12); }
+    body.dark .tab-bar { border-bottom-color: rgba(255,255,255,0.25); }
+    body.dark .tab-btn { color: rgba(240,240,240,0.5); }
+    body.dark .tab-btn:hover { color: rgba(240,240,240,0.9); }
+    body.dark .tab-btn.active { color: var(--accent); }
+    body.dark .sub-tab-btn { border-color: rgba(255,255,255,0.15); color: rgba(240,240,240,0.5); }
+    body.dark .sub-tab-btn:hover { border-color: var(--accent); color: var(--accent); }
+    body.dark .social-btn { border-color: rgba(255,255,255,0.15); color: rgba(240,240,240,0.5); }
+    body.dark .social-btn:hover { border-color: var(--accent); color: var(--accent); }
+    body.dark .timeline-body { border-left-color: rgba(26,122,118,0.4); }
+    body.dark .timeline-role { color: rgba(240,240,240,0.6); }
+    body.dark .resume-section h3 { border-bottom-color: rgba(255,255,255,0.1); color: rgba(240,240,240,0.7); }
+    body.dark .resume-entry-title { color: rgba(240,240,240,0.92); }
+    body.dark .resume-entry-org { color: rgba(240,240,240,0.65); }
+    body.dark .resume-entry-meta { color: rgba(240,240,240,0.55); }
+    body.dark .about-bio { color: rgba(240,240,240,0.82); }
+    body.dark .book-author { color: rgba(240,240,240,0.6); }
+    body.dark .book-note { color: rgba(240,240,240,0.7); }
+    body.dark .book-cover { background: rgba(255,255,255,0.05); box-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+    body.dark .star-empty { color: rgba(255,255,255,0.15); }
+    body.dark .placeholder-msg { color: rgba(240,240,240,0.25); }
+    body.dark .year-label { color: rgba(240,240,240,0.5); }
+    body.dark .entry-subtitle { color: rgba(240,240,240,0.6); }
+    body.dark .list-entry { border-bottom-color: rgba(255,255,255,0.06); }
+    body.dark .blog-entry { border-bottom-color: rgba(255,255,255,0.06); }
+    body.dark .blog-excerpt { color: rgba(240,240,240,0.6); }
+    body.dark .social-post-date { color: rgba(240,240,240,0.38); }
+    body.dark .social-post-text { color: rgba(240,240,240,0.72); }
+    body.dark .social-coming-soon { color: rgba(240,240,240,0.35); }
+    body.dark .project-card { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
+    body.dark .project-name { color: rgba(240,240,240,0.9); }
+    body.dark .project-desc { color: rgba(240,240,240,0.6); }
+    body.dark .project-tech-tag { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); color: rgba(240,240,240,0.6); }
+    body.dark .panel-container { scrollbar-color: rgba(255,255,255,0.2) transparent; }
+    body.dark .panel-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); }
+    body.dark .dark-toggle { border-color: rgba(255,255,255,0.35); color: rgba(240,240,240,0.6); }
+    body.dark .dark-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    body.dark .dark-toggle .icon-moon { display: none; }
+    body.dark .dark-toggle .icon-sun { display: flex; }
+
     /* === RESPONSIVE === */
     @media (max-width: 1680px) { html { font-size: 12pt; } }
     @media (max-width: 1280px) { html { font-size: 12pt; } }
@@ -813,6 +934,7 @@
         <!-- ── TAB BAR ── -->
         <nav class="tab-bar" role="tablist">
           <button class="tab-btn active" data-tab="about" role="tab" aria-selected="true">About</button>
+          <button class="tab-btn" data-tab="experience" role="tab" aria-selected="false">Experience</button>
           <button class="tab-btn" data-tab="projects" role="tab" aria-selected="false">Projects</button>
           <button class="tab-btn" data-tab="social" role="tab" aria-selected="false">Social</button>
           <button class="tab-btn" data-tab="events" role="tab" aria-selected="false">Events</button>
@@ -826,9 +948,47 @@
           <!-- ABOUT -->
           <div class="panel active" id="panel-about" role="tabpanel">
             <p class="about-bio" id="about-bio">
-              <!-- FILL: short bio (3–4 sentences) -->
               Jordan Leopold is an entrepreneur, venture capital professional, and political advocate based in the San Francisco Bay Area. With a background spanning enterprise sales, early-stage investing, and government affairs, he is currently building CLIENTEL — an agentic AI platform enabling the one-man sales team — while teaching himself software development.
             </p>
+
+            <div class="services-section">
+              <h3 class="services-heading">Services</h3>
+              <div class="services-grid">
+                <div class="service-item">
+                  <div class="service-item-top">
+                    <div class="service-name">Startup Sales</div>
+                    <a class="service-cta" href="https://cal.com/jordanleopold" target="_blank" rel="noopener noreferrer">Schedule Free Call</a>
+                  </div>
+                  <div class="service-desc">Go-to-market strategy, outbound systems, and product market fit discovery for early stage startups.</div>
+                </div>
+                <div class="service-item">
+                  <div class="service-item-top">
+                    <div class="service-name">Startup Fundraising</div>
+                    <a class="service-cta" href="https://cal.com/jordanleopold" target="_blank" rel="noopener noreferrer">Schedule Free Call</a>
+                  </div>
+                  <div class="service-desc">Fundraising &amp; investor acquisition strategy, pitch positioning, and investor introductions for early stage startups.</div>
+                </div>
+                <div class="service-item">
+                  <div class="service-item-top">
+                    <div class="service-name">Venture Capital Advisory</div>
+                    <a class="service-cta" href="https://cal.com/jordanleopold" target="_blank" rel="noopener noreferrer">Schedule Free Call</a>
+                  </div>
+                  <div class="service-desc">Deal sourcing, founder evaluation, fund operations, and portfolio support for early-stage funds.</div>
+                </div>
+                <div class="service-item">
+                  <div class="service-item-top">
+                    <div class="service-name">Government Affairs</div>
+                    <a class="service-cta" href="https://cal.com/jordanleopold" target="_blank" rel="noopener noreferrer">Schedule Free Call</a>
+                  </div>
+                  <div class="service-desc">Policy advocacy, legislative strategy, and stakeholder engagement for nonprofits, grassroots organizations and aspiring candidates.</div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /#panel-about -->
+
+          <!-- EXPERIENCE -->
+          <div class="panel" id="panel-experience" role="tabpanel">
 
             <div class="resume-section">
               <h3>Experience</h3>
@@ -897,7 +1057,7 @@
               <div class="timeline-entry">
                 <div class="timeline-date">2017</div>
                 <div class="timeline-body">
-                  <div class="timeline-company">Cal State East Bay</div>
+                  <div class="timeline-company">Cal State University East Bay</div>
                   <div class="timeline-role">Economics &amp; Political Science</div>
                 </div>
               </div>
@@ -933,7 +1093,7 @@
 
             </div>
 
-          </div><!-- /#panel-about -->
+          </div><!-- /#panel-experience -->
 
           <!-- PROJECTS -->
           <div class="panel" id="panel-projects" role="tabpanel">
@@ -1019,6 +1179,12 @@
           </div>
 
         </div><!-- /.panel-container -->
+
+        <!-- Dark mode toggle — bottom-left of card -->
+        <button id="dark-toggle" class="dark-toggle" aria-label="Toggle dark mode">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="12" height="12"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/></svg>
+        </button>
 
       </div><!-- /.inner -->
     </div><!-- /.site-main -->
@@ -1363,6 +1529,19 @@
             fade.classList.remove('visible');
           });
         });
+      });
+    })();
+
+    // ─────────────────────────────────────────
+    // DARK MODE TOGGLE
+    // ─────────────────────────────────────────
+    (function() {
+      var btn = document.getElementById('dark-toggle');
+      if (!btn) return;
+      if (localStorage.getItem('dark-mode') === 'true') document.body.classList.add('dark');
+      btn.addEventListener('click', function() {
+        document.body.classList.toggle('dark');
+        localStorage.setItem('dark-mode', document.body.classList.contains('dark'));
       });
     })();
 
