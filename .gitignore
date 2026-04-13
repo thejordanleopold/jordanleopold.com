@@ -1,2 +1,9 @@
 .DS_Store
 assets/videos/bg.mov
+
+# Node
+node_modules/
+npm-debug.log*
+
+# content.js is intentionally committed so the site deploys without a build step.
+# To regenerate: node build.js

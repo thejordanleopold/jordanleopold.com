@@ -14,7 +14,7 @@
   <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
   <link href="https://fonts.googleapis.com/css2?display=swap&family=Bebas+Neue:ital,wght@0,400;1,400&family=Alexandria:ital,wght@0,300;1,300" rel="stylesheet" type="text/css">
   <style>
-    /* Reset */
+    /* === RESET === */
     html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
     article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}
     body{line-height:1;}
@@ -27,21 +27,22 @@
     input::-moz-focus-inner{border:0;padding:0}
     input[type="text"],input[type="email"],select,textarea{-moz-appearance:none;-webkit-appearance:none;appearance:none}
     *,*::before,*::after{box-sizing:border-box;}
+    button{background:none;border:none;cursor:pointer;font:inherit;color:inherit;}
 
-    /* Root variables */
+    /* === ROOT VARIABLES === */
     :root {
       --background-height: 100vh;
       --viewport-height: 100vh;
       --site-language-alignment: left;
       --site-language-direction: ltr;
       --site-language-flex-alignment: flex-start;
+      --accent: #1A7A76;
+      --text: #1C1C1C;
     }
 
-    html {
-      font-size: 16pt;
-    }
+    html { font-size: 16pt; }
 
-    /* Body */
+    /* === BODY === */
     body {
       line-height: 1.0;
       min-height: var(--viewport-height);
@@ -51,7 +52,7 @@
       background-color: #000000;
     }
 
-    /* Fade-in overlay */
+    /* Page fade-in overlay */
     body::after {
       background-color: #F7F7F7;
       content: '';
@@ -67,14 +68,10 @@
       visibility: hidden;
       width: 100%;
     }
-    body.is-loading::after {
-      opacity: 1;
-      visibility: visible;
-    }
+    body.is-loading::after { opacity: 1; visibility: visible; }
 
-    /* Background video */
+    /* === BACKGROUND VIDEO === */
     .site-bg {
-      background-attachment: scroll;
       height: var(--background-height);
       left: 0;
       pointer-events: none;
@@ -95,8 +92,18 @@
       top: 0;
       width: 100%;
     }
+    .site-bg-fade {
+      position: absolute;
+      inset: 0;
+      background: #000;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 1;
+      transition: opacity 2s ease;
+    }
+    .site-bg-fade.visible { opacity: 1; transition: none; }
 
-    /* Site wrapper */
+    /* === LAYOUT === */
     .site-wrapper {
       -webkit-overflow-scrolling: touch;
       align-items: flex-start;
@@ -107,30 +114,27 @@
       overflow: hidden;
       position: relative;
       z-index: 2;
-      padding: 3rem 3rem 3rem 0;
+      padding: 1rem 3rem 1rem 0;
     }
 
-    /* Main card */
+    /* === CARD === */
     .site-main {
-      --alignment: left;
-      --flex-alignment: flex-start;
       --border-radius-tl: 0;
       --border-radius-tr: 1rem;
       --border-radius-br: 1rem;
       --border-radius-bl: 0;
-      align-items: center;
+      align-items: stretch;
       display: flex;
       flex-grow: 0;
       flex-shrink: 0;
       justify-content: center;
       max-width: 100%;
+      height: 96vh;
+      max-height: 96vh;
+      overflow: hidden;
       position: relative;
-      text-align: var(--alignment);
       z-index: 1;
       background-image: linear-gradient(90deg, rgba(255,255,255,0.859) 58%, rgba(255,255,255,0.412) 100%);
-      background-position: 0% 0%;
-      background-repeat: repeat;
-      background-size: cover;
       box-shadow: 0rem 1.75rem 2rem 0rem rgba(0,0,0,0.051);
       border-radius: var(--border-radius-tl) var(--border-radius-tr) var(--border-radius-br) var(--border-radius-bl);
       border-top: solid 1px rgba(0,0,0,0.09);
@@ -138,43 +142,44 @@
       border-bottom: solid 1px rgba(0,0,0,0.09);
       transition: opacity 1s ease 0s, transform 1s ease 0s;
     }
+    body.is-loading .site-main { opacity: 0; transform: translateX(-1.6875rem); }
 
     .site-main > .inner {
-      --border-radius-tl: 0;
-      --border-radius-tr: calc(1rem - 1px);
-      --border-radius-br: calc(1rem - 1px);
-      --border-radius-bl: 0;
       --padding-horizontal: 4rem;
       --padding-vertical: 4.5rem;
       --spacing: 1.5rem;
       --width: 35rem;
-      border-radius: var(--border-radius-tl) var(--border-radius-tr) var(--border-radius-br) var(--border-radius-bl);
+      display: flex;
+      flex-direction: column;
       max-width: 100%;
-      position: relative;
       width: var(--width);
-      z-index: 1;
-      padding: var(--padding-vertical) var(--padding-horizontal);
-    }
-
-    .site-main > .inner > * {
-      margin-top: var(--spacing);
-      margin-bottom: var(--spacing);
-    }
-    .site-main > .inner > :first-child { margin-top: 0 !important; }
-    .site-main > .inner > :last-child { margin-bottom: 0 !important; }
-
-    body.is-loading .site-main {
-      opacity: 0;
-      transform: translateX(-1.6875rem);
-    }
-
-    /* Logo image */
-    .image-component {
-      display: block;
-      line-height: 0;
-      max-width: 100%;
+      padding: var(--padding-vertical) 0 0 var(--padding-horizontal);
+      overflow: hidden;
       position: relative;
     }
+    /* Fade at bottom to hint scrollability */
+    .site-main > .inner::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3.5rem;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.88));
+      pointer-events: none;
+      z-index: 2;
+    }
+    /* Card header and tab bar keep the right padding */
+    .card-header { padding-right: var(--padding-horizontal); }
+    .tab-bar { padding-right: var(--padding-horizontal); }
+
+    /* Header section (logo + title + buttons) — always visible */
+    .card-header > * { margin-top: var(--spacing); margin-bottom: var(--spacing); }
+    .card-header > :first-child { margin-top: 0 !important; }
+    .card-header > :last-child { margin-bottom: 0 !important; }
+
+    /* === LOGO === */
+    .image-component { display: block; line-height: 0; max-width: 100%; position: relative; }
     .image-component > .frame {
       -webkit-backface-visibility: hidden;
       display: inline-block;
@@ -183,73 +188,45 @@
       vertical-align: top;
       width: 100%;
     }
-    .image-component > .frame > img {
-      border-radius: 0 !important;
-      max-width: 100%;
-      vertical-align: top;
-      width: inherit;
-    }
-    .image-component.style-1:not(:first-child) { margin-top: 3rem !important; }
-    .image-component.style-1:not(:last-child) { margin-bottom: 3rem !important; }
+    .image-component > .frame > img { border-radius: 0 !important; max-width: 100%; vertical-align: top; width: inherit; }
     .image-component.style-1 > .frame {
-      width: 7rem;
+      width: 4.67rem;
       border-radius: 100%;
-      border-color: rgba(0,0,0,0.09);
-      border-style: solid;
-      border-width: 1px;
+      border: 1px solid rgba(0,0,0,0.09);
     }
-    .image-component.style-1 > .frame > img {
-      border-radius: inherit !important;
-      padding: 0.25rem;
-    }
+    .image-component.style-1 > .frame > img { border-radius: inherit !important; padding: 0.25rem; }
 
-    /* Heading text */
-    .text-component {
-      direction: var(--site-language-direction);
-      position: relative;
-    }
-    .text-component span.p {
-      display: block;
-      position: relative;
-    }
-
-    .text-component.style-2:not(:first-child) { margin-top: 2rem !important; }
-    .text-component.style-2:not(:last-child) { margin-bottom: 2rem !important; }
+    /* === HEADING === */
+    .text-component { direction: var(--site-language-direction); position: relative; }
+    .text-component span.p { display: block; position: relative; }
     .text-component.style-2 {
-      color: #1C1C1C;
+      color: var(--text);
       font-family: 'Bebas Neue', sans-serif;
       font-size: 3.375em;
       line-height: 1;
       font-weight: 400;
+      margin-top: 2rem !important;
+      margin-bottom: 2rem !important;
     }
-
-    /* Body text */
     .text-component.style-1 {
-      color: #1C1C1C;
+      color: var(--text);
       font-family: 'Alexandria', sans-serif;
       font-size: 0.875em;
       line-height: 1.75;
       font-weight: 300;
     }
-    .text-component.style-1 a {
-      color: #33ADA9;
-      text-decoration: underline;
-    }
+    .text-component.style-1 a { color: var(--accent); text-decoration: underline; }
     .text-component.style-1 a:hover { text-decoration: none; }
-    .text-component.style-1 span.p:nth-child(n + 2) { margin-top: 1.5rem; }
+    .text-component.style-1 span.p:nth-child(n+2) { margin-top: 1.5rem; }
 
-    /* Buttons */
+    /* === SOCIAL BUTTONS === */
     .buttons-component {
       cursor: default;
       display: flex;
-      justify-content: var(--flex-alignment, flex-start);
-      letter-spacing: 0;
+      justify-content: flex-start;
       padding: 0;
     }
-    .buttons-component > li {
-      max-width: 100%;
-      text-align: var(--alignment, left);
-    }
+    .buttons-component > li { max-width: 100%; }
     .buttons-component > li > a {
       align-items: center;
       justify-content: center;
@@ -259,25 +236,19 @@
       vertical-align: middle;
       white-space: nowrap;
     }
-    .buttons-component.style-1 {
-      gap: 0.75rem;
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
+    .buttons-component.style-1 { gap: 0.75rem; flex-direction: row; flex-wrap: wrap; }
     .buttons-component.style-1 > li > a {
       display: inline-flex;
-      width: auto;
-      height: 2.25rem;
-      line-height: 2.25rem;
-      padding: 0 1.125rem;
-      vertical-align: middle;
-      font-family: '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
-      font-size: 1em;
+      height: 1.75rem;
+      line-height: 1.75rem;
+      padding: 0 0.8rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.8em;
       font-weight: 400;
       border-radius: 3rem;
-      background-color: #1C1C1C;
+      background-color: var(--text);
       color: #FFFFFF;
-      transition: transform 0.25s ease, color 0.25s ease, background-color 0.25s ease;
+      transition: transform 0.25s ease, background-color 0.25s ease;
     }
     .buttons-component.style-1 > li > a > svg {
       display: block;
@@ -286,55 +257,507 @@
       flex-shrink: 0;
       height: 100%;
       min-width: 16px;
-      pointer-events: none;
       width: 1em;
       margin-left: -0.125em;
-      margin-right: calc(1rem + 0rem);
-      transition: fill 0.25s ease;
+      margin-right: 0.625rem;
+      pointer-events: none;
     }
-    .buttons-component.style-1 > li > a > .label {
-      direction: var(--site-language-direction);
-      overflow: hidden;
+    .buttons-component.style-1 > li > a > .label { overflow: hidden; }
+    .buttons-component.style-1 > li > a:hover { background-color: var(--accent) !important; transform: scale(1.025); }
+
+    /* === TAB BAR === */
+    .tab-bar {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid rgba(0,0,0,0.25);
+      margin-top: 0.625rem;
+      flex-shrink: 0;
     }
-    .buttons-component.style-1 > li > a:hover {
-      background-color: #33ADA9 !important;
-      transform: scale(1.025);
+    .tab-btn {
+      flex: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      padding: 0.5rem 0.6rem;
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.625em;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(28,28,28,0.65);
+      transition: color 150ms, border-color 150ms;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: rgba(28,28,28,0.9); }
+    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    /* === PANEL CONTAINER === */
+    .panel-container {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-top: 1.25rem;
+      /* Bleed to right edge of card so scrollbar sits there */
+      padding-bottom: 3.5rem; /* space for fade */
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0,0,0,0.15) transparent;
+    }
+    .panel-container::-webkit-scrollbar { width: 4px; }
+    .panel-container::-webkit-scrollbar-track { background: transparent; }
+    .panel-container::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 99px; }
+
+    /* Panels restore right padding that .inner no longer provides */
+    .panel { padding-right: var(--padding-horizontal); }
+
+    .panel { display: none; }
+    .panel.active { display: block; animation: fadeIn 150ms ease; }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* === SECTION: ABOUT === */
+    .about-bio {
+      color: var(--text);
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.875em;
+      line-height: 1.75;
+      font-weight: 300;
+      margin-bottom: 1.25rem;
     }
 
-    /* Responsive */
+    /* === SECTION: RESUME === */
+    .resume-section {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      column-gap: 0.5rem;
+      row-gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .resume-section h3 {
+      grid-column: 1 / -1;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5em;
+      color: var(--text);
+      margin-bottom: 0;
+      letter-spacing: 0.02em;
+    }
+    .timeline-entry { display: contents; }
+    .timeline-date {
+      white-space: nowrap;
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.7em;
+      color: var(--accent);
+      padding-top: 0.2rem;
+      font-weight: 300;
+      line-height: 1.4;
+      align-self: start;
+    }
+    .timeline-body {
+      border-left: 2px solid rgba(26,122,118,0.25);
+      padding-left: 0.65rem;
+      align-self: start;
+    }
+    .timeline-company {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.8em;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.1rem;
+    }
+    .timeline-role {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.775em;
+      color: rgba(28,28,28,0.65);
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-bullets {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.775em;
+      color: rgba(28,28,28,0.8);
+      font-weight: 300;
+      line-height: 1.6;
+      list-style: disc;
+      padding-left: 1rem;
+    }
+    .timeline-bullets li { margin-bottom: 0.2rem; }
+
+    /* === SECTION: PROJECTS === */
+    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.875rem; }
+    .project-card {
+      background: rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 0.625rem;
+      padding: 0.875rem;
+    }
+    .project-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.25em;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+      line-height: 1;
+    }
+    .project-desc {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.75em;
+      color: rgba(28,28,28,0.7);
+      font-weight: 300;
+      line-height: 1.5;
+      margin-bottom: 0.625rem;
+    }
+    .tech-pills { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-bottom: 0.625rem; }
+    .tech-pill {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.6em;
+      padding: 2px 8px;
+      border-radius: 99px;
+      background: rgba(51,173,169,0.12);
+      color: var(--accent);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+    .project-links { display: flex; gap: 0.5rem; }
+    .project-link {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.7em;
+      color: var(--text);
+      text-decoration: none;
+      opacity: 0.55;
+      transition: opacity 0.2s;
+    }
+    .project-link:hover { opacity: 1; }
+    .project-stars {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.7em;
+      color: rgba(28,28,28,0.45);
+      margin-top: 0.4rem;
+    }
+    .github-section {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+    .github-section h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.25em;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+    .github-repos { display: flex; flex-direction: column; gap: 0.625rem; }
+    .github-repo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0.75rem;
+      background: rgba(0,0,0,0.03);
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 0.5rem;
+    }
+    .repo-name {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.775em;
+      font-weight: 400;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .repo-meta {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.7em;
+      color: rgba(28,28,28,0.45);
+    }
+
+    /* === SECTION: SOCIAL === */
+    .sub-tab-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .sub-tab-btn {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.75em;
+      padding: 4px 12px;
+      border-radius: 99px;
+      border: 1px solid rgba(0,0,0,0.15);
+      color: rgba(28,28,28,0.55);
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 150ms;
+      font-weight: 300;
+    }
+    .sub-tab-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .sub-tab-btn.active {
+      background: rgba(26,122,118,0.12);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .social-btns { display: flex; gap: 0.5rem; flex-wrap: nowrap; overflow-x: auto; margin-bottom: 1.25rem; scrollbar-width: none; }
+    .social-btns::-webkit-scrollbar { display: none; }
+    .social-btn {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.75em;
+      padding: 4px 12px;
+      border-radius: 99px;
+      border: 1px solid rgba(0,0,0,0.15);
+      color: rgba(28,28,28,0.55);
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 150ms;
+      font-weight: 300;
+    }
+    .social-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .social-btn.active { background: rgba(26,122,118,0.12); border-color: var(--accent); color: var(--accent); }
+    .social-btn-arrow {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      max-width: 0;
+      overflow: hidden;
+      opacity: 0;
+      margin-left: 0;
+      vertical-align: middle;
+      flex-shrink: 0;
+      transition: max-width 0.2s ease, opacity 0.2s ease, margin-left 0.2s ease;
+    }
+    .social-btn.active .social-btn-arrow { max-width: 1.25em; opacity: 1; margin-left: 0.3rem; }
+    .social-section { margin-bottom: 0.5rem; }
+    .social-feed { display: flex; flex-direction: column; gap: 0.875rem; }
+    .social-post {
+      padding: 0.875rem;
+      background: rgba(0,0,0,0.03);
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 0.625rem;
+    }
+    .social-post-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .social-post-platform {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.65em;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      font-weight: 400;
+    }
+    .social-post-date {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.65em;
+      color: rgba(28,28,28,0.4);
+      font-weight: 300;
+    }
+    .social-post-text {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.775em;
+      color: rgba(28,28,28,0.8);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+    .social-post-link {
+      display: inline-block;
+      margin-top: 0.4rem;
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.7em;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .social-post-link:hover { text-decoration: underline; }
+    .social-coming-soon {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.8em;
+      color: rgba(28,28,28,0.4);
+      font-weight: 300;
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    /* === SECTION: EVENTS & SPEAKING === */
+    .list-section { display: flex; flex-direction: column; gap: 0; }
+    .year-group { margin-bottom: 1.25rem; }
+    .year-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.25em;
+      color: rgba(28,28,28,0.3);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.04em;
+    }
+    .list-entry {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.625rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .list-entry:last-child { border-bottom: none; }
+    .entry-date {
+      flex: 0 0 4.5rem;
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.7em;
+      color: var(--accent);
+      font-weight: 300;
+      padding-top: 0.15rem;
+      line-height: 1.4;
+    }
+    .entry-body { flex: 1; }
+    .entry-title {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.8em;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.1rem;
+      line-height: 1.4;
+    }
+    .entry-subtitle {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.72em;
+      color: rgba(28,28,28,0.55);
+      font-weight: 300;
+    }
+    .entry-badge {
+      flex-shrink: 0;
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.6em;
+      padding: 2px 8px;
+      border-radius: 99px;
+      border: 1px solid rgba(51,173,169,0.4);
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      align-self: center;
+    }
+    .entry-links { display: flex; gap: 0.5rem; margin-top: 0.3rem; }
+    .entry-link {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.7em;
+      color: var(--accent);
+      text-decoration: none;
+      opacity: 0.7;
+    }
+    .entry-link:hover { opacity: 1; }
+
+    /* === SECTION: BLOG === */
+    .blog-list { display: flex; flex-direction: column; gap: 0; }
+    .blog-entry {
+      padding: 0.875rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .blog-entry:last-child { border-bottom: none; }
+    .blog-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3em;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 0.2rem;
+    }
+    .blog-date {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.7em;
+      color: var(--accent);
+      font-weight: 300;
+      margin-bottom: 0.4rem;
+    }
+    .blog-excerpt {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.775em;
+      color: rgba(28,28,28,0.7);
+      font-weight: 300;
+      line-height: 1.6;
+      margin-bottom: 0.4rem;
+    }
+    .blog-read-more {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.75em;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 400;
+    }
+    .blog-read-more:hover { text-decoration: underline; }
+
+    /* === SECTION: BOOKSHELF === */
+    .bookshelf-filter { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+    .bookshelf-list { display: flex; flex-direction: column; gap: 1rem; }
+    .textbook-subject-heading { font-family: system-ui, -apple-system, sans-serif; font-size: 0.65em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-top: 0.5rem; margin-bottom: -0.25rem; }
+    .textbook-subject-heading:first-child { margin-top: 0; }
+    .book-row {
+      display: flex;
+      gap: 0.875rem;
+      align-items: flex-start;
+    }
+    .book-cover {
+      width: 56px;
+      flex-shrink: 0;
+      border-radius: 3px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      background: rgba(0,0,0,0.06);
+      min-height: 72px;
+      object-fit: cover;
+    }
+    .book-info { flex: 1; }
+    .book-title {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.8em;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.1rem;
+      line-height: 1.3;
+    }
+    .book-author {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.7em;
+      color: rgba(28,28,28,0.5);
+      font-weight: 300;
+      margin-bottom: 0.3rem;
+    }
+    .book-note {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.725em;
+      color: rgba(28,28,28,0.65);
+      font-weight: 300;
+      line-height: 1.5;
+      margin-bottom: 0.3rem;
+    }
+    .book-stars { font-size: 0.8em; }
+    .star-filled { color: var(--accent); }
+    .star-empty { color: rgba(0,0,0,0.18); }
+
+    /* Placeholder state for unfilled sections */
+    .placeholder-msg {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.8em;
+      color: rgba(28,28,28,0.35);
+      font-weight: 300;
+      text-align: center;
+      padding: 2.5rem 0;
+      line-height: 1.6;
+    }
+
+    /* === RESPONSIVE === */
     @media (max-width: 1680px) { html { font-size: 12pt; } }
     @media (max-width: 1280px) { html { font-size: 12pt; } }
     @media (max-width: 980px)  { html { font-size: 10pt; } }
     @media (max-width: 736px) {
       html { font-size: 10pt; }
       .site-wrapper { padding: 3rem 3rem 3rem 0; }
-      .site-main > .inner {
-        --padding-horizontal: 2rem;
-        --padding-vertical: 3.5rem;
-        --spacing: 1.5rem;
-      }
-      .image-component.style-1:not(:first-child) { margin-top: 2.25rem !important; }
-      .image-component.style-1:not(:last-child) { margin-bottom: 2.25rem !important; }
-      .image-component.style-1 > .frame { width: 7rem; }
-      .text-component.style-2 { font-size: 3em; line-height: 1; width: 100%; }
-      .text-component.style-1 { font-size: 0.875em; line-height: 1.75; width: 100%; }
-    }
-    @media (max-width: 480px) {
-      .site-wrapper { padding: 2.25rem 2.25rem 2.25rem 0; }
-      .site-main > .inner { --spacing: 1.3125rem; }
-      .buttons-component.style-1 { flex-direction: column; flex-wrap: nowrap; }
-      .buttons-component.style-1 > li > a { max-width: 32rem; width: 100%; }
+      .site-main > .inner { --padding-horizontal: 2rem; --padding-vertical: 3.5rem; --spacing: 1.5rem; }
+      .text-component.style-2 { font-size: 3em; width: 100%; }
+      .text-component.style-1 { font-size: 0.875em; width: 100%; }
+      .image-component.style-1 > .frame { width: 4.67rem; }
     }
     @media (max-width: 360px) {
       .site-wrapper { padding: 2.0625rem 2.0625rem 2.0625rem 0; }
-      .site-main > .inner {
-        --padding-horizontal: 1.5rem;
-        --padding-vertical: 2.625rem;
-        --spacing: 1.125rem;
-      }
+      .site-main > .inner { --padding-horizontal: 1.5rem; --padding-vertical: 2.625rem; --spacing: 1.125rem; }
       .text-component.style-2 { font-size: 3em; }
       .text-component.style-1 { font-size: 0.875em; }
-      .buttons-component.style-1 { gap: 0.5625rem; }
+    }
+    @media (max-width: 480px) {
+      .site-wrapper { padding: 0; }
+      .site-main {
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        background-image: linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.95) 100%);
+      }
+      .site-main > .inner { --padding-horizontal: 1.5rem; --padding-vertical: 2rem; --width: 100vw; }
+      .tab-bar { overflow-x: auto; white-space: nowrap; }
+      .tab-bar::-webkit-scrollbar { display: none; }
+      .project-grid { grid-template-columns: 1fr; }
+      .buttons-component.style-1 { flex-wrap: wrap; }
     }
   </style>
 </head>
@@ -342,24 +765,28 @@
 
   <!-- Background video -->
   <div class="site-bg">
-    <video src="assets/videos/bg.mp4" autoplay preload="auto" loop playsinline disablepictureinpicture disableremoteplayback webkit-playsinline muted></video>
+    <video id="bg-video" src="assets/videos/bg.mp4" autoplay preload="auto" playsinline disablepictureinpicture disableremoteplayback webkit-playsinline muted></video>
+    <div class="site-bg-fade" id="bg-fade"></div>
   </div>
 
   <!-- SVG icon defs -->
   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 40 40" display="none" width="0" height="0">
-    <!-- LinkedIn -->
     <symbol id="icon-linkedin" viewBox="0 0 40 40">
       <path d="M12.1,13.8v19.1H5.7V13.8C5.7,13.8,12.1,13.8,12.1,13.8z M12.5,7.9c0,0.9-0.3,1.7-1,2.4c-0.7,0.6-1.5,0.9-2.6,0.9h0 c-1.1,0-1.9-0.3-2.5-0.9c-0.6-0.6-1-1.4-1-2.4c0-1,0.3-1.7,1-2.4S7.9,4.6,9,4.6s1.9,0.3,2.6,0.9S12.5,6.9,12.5,7.9z M35,22v11h-6.4 V22.7c0-1.4-0.3-2.4-0.8-3.2c-0.5-0.8-1.3-1.1-2.4-1.1c-0.8,0-1.5,0.2-2,0.7c-0.5,0.4-1,1-1.2,1.7c-0.1,0.4-0.2,0.9-0.2,1.6v10.7 h-6.4c0-5.1,0-9.3,0-12.5s0-5.1,0-5.7l0-0.9H22v2.8h0c0.3-0.4,0.5-0.8,0.8-1.1c0.3-0.3,0.6-0.6,1.1-1c0.5-0.4,1-0.6,1.7-0.8 c0.7-0.2,1.4-0.3,2.2-0.3c2.2,0,4,0.7,5.3,2.2C34.4,17,35,19.1,35,22L35,22z"></path>
     </symbol>
-    <!-- Instagram -->
     <symbol id="icon-instagram" viewBox="0 0 40 40">
       <path d="M20,7c4.2,0,4.7,0,6.3,0.1c1.5,0.1,2.3,0.3,3,0.5C30,8,30.5,8.3,31.1,8.9c0.5,0.5,0.9,1.1,1.2,1.8c0.2,0.5,0.5,1.4,0.5,3 C33,15.3,33,15.8,33,20s0,4.7-0.1,6.3c-0.1,1.5-0.3,2.3-0.5,3c-0.3,0.7-0.6,1.2-1.2,1.8c-0.5,0.5-1.1,0.9-1.8,1.2 c-0.5,0.2-1.4,0.5-3,0.5C24.7,33,24.2,33,20,33s-4.7,0-6.3-0.1c-1.5-0.1-2.3-0.3-3-0.5C10,32,9.5,31.7,8.9,31.1 C8.4,30.6,8,30,7.7,29.3c-0.2-0.5-0.5-1.4-0.5-3C7,24.7,7,24.2,7,20s0-4.7,0.1-6.3c0.1-1.5,0.3-2.3,0.5-3C8,10,8.3,9.5,8.9,8.9 C9.4,8.4,10,8,10.7,7.7c0.5-0.2,1.4-0.5,3-0.5C15.3,7.1,15.8,7,20,7z M20,4.3c-4.3,0-4.8,0-6.5,0.1c-1.6,0-2.8,0.3-3.8,0.7 C8.7,5.5,7.8,6,6.9,6.9C6,7.8,5.5,8.7,5.1,9.7c-0.4,1-0.6,2.1-0.7,3.8c-0.1,1.7-0.1,2.2-0.1,6.5s0,4.8,0.1,6.5 c0,1.6,0.3,2.8,0.7,3.8c0.4,1,0.9,1.9,1.8,2.8c0.9,0.9,1.7,1.4,2.8,1.8c1,0.4,2.1,0.6,3.8,0.7c1.6,0.1,2.2,0.1,6.5,0.1 s4.8,0,6.5-0.1c1.6-0.1,2.9-0.3,3.8-0.7c1-0.4,1.9-0.9,2.8-1.8c0.9-0.9,1.4-1.7,1.8-2.8c0.4-1,0.6-2.1,0.7-3.8 c0.1-1.6,0.1-2.2,0.1-6.5s0-4.8-0.1-6.5c-0.1-1.6-0.3-2.9-0.7-3.8c-0.4-1-0.9-1.9-1.8-2.8c-0.9-0.9-1.7-1.4-2.8-1.8 c-1-0.4-2.1-0.6-3.8-0.7C24.8,4.3,24.3,4.3,20,4.3L20,4.3L20,4.3z"></path>
       <path d="M20,11.9c-4.5,0-8.1,3.7-8.1,8.1s3.7,8.1,8.1,8.1s8.1-3.7,8.1-8.1S24.5,11.9,20,11.9z M20,25.2c-2.9,0-5.2-2.3-5.2-5.2 s2.3-5.2,5.2-5.2s5.2,2.3,5.2,5.2S22.9,25.2,20,25.2z"></path>
       <path d="M30.6,11.6c0,1-0.8,1.9-1.9,1.9c-1,0-1.9-0.8-1.9-1.9s0.8-1.9,1.9-1.9C29.8,9.7,30.6,10.5,30.6,11.6z"></path>
     </symbol>
-    <!-- YouTube -->
     <symbol id="icon-youtube" viewBox="0 0 40 40">
       <path d="M24.3,27v4.2c0,0.9-0.3,1.3-0.8,1.3c-0.3,0-0.6-0.1-0.9-0.4v-6c0.3-0.3,0.6-0.4,0.9-0.4C24,25.6,24.3,26.1,24.3,27L24.3,27z M31.1,27v0.9h-1.8V27c0-0.9,0.3-1.4,0.9-1.4C30.8,25.6,31.1,26.1,31.1,27L31.1,27z M11.7,22.6h2.1v-1.9H7.6v1.9h2.1v11.4h2 L11.7,22.6L11.7,22.6z M17.5,34.1h1.8v-9.9h-1.8v7.6c-0.4,0.6-0.8,0.8-1.1,0.8c-0.2,0-0.4-0.1-0.4-0.4c0,0,0-0.3,0-0.7v-7.3h-1.8V32 c0,0.7,0.1,1.1,0.2,1.5c0.2,0.5,0.5,0.7,1.2,0.7c0.6,0,1.3-0.4,2-1.2L17.5,34.1L17.5,34.1z M26.1,31.1v-4c0-1-0.1-1.6-0.2-2 c-0.2-0.7-0.7-1.1-1.4-1.1c-0.7,0-1.3,0.4-1.9,1.1v-4.4h-1.8v13.3h1.8v-1c0.6,0.7,1.2,1.1,1.9,1.1c0.7,0,1.2-0.4,1.4-1.1 C26,32.7,26.1,32.1,26.1,31.1L26.1,31.1z M32.9,30.9v-0.3H31c0,0.7,0,1.1,0,1.2c-0.1,0.5-0.4,0.7-0.8,0.7c-0.6,0-0.9-0.5-0.9-1.4 v-1.7h3.6v-2.1c0-1.1-0.2-1.8-0.5-2.3c-0.5-0.7-1.2-1-2.1-1c-0.9,0-1.6,0.3-2.1,1c-0.4,0.5-0.6,1.3-0.6,2.3v3.5 c0,1.1,0.2,1.8,0.6,2.3c0.5,0.7,1.2,1,2.2,1c1,0,1.7-0.4,2.2-1.1c0.2-0.4,0.4-0.7,0.4-1.1C32.9,31.9,32.9,31.5,32.9,30.9L32.9,30.9z M20.7,12.5V8.3c0-0.9-0.3-1.4-0.9-1.4c-0.6,0-0.9,0.5-0.9,1.4v4.2c0,0.9,0.3,1.4,0.9,1.4C20.4,14,20.7,13.5,20.7,12.5z M35.1,27.6 c0,3.1-0.2,5.5-0.5,7c-0.2,0.8-0.6,1.5-1.2,2c-0.6,0.5-1.3,0.8-2,0.9c-2.5,0.3-6.2,0.4-11.1,0.4s-8.7-0.1-11.1-0.4 c-0.8-0.1-1.5-0.4-2.1-0.9c-0.6-0.5-1-1.2-1.2-2c-0.3-1.5-0.5-3.8-0.5-7c0-3.1,0.2-5.5,0.5-7c0.2-0.8,0.6-1.5,1.2-2 c0.6-0.5,1.3-0.9,2.1-0.9c2.5-0.3,6.2-0.4,11.1-0.4s8.7,0.1,11.1,0.4c0.8,0.1,1.5,0.4,2.1,0.9c0.6,0.5,1,1.2,1.2,2 C34.9,22.1,35.1,24.4,35.1,27.6z M15.1,2h2l-2.4,8v5.4h-2V10c-0.2-1-0.6-2.4-1.2-4.3c-0.5-1.4-0.9-2.6-1.3-3.8h2.1l1.4,5.3L15.1,2z M22.5,8.7v3.5c0,1.1-0.2,1.9-0.6,2.4c-0.5,0.7-1.2,1-2.1,1c-0.9,0-1.6-0.3-2.1-1c-0.4-0.5-0.6-1.3-0.6-2.4V8.7 c0-1.1,0.2-1.9,0.6-2.3c0.5-0.7,1.2-1,2.1-1c0.9,0,1.6,0.3,2.1,1C22.3,6.8,22.5,7.6,22.5,8.7z M29.2,5.4v10h-1.8v-1.1 c-0.7,0.8-1.4,1.2-2.1,1.2c-0.6,0-1-0.2-1.2-0.7C24,14.5,24,14,24,13.4V5.4h1.8v7.4c0,0.4,0,0.7,0,0.7c0,0.3,0.2,0.4,0.4,0.4 c0.4,0,0.7-0.3,1.1-0.9V5.4C27.4,5.4,29.2,5.4,29.2,5.4z"></path>
+    </symbol>
+    <symbol id="icon-x" viewBox="0 0 40 40">
+      <path d="M30.9 4h5.4L23.9 17.6 38.5 36h-11L18.8 25.4 8.7 36H3.3l13.2-15.1L3 4h11.3l8.4 10.1L30.9 4zm-1.9 28.8h3L11.2 7.1H8L29 32.8z"/>
+    </symbol>
+    <symbol id="icon-tiktok" viewBox="0 0 40 40">
+      <path d="M33 14.6c-3.2 0-6.1-1-8.4-2.8V27c0 6.1-5 11-11.1 11S2.5 33.1 2.5 27s5-11 11.1-11c.6 0 1.2.1 1.8.2v6.1c-.6-.2-1.2-.3-1.8-.3-2.8 0-5.1 2.3-5.1 5.1s2.3 5.1 5.1 5.1 5.1-2.3 5.1-5.1V2h5.9c.4 3.9 3.6 7 7.4 7.2v5.4z"/>
     </symbol>
   </svg>
 
@@ -368,75 +795,589 @@
     <div class="site-main">
       <div class="inner">
 
-        <!-- Logo -->
-        <div class="image-component style-1">
-          <span class="frame">
-            <img src="assets/images/image01.jpg" alt="Jordan Leopold Logo">
-          </span>
-        </div>
+        <!-- ── CARD HEADER (always visible) ── -->
+        <div class="card-header">
 
-        <!-- Heading -->
-        <h1 class="text-component style-2">
-          <span class="p">Hi, I'm Jordan Leopold.</span>
-        </h1>
+          <div class="image-component style-1">
+            <span class="frame">
+              <img src="assets/images/image01.jpg" alt="Jordan Leopold Logo">
+            </span>
+          </div>
 
-        <!-- Social buttons -->
-        <ul class="buttons-component style-1">
-          <li>
-            <a href="https://www.linkedin.com/in/jordanleopold/" role="button">
-              <svg aria-label="LinkedIn"><use xlink:href="#icon-linkedin"></use></svg>
-              <span class="label">LinkedIn</span>
-            </a>
-          </li>
-          <li>
-            <a href="https://www.instagram.com/jordan.leopold" role="button">
-              <svg aria-label="Instagram"><use xlink:href="#icon-instagram"></use></svg>
-              <span class="label">Instagram</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" role="button">
-              <svg aria-label="YouTube"><use xlink:href="#icon-youtube"></use></svg>
-              <span class="label">YouTube</span>
-            </a>
-          </li>
-        </ul>
+          <h1 class="text-component style-2">
+            <span class="p">Hi, I'm Jordan Leopold.</span>
+          </h1>
 
-        <!-- Bio -->
-        <p class="text-component style-1">
-          <span class="p">Jordan is a seasoned business professional with extensive experience in enterprise sales, venture capital investing, and political strategy &amp; advocacy. He is currently teaching himself Agentic AI software development while building CLIENTEL - enabling the one man sales team.</span>
-          <span class="p">Jordan is from Hayward, a city within the East Bay of the San Francisco Bay Area. It was there after graduating Impact Academy of Arts &amp; Technology, Jordan studied Economics &amp; Political Science at Cal State East Bay.</span>
-          <span class="p">His sales acumen was honed at First Republic Bank, Sentry.io and Crunchbase, where he consistently refined his sales skills by implementing successful outbound campaigns. At First Republic, Jordan learned the value of consultative selling while providing white glove support for affluent clients in need of a quality digital banking experience. At Sentry.io, Jordan challenged himself by selling technical product development software to engineering and product teams looking to catch code errors, expanding his technical knowledge and his inbound and outbound selling capabilities. Jordan was promoted in his first 6 months, and exceeded his new quota by 170%. At Crunchbase, Jordan sold industry data that included startup funding to Venture Capital firms, Private Equity firms and Corporate Innovation teams looking to find promising business opportunities.</span>
-          <span class="p">He would later apply his sales and relationship management skills in venture capital, working as an Analyst at The BFM Fund (Emerging Fund) and Keyhorse Capital (State Backed Fund), where he sourced and managed investment deals in early stage startups. At The BFM Fund, Jordan took an impact lens to investing in diverse founders, while at Keyhorse, taking an ecosystem approach to venture funding as a means of economic development for the state of Kentucky. He would then join Newchip, an early-stage startup accelerator as an Investor Relations Associate, where he connected Newchip's portfolio companies to investors in his network. Jordan made 660+ introductions, all while mentoring founders on fundraising and go-to-market strategies.</span>
-          <span class="p">With a strong foundation in finance, sales and relationship management, Jordan excels in creating valuable connections that drive business growth, external impact and a deeper sense of pride in our work.</span>
-          <span class="p">In addition, Jordan also has years of experience in government affairs and community development. From candidate canvassing, to federal and state legislative research and lobbying, to local community service and policy-based advocacy &amp; activism.</span>
-        </p>
+        </div><!-- /.card-header -->
 
-      </div>
-    </div>
-  </div>
+        <!-- ── TAB BAR ── -->
+        <nav class="tab-bar" role="tablist">
+          <button class="tab-btn active" data-tab="about" role="tab" aria-selected="true">About</button>
+          <button class="tab-btn" data-tab="projects" role="tab" aria-selected="false">Projects</button>
+          <button class="tab-btn" data-tab="social" role="tab" aria-selected="false">Social</button>
+          <button class="tab-btn" data-tab="events" role="tab" aria-selected="false">Events</button>
+          <button class="tab-btn" data-tab="blog" role="tab" aria-selected="false">Blog</button>
+          <button class="tab-btn" data-tab="bookshelf" role="tab" aria-selected="false">Bookshelf</button>
+        </nav>
 
+        <!-- ── PANEL CONTAINER ── -->
+        <div class="panel-container">
+
+          <!-- ABOUT -->
+          <div class="panel active" id="panel-about" role="tabpanel">
+            <p class="about-bio" id="about-bio">
+              <!-- FILL: short bio (3–4 sentences) -->
+              Jordan Leopold is an entrepreneur, venture capital professional, and political advocate based in the San Francisco Bay Area. With a background spanning enterprise sales, early-stage investing, and government affairs, he is currently building CLIENTEL — an agentic AI platform enabling the one-man sales team — while teaching himself software development.
+            </p>
+
+            <div class="resume-section">
+              <h3>Experience</h3>
+
+              <div class="timeline-entry">
+                <div class="timeline-date">Apr 2021 – Present</div>
+                <div class="timeline-body">
+                  <div class="timeline-company">Startup IQ</div>
+                  <div class="timeline-role">Founder</div>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div class="timeline-date">Feb 2021 – Jan 2022</div>
+                <div class="timeline-body">
+                  <div class="timeline-company">Newchip</div>
+                  <div class="timeline-role">Investor Relations Associate</div>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div class="timeline-date">Nov 2021 – Dec 2021</div>
+                <div class="timeline-body">
+                  <div class="timeline-company">The BFM Fund</div>
+                  <div class="timeline-role">Venture Capital Analyst</div>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div class="timeline-date">Sep 2021 – Dec 2021</div>
+                <div class="timeline-body">
+                  <div class="timeline-company">Keyhorse Capital</div>
+                  <div class="timeline-role">Venture Capital Analyst</div>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div class="timeline-date">Dec 2020 – Sep 2021</div>
+                <div class="timeline-body">
+                  <div class="timeline-company">Crunchbase</div>
+                  <div class="timeline-role">Sales Development Representative</div>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div class="timeline-date">Apr 2020 – Nov 2020</div>
+                <div class="timeline-body">
+                  <div class="timeline-company">Sentry.io</div>
+                  <div class="timeline-role">Sales Development Representative</div>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div class="timeline-date">Feb 2018 – Apr 2019</div>
+                <div class="timeline-body">
+                  <div class="timeline-company">First Republic Bank</div>
+                  <div class="timeline-role">Digital Banking Sales Associate</div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="resume-section">
+              <h3>Education</h3>
+
+              <div class="timeline-entry">
+                <div class="timeline-date">2017</div>
+                <div class="timeline-body">
+                  <div class="timeline-company">Cal State East Bay</div>
+                  <div class="timeline-role">Economics &amp; Political Science</div>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div class="timeline-date">2011</div>
+                <div class="timeline-body">
+                  <div class="timeline-company">Impact Academy of Arts &amp; Technology</div>
+                  <div class="timeline-role">High School Diploma</div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="resume-section">
+              <h3>Certifications</h3>
+
+              <div class="timeline-entry">
+                <div class="timeline-date">Jan 2021</div>
+                <div class="timeline-body">
+                  <div class="timeline-company">UC Berkeley School of Law</div>
+                  <div class="timeline-role">Venture Capital University</div>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div class="timeline-date">Sep 2020</div>
+                <div class="timeline-body">
+                  <div class="timeline-company">Techstars &amp; Kauffman Fellows</div>
+                  <div class="timeline-role">Venture Deals 2020</div>
+                </div>
+              </div>
+
+            </div>
+
+          </div><!-- /#panel-about -->
+
+          <!-- PROJECTS -->
+          <div class="panel" id="panel-projects" role="tabpanel">
+            <div class="project-grid" id="project-grid">
+              <!-- Rendered by JS from CONTENT.projects -->
+              <p class="placeholder-msg"><!-- FILL: add projects to CONTENT.projects in the script block --></p>
+            </div>
+
+            <div class="github-section" id="github-section" style="display:none">
+              <h3>GitHub</h3>
+              <div class="github-repos" id="github-repos"></div>
+            </div>
+          </div>
+
+          <!-- SOCIAL -->
+          <div class="panel" id="panel-social" role="tabpanel">
+            <div class="social-btns">
+              <button class="social-btn" data-platform="linkedin" data-url="https://www.linkedin.com/in/jordanleopold/">LinkedIn<svg class="social-btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6,3 13,3 13,10"/></svg></button>
+              <button class="social-btn" data-platform="youtube" data-url="https://youtube.com/@jordanleopold">YouTube<svg class="social-btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6,3 13,3 13,10"/></svg></button>
+              <button class="social-btn" data-platform="x" data-url="https://x.com/jordanleopold">X<svg class="social-btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6,3 13,3 13,10"/></svg></button>
+              <button class="social-btn" data-platform="instagram" data-url="https://www.instagram.com/jordan.leopold">Instagram<svg class="social-btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6,3 13,3 13,10"/></svg></button>
+              <button class="social-btn" data-platform="tiktok" data-url="https://tiktok.com/@jordanleopold">TikTok<svg class="social-btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6,3 13,3 13,10"/></svg></button>
+            </div>
+            <div class="social-section" id="social-linkedin" style="display:none">
+              <p class="social-coming-soon">LinkedIn posts coming soon.</p>
+            </div>
+            <div class="social-section" id="social-youtube" style="display:none">
+              <p class="social-coming-soon">YouTube videos coming soon.</p>
+            </div>
+            <div class="social-section" id="social-x" style="display:none">
+              <p class="social-coming-soon">X posts coming soon.</p>
+            </div>
+            <div class="social-section" id="social-instagram" style="display:none">
+              <p class="social-coming-soon">Instagram feed coming soon.</p>
+            </div>
+            <div class="social-section" id="social-tiktok" style="display:none">
+              <p class="social-coming-soon">TikTok videos coming soon.</p>
+            </div>
+          </div>
+
+          <!-- EVENTS -->
+          <div class="panel" id="panel-events" role="tabpanel">
+            <div class="resume-section">
+              <h3>Attended</h3>
+              <div id="events-list">
+                <!-- Rendered by JS from CONTENT.events -->
+                <p class="placeholder-msg"><!-- FILL: add events to CONTENT.events in the script block --></p>
+              </div>
+            </div>
+            <div class="resume-section">
+              <h3>Speaking Engagements</h3>
+              <div id="speaking-list">
+                <!-- Rendered by JS from CONTENT.speaking -->
+                <p class="placeholder-msg"><!-- FILL: add speaking engagements to CONTENT.speaking in the script block --></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- BLOG -->
+          <div class="panel" id="panel-blog" role="tabpanel">
+            <div class="blog-list" id="blog-list">
+              <!-- Rendered by JS from CONTENT.blog -->
+              <p class="placeholder-msg"><!-- FILL: add blog posts to CONTENT.blog in the script block --></p>
+            </div>
+          </div>
+
+          <!-- BOOKSHELF -->
+          <div class="panel" id="panel-bookshelf" role="tabpanel">
+            <div class="bookshelf-filter sub-tab-bar">
+              <button class="sub-tab-btn active" data-shelf="reading">Reading</button>
+              <button class="sub-tab-btn" data-shelf="textbook">Text Books</button>
+              <button class="sub-tab-btn" data-shelf="Business">Business</button>
+              <button class="sub-tab-btn" data-shelf="Personal Dev">Personal Dev</button>
+              <button class="sub-tab-btn" data-shelf="Philosophy">Philosophy</button>
+              <button class="sub-tab-btn" data-shelf="History">History</button>
+              <button class="sub-tab-btn" data-shelf="Politics">Politics</button>
+              <button class="sub-tab-btn" data-shelf="Fiction">Fiction</button>
+            </div>
+            <div class="bookshelf-list" id="bookshelf-list">
+              <!-- Rendered by JS from CONTENT.books -->
+              <p class="placeholder-msg"><!-- FILL: add books to CONTENT.books in the script block --></p>
+            </div>
+          </div>
+
+        </div><!-- /.panel-container -->
+
+      </div><!-- /.inner -->
+    </div><!-- /.site-main -->
+  </div><!-- /.site-wrapper -->
+
+  <script src="content.js"></script>
   <script>
-    // Fade in on load
+    // ─────────────────────────────────────────
+    // CONTENT — edit via content/*.md + node build.js
+    // ─────────────────────────────────────────
+    if (typeof GITHUB_USERNAME === 'undefined') var GITHUB_USERNAME = 'FILL_ME';
+    var CONTENT = (typeof SITE_CONTENT !== 'undefined') ? SITE_CONTENT : {
+      bio: '', projects: [], instagram: [], linkedin: [], events: [], speaking: [], blog: [], books: []
+    };
+
+    // ─────────────────────────────────────────
+    // LAZY RENDER CACHE
+    // ─────────────────────────────────────────
+    const rendered = {};
+
+    // ─────────────────────────────────────────
+    // TAB SWITCHING
+    // ─────────────────────────────────────────
+    function switchTab(name) {
+      document.querySelectorAll('.tab-btn').forEach(function(b) {
+        var active = b.dataset.tab === name;
+        b.classList.toggle('active', active);
+        b.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      document.querySelectorAll('.panel').forEach(function(p) {
+        p.classList.toggle('active', p.id === 'panel-' + name);
+      });
+      if (!rendered[name]) {
+        renderPanel(name);
+        rendered[name] = true;
+      }
+    }
+
+    function renderPanel(name) {
+      if (name === 'projects')   renderProjects();
+      if (name === 'social')     renderSocial();
+      if (name === 'events')   { renderEvents(); renderSpeaking(); }
+      if (name === 'blog')       renderBlog();
+      if (name === 'bookshelf')  renderBookshelf('reading');
+    }
+
+    // ─────────────────────────────────────────
+    // PROJECTS
+    // ─────────────────────────────────────────
+    function renderProjects() {
+      var grid = document.getElementById('project-grid');
+      if (!CONTENT.projects.length) return;
+      grid.innerHTML = CONTENT.projects.map(function(p) {
+        var pills = (p.tech || []).map(function(t) {
+          return '<span class="tech-pill">' + esc(t) + '</span>';
+        }).join('');
+        var links = '';
+        if (p.url)  links += '<a class="project-link" href="' + esc(p.url) + '" target="_blank" rel="noopener">↗ Live</a>';
+        if (p.repo) links += '<a class="project-link" href="https://github.com/' + esc(GITHUB_USERNAME) + '/' + esc(p.repo) + '" target="_blank" rel="noopener">⌥ GitHub</a>';
+        return '<div class="project-card">'
+          + '<div class="project-name">' + esc(p.name) + '</div>'
+          + '<div class="project-desc">' + esc(p.desc) + '</div>'
+          + '<div class="tech-pills">' + pills + '</div>'
+          + '<div class="project-links">' + links + '</div>'
+          + '<div class="project-stars" id="stars-' + esc(p.repo) + '"></div>'
+          + '</div>';
+      }).join('');
+
+      // GitHub star counts — fetch async, degrade gracefully
+      if (GITHUB_USERNAME !== 'FILL_ME') {
+        fetch('https://api.github.com/users/' + GITHUB_USERNAME + '/repos?per_page=100')
+          .then(function(r) { return r.json(); })
+          .then(function(repos) {
+            CONTENT.projects.forEach(function(p) {
+              if (!p.repo) return;
+              var match = repos.find(function(r) { return r.name === p.repo; });
+              if (match) {
+                var el = document.getElementById('stars-' + p.repo);
+                if (el) el.textContent = '★ ' + match.stargazers_count;
+              }
+            });
+            // Show full repo list
+            var section = document.getElementById('github-section');
+            var list = document.getElementById('github-repos');
+            var sorted = repos.sort(function(a,b){ return b.stargazers_count - a.stargazers_count; }).slice(0,6);
+            list.innerHTML = sorted.map(function(r) {
+              return '<div class="github-repo">'
+                + '<a class="repo-name" href="' + r.html_url + '" target="_blank" rel="noopener">' + esc(r.name) + '</a>'
+                + '<span class="repo-meta">★ ' + r.stargazers_count + '</span>'
+                + '</div>';
+            }).join('');
+            section.style.display = '';
+          })
+          .catch(function() {}); // silent fail
+      }
+    }
+
+    // ─────────────────────────────────────────
+    // SOCIAL
+    // ─────────────────────────────────────────
+    function renderSocial() {
+      document.querySelectorAll('.social-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          if (btn.classList.contains('active')) {
+            // Second tap — go to external URL
+            window.open(btn.dataset.url, '_blank', 'noopener,noreferrer');
+          } else {
+            // First tap — deactivate all, activate this one, show its section
+            document.querySelectorAll('.social-btn').forEach(function(b) { b.classList.remove('active'); });
+            document.querySelectorAll('.social-section').forEach(function(s) { s.style.display = 'none'; });
+            btn.classList.add('active');
+            var section = document.getElementById('social-' + btn.dataset.platform);
+            if (section) section.style.display = '';
+          }
+        });
+      });
+
+      // Default to LinkedIn on load
+      var defaultBtn = document.querySelector('.social-btn[data-platform="linkedin"]');
+      if (defaultBtn) defaultBtn.click();
+    }
+
+    // ─────────────────────────────────────────
+    // EVENTS
+    // ─────────────────────────────────────────
+    function renderEvents() {
+      if (!CONTENT.events.length) return;
+      var el = document.getElementById('events-list');
+      var byYear = groupByYear(CONTENT.events);
+      el.innerHTML = renderYearGroups(byYear, function(e) {
+        return '<div class="list-entry">'
+          + '<div class="entry-date">' + esc(e.date) + '</div>'
+          + '<div class="entry-body">'
+          + '<div class="entry-title">' + esc(e.name) + '</div>'
+          + '<div class="entry-subtitle">' + esc(e.location) + '</div>'
+          + '</div>'
+          + (e.type ? '<span class="entry-badge">' + esc(e.type) + '</span>' : '')
+          + '</div>';
+      });
+    }
+
+    // ─────────────────────────────────────────
+    // SPEAKING
+    // ─────────────────────────────────────────
+    function renderSpeaking() {
+      if (!CONTENT.speaking.length) return;
+      var el = document.getElementById('speaking-list');
+      var byYear = groupByYear(CONTENT.speaking);
+      el.innerHTML = renderYearGroups(byYear, function(s) {
+        var links = '';
+        if (s.videoUrl)  links += '<a class="entry-link" href="' + esc(s.videoUrl) + '" target="_blank" rel="noopener">▶ Video</a>';
+        if (s.slidesUrl) links += '<a class="entry-link" href="' + esc(s.slidesUrl) + '" target="_blank" rel="noopener">↗ Slides</a>';
+        return '<div class="list-entry">'
+          + '<div class="entry-date">' + esc(s.date) + '</div>'
+          + '<div class="entry-body">'
+          + '<div class="entry-title">' + esc(s.talk) + '</div>'
+          + '<div class="entry-subtitle">' + esc(s.event) + '</div>'
+          + (links ? '<div class="entry-links">' + links + '</div>' : '')
+          + '</div>'
+          + '</div>';
+      });
+    }
+
+    // ─────────────────────────────────────────
+    // BLOG
+    // ─────────────────────────────────────────
+    function renderBlog() {
+      if (!CONTENT.blog.length) return;
+      var el = document.getElementById('blog-list');
+      el.innerHTML = CONTENT.blog.map(function(post) {
+        return '<div class="blog-entry">'
+          + '<div class="blog-title">' + esc(post.title) + '</div>'
+          + '<div class="blog-date">' + esc(post.date) + '</div>'
+          + '<p class="blog-excerpt">' + esc(post.excerpt) + '</p>'
+          + '<a class="blog-read-more" href="' + esc(post.url) + '" target="_blank" rel="noopener">Read →</a>'
+          + '</div>';
+      }).join('');
+    }
+
+    // ─────────────────────────────────────────
+    // BOOKSHELF
+    // ─────────────────────────────────────────
+    function renderBookshelf(filter) {
+      var el = document.getElementById('bookshelf-list');
+
+      // Wire shelf sub-tab buttons
+      document.querySelectorAll('.sub-tab-btn[data-shelf]').forEach(function(btn) {
+        btn.onclick = function() {
+          document.querySelectorAll('.sub-tab-btn[data-shelf]').forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          renderBookshelf(btn.dataset.shelf);
+        };
+      });
+
+      var SUBJECT_TABS = ['Business', 'Personal Dev', 'Philosophy', 'History', 'Politics', 'Fiction'];
+      var isSubjectTab = SUBJECT_TABS.indexOf(filter) !== -1;
+
+      var books = isSubjectTab
+        ? CONTENT.books.filter(function(b) { return b.status === 'read' && b.subject === filter; })
+        : CONTENT.books.filter(function(b) { return b.status === filter; });
+
+      if (!books.length) {
+        el.innerHTML = '<p class="placeholder-msg">No books here yet.</p>';
+        return;
+      }
+
+      if (filter === 'textbook') {
+        var subjectOrder = ['Finance', 'Economics', 'Business', 'Policy', 'History', 'Science', 'Technology'];
+        var grouped1 = {};
+        books.forEach(function(b) {
+          var s = b.subject || 'Other';
+          if (!grouped1[s]) grouped1[s] = [];
+          grouped1[s].push(b);
+        });
+        var html = '';
+        subjectOrder.forEach(function(subject) {
+          if (!grouped1[subject] || !grouped1[subject].length) return;
+          html += '<div class="textbook-subject-heading">' + esc(subject) + '</div>';
+          grouped1[subject].forEach(function(b) {
+            var meta = [b.edition ? b.edition + ' ed.' : '', b.year || ''].filter(Boolean).join(' · ');
+            html += '<div class="book-row">'
+              + '<div class="book-info">'
+              + '<div class="book-title">' + esc(b.title) + '</div>'
+              + '<div class="book-author">' + esc(b.author) + '</div>'
+              + (meta ? '<div class="book-note">' + esc(meta) + '</div>' : '')
+              + '</div>'
+              + '</div>';
+          });
+        });
+        el.innerHTML = html;
+        return;
+      }
+
+      if (isSubjectTab) {
+        var grouped2 = {};
+        var ssOrder = [];
+        books.forEach(function(b) {
+          var ss = b.subsubject || 'General';
+          if (!grouped2[ss]) { grouped2[ss] = []; ssOrder.push(ss); }
+          grouped2[ss].push(b);
+        });
+        var html2 = '';
+        ssOrder.forEach(function(ss) {
+          html2 += '<div class="textbook-subject-heading">' + esc(ss) + '</div>';
+          grouped2[ss].forEach(function(b) {
+            var stars = '';
+            if (b.stars) { for (var i = 1; i <= 5; i++) stars += '<span class="' + (i <= b.stars ? 'star-filled' : 'star-empty') + '">★</span>'; }
+            html2 += '<div class="book-row">'
+              + '<div class="book-info">'
+              + '<div class="book-title">' + esc(b.title) + '</div>'
+              + (b.author ? '<div class="book-author">' + esc(b.author) + '</div>' : '')
+              + (b.note ? '<div class="book-note">' + esc(b.note) + '</div>' : '')
+              + (stars ? '<div class="book-stars">' + stars + '</div>' : '')
+              + '</div>'
+              + '</div>';
+          });
+        });
+        el.innerHTML = html2;
+        return;
+      }
+
+      el.innerHTML = books.map(function(b) {
+        var stars = '';
+        for (var i = 1; i <= 5; i++) {
+          stars += '<span class="' + (i <= b.stars ? 'star-filled' : 'star-empty') + '">★</span>';
+        }
+        return '<div class="book-row">'
+          + (b.cover ? '<img class="book-cover" src="' + esc(b.cover) + '" alt="' + esc(b.title) + '">' : '<div class="book-cover"></div>')
+          + '<div class="book-info">'
+          + '<div class="book-title">' + esc(b.title) + '</div>'
+          + '<div class="book-author">' + esc(b.author) + '</div>'
+          + (b.note ? '<div class="book-note">' + esc(b.note) + '</div>' : '')
+          + '</div>'
+          + '</div>';
+      }).join('');
+
+    }
+
+    // ─────────────────────────────────────────
+    // UTILITIES
+    // ─────────────────────────────────────────
+    function esc(s) {
+      if (s == null) return '';
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+
+    function groupByYear(items) {
+      var map = {};
+      items.forEach(function(item) {
+        var y = item.year || (item.date ? item.date.split(' ').pop() : 'TBD');
+        if (!map[y]) map[y] = [];
+        map[y].push(item);
+      });
+      return map;
+    }
+
+    function renderYearGroups(byYear, rowFn) {
+      return Object.keys(byYear).sort(function(a,b){ return b - a; }).map(function(year) {
+        return '<div class="year-group">'
+          + '<div class="year-label">' + esc(year) + '</div>'
+          + '<div class="list-section">' + byYear[year].map(rowFn).join('') + '</div>'
+          + '</div>';
+      }).join('');
+    }
+
+    // ─────────────────────────────────────────
+    // TAB BUTTON WIRING
+    // ─────────────────────────────────────────
+    // BIO INJECTION
+    // ─────────────────────────────────────────
+    (function() {
+      var el = document.getElementById('about-bio');
+      if (el && CONTENT.bio) el.textContent = CONTENT.bio;
+    })();
+
+    // ─────────────────────────────────────────
+    document.querySelectorAll('.tab-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() { switchTab(btn.dataset.tab); });
+    });
+
+    // ─────────────────────────────────────────
+    // PAGE LOAD FADE-IN
+    // ─────────────────────────────────────────
     window.addEventListener('load', function() {
       setTimeout(function() {
         document.body.classList.remove('is-loading');
       }, 100);
     });
 
-    // Mobile viewport height fix
+    // ─────────────────────────────────────────
+    // VIDEO LOOP FADE
+    // ─────────────────────────────────────────
     (function() {
-      var ua = navigator.userAgent;
-      var isMobile = /android|iphone|ipad/i.test(ua);
+      var video = document.getElementById('bg-video');
+      var fade  = document.getElementById('bg-fade');
+      video.addEventListener('ended', function() {
+        fade.classList.add('visible');
+        video.currentTime = 0;
+        video.play();
+        requestAnimationFrame(function() {
+          requestAnimationFrame(function() {
+            fade.classList.remove('visible');
+          });
+        });
+      });
+    })();
+
+    // ─────────────────────────────────────────
+    // MOBILE VIEWPORT HEIGHT FIX
+    // ─────────────────────────────────────────
+    (function() {
+      var isMobile = /android|iphone|ipad/i.test(navigator.userAgent);
       if (isMobile) {
         var setVh = function() {
           document.documentElement.style.setProperty('--viewport-height', window.innerHeight + 'px');
           document.documentElement.style.setProperty('--background-height', (window.innerHeight + 250) + 'px');
         };
         window.addEventListener('load', setVh);
-        window.addEventListener('orientationchange', function() {
-          setTimeout(setVh, 100);
-        });
+        window.addEventListener('orientationchange', function() { setTimeout(setVh, 100); });
       }
     })();
   </script>
