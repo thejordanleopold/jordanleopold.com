@@ -18,7 +18,7 @@ var SITE_CONTENT = {
     },
     {
       "name": "21st CENTURION",
-      "desc": "Agentic AI Platform for startup teams and small enterprises.",
+      "desc": "Agentic AI Platform for startup founders, teams and small enterprises.",
       "current": true,
       "tech": [
         "AI",
