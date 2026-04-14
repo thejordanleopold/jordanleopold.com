@@ -372,6 +372,13 @@ var SITE_CONTENT = {
       "subsubject": "Classical"
     },
     {
+      "title": "The Dhammapada",
+      "author": "Buddha",
+      "status": "read",
+      "subject": "Philosophy",
+      "subsubject": "Eastern"
+    },
+    {
       "title": "Tao Te Ching",
       "author": "Lao Tzu",
       "status": "read",
