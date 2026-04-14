@@ -414,6 +414,28 @@
       color: #000;
       text-decoration: none;
     }
+    .timeline-subroles {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      column-gap: 0.6rem;
+      row-gap: 0.2rem;
+      margin-top: 0.25rem;
+    }
+    .timeline-subrole-date {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.6em;
+      color: var(--accent);
+      white-space: nowrap;
+      font-weight: 300;
+      padding-top: 0.1rem;
+    }
+    .timeline-subrole-title {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.625em;
+      color: rgba(28,28,28,0.65);
+      font-weight: 300;
+    }
+    body.dark .timeline-subrole-title { color: rgba(240,240,240,0.6); }
     .timeline-role {
       font-family: 'Alexandria', sans-serif;
       font-size: 0.625em;
@@ -1080,7 +1102,12 @@
                 <div class="timeline-date">Jul 2018 – Sep 2019</div>
                 <div class="timeline-body">
                   <div class="timeline-company"><a href="https://sentry.io" target="_blank" rel="noopener noreferrer">Sentry.io</a></div>
-                  <div class="timeline-role">Outbound SDR (Apr–Sep 2019) · Inbound SDR (Jul 2018–Mar 2019)</div>
+                  <div class="timeline-subroles">
+                    <div class="timeline-subrole-date">Apr 2019 – Sep 2019</div>
+                    <div class="timeline-subrole-title">Outbound Sales Development Representative</div>
+                    <div class="timeline-subrole-date">Jul 2018 – Mar 2019</div>
+                    <div class="timeline-subrole-title">Inbound Sales Development Representative</div>
+                  </div>
                 </div>
               </div>
 
@@ -1112,7 +1139,12 @@
                 <div class="timeline-date">Jul 2013 – Jul 2015</div>
                 <div class="timeline-body">
                   <div class="timeline-company">Cal State University East Bay</div>
-                  <div class="timeline-role">VP of Finance (2014–2015) · Director of Legislative Affairs (2013–2014)</div>
+                  <div class="timeline-subroles">
+                    <div class="timeline-subrole-date">Jul 2014 – Jul 2015</div>
+                    <div class="timeline-subrole-title">VP of Finance – Student Government Board</div>
+                    <div class="timeline-subrole-date">Jul 2013 – Jul 2014</div>
+                    <div class="timeline-subrole-title">Director of Legislative Affairs – Student Government Board</div>
+                  </div>
                 </div>
               </div>
 
