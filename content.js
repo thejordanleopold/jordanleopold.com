@@ -9,6 +9,7 @@ var SITE_CONTENT = {
     {
       "name": "Startup IQ",
       "desc": "Relationship management platform helping early-stage founders identify investors and catalyze their network into closed funding rounds through live data and AI.",
+      "current": true,
       "tech": [
         "Network",
         "React",
@@ -18,11 +19,27 @@ var SITE_CONTENT = {
     {
       "name": "CLIENTEL",
       "desc": "Agentic AI platform enabling the one-man sales team.",
+      "current": true,
       "repo": "clientel",
       "tech": [
         "AI",
         "Node.js"
       ]
+    },
+    {
+      "name": "Agentic AI Workshop",
+      "desc": "Everything Jordan has learned relating to fullstack agentic AI development.",
+      "repo": "agentic-ai-workshop"
+    },
+    {
+      "name": "Claude Code Skills Distilled",
+      "desc": "42 production-quality Claude Code skills distilled from 17 community repositories.",
+      "repo": "claude-code-skills-distilled"
+    },
+    {
+      "name": "MediaBay",
+      "desc": "Open source online video downloader and editor. Not currently functioning — work in progress.",
+      "repo": "mediabay"
     }
   ],
   "blog": [],
