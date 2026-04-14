@@ -750,8 +750,16 @@
     .blog-read-more:hover { text-decoration: underline; }
 
     /* === SECTION: BOOKSHELF === */
-    .bookshelf-filter { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
-    .bookshelf-list { display: flex; flex-direction: column; gap: 1rem; }
+    .bookshelf-list { display: flex; flex-direction: column; gap: 0.625rem; }
+    .bookshelf-cat-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5em;
+      color: var(--text);
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      padding-bottom: 0.15rem;
+      margin-top: 0.75rem;
+    }
+    .bookshelf-cat-heading:first-child { margin-top: 0; }
     .textbook-subject-heading { font-family: system-ui, -apple-system, sans-serif; font-size: 0.65em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-top: 0.5rem; margin-bottom: -0.25rem; }
     .textbook-subject-heading:first-child { margin-top: 0; }
     .book-row {
@@ -856,6 +864,7 @@
     body.dark .resume-entry-org { color: rgba(240,240,240,0.65); }
     body.dark .resume-entry-meta { color: rgba(240,240,240,0.55); }
     body.dark .about-bio { color: rgba(240,240,240,0.82); }
+    body.dark .bookshelf-cat-heading { border-bottom-color: rgba(255,255,255,0.1); }
     body.dark .book-author { color: rgba(240,240,240,0.6); }
     body.dark .book-note { color: rgba(240,240,240,0.7); }
     body.dark .book-cover { background: rgba(255,255,255,0.05); box-shadow: 0 2px 8px rgba(0,0,0,0.5); }
@@ -1317,16 +1326,6 @@
 
           <!-- BOOKSHELF -->
           <div class="panel" id="panel-bookshelf" role="tabpanel">
-            <div class="bookshelf-filter sub-tab-bar">
-              <button class="sub-tab-btn active" data-shelf="reading">Reading</button>
-              <button class="sub-tab-btn" data-shelf="textbook">Text Books</button>
-              <button class="sub-tab-btn" data-shelf="Business">Business</button>
-              <button class="sub-tab-btn" data-shelf="Personal Dev">Personal Dev</button>
-              <button class="sub-tab-btn" data-shelf="Philosophy">Philosophy</button>
-              <button class="sub-tab-btn" data-shelf="History">History</button>
-              <button class="sub-tab-btn" data-shelf="Politics">Politics</button>
-              <button class="sub-tab-btn" data-shelf="Fiction">Fiction</button>
-            </div>
             <div class="bookshelf-list" id="bookshelf-list">
               <!-- Rendered by JS from CONTENT.books -->
               <p class="placeholder-msg"><!-- FILL: add books to CONTENT.books in the script block --></p>
@@ -1430,7 +1429,7 @@
       if (name === 'social')     renderSocial();
       if (name === 'events')   { renderEvents(); renderSpeaking(); }
       if (name === 'blog')       renderBlog();
-      if (name === 'bookshelf')  renderBookshelf('reading');
+      if (name === 'bookshelf')  renderBookshelf();
     }
 
     // ─────────────────────────────────────────
@@ -1635,100 +1634,64 @@
     // ─────────────────────────────────────────
     // BOOKSHELF
     // ─────────────────────────────────────────
-    function renderBookshelf(filter) {
+    function renderBookshelf() {
       var el = document.getElementById('bookshelf-list');
+      if (!CONTENT.books || !CONTENT.books.length) return;
 
-      // Wire shelf sub-tab buttons
-      document.querySelectorAll('.sub-tab-btn[data-shelf]').forEach(function(btn) {
-        btn.onclick = function() {
-          document.querySelectorAll('.sub-tab-btn[data-shelf]').forEach(function(b) { b.classList.remove('active'); });
-          btn.classList.add('active');
-          renderBookshelf(btn.dataset.shelf);
-        };
-      });
+      var readBooks  = CONTENT.books.filter(function(b) { return b.status === 'read'; });
+      var textbooks  = CONTENT.books.filter(function(b) { return b.status === 'textbook'; });
 
-      var SUBJECT_TABS = ['Business', 'Personal Dev', 'Philosophy', 'History', 'Politics', 'Fiction'];
-      var isSubjectTab = SUBJECT_TABS.indexOf(filter) !== -1;
+      var subjectOrder  = ['Business', 'Personal Dev', 'Philosophy', 'History', 'Politics', 'Fiction'];
+      var textSubOrder  = ['Finance', 'Economics', 'Business', 'Policy', 'History', 'Science', 'Technology'];
 
-      var books = isSubjectTab
-        ? CONTENT.books.filter(function(b) { return b.status === 'read' && b.subject === filter; })
-        : CONTENT.books.filter(function(b) { return b.status === filter; });
-
-      if (!books.length) {
-        el.innerHTML = '<p class="placeholder-msg">No books here yet.</p>';
-        return;
-      }
-
-      if (filter === 'textbook') {
-        var subjectOrder = ['Finance', 'Economics', 'Business', 'Policy', 'History', 'Science', 'Technology'];
-        var grouped1 = {};
-        books.forEach(function(b) {
-          var s = b.subject || 'Other';
-          if (!grouped1[s]) grouped1[s] = [];
-          grouped1[s].push(b);
-        });
-        var html = '';
-        subjectOrder.forEach(function(subject) {
-          if (!grouped1[subject] || !grouped1[subject].length) return;
-          html += '<div class="textbook-subject-heading">' + esc(subject) + '</div>';
-          grouped1[subject].forEach(function(b) {
-            var meta = [b.edition ? b.edition + ' ed.' : '', b.year || ''].filter(Boolean).join(' · ');
-            html += '<div class="book-row">'
-              + '<div class="book-info">'
-              + '<div class="book-title">' + esc(b.title) + '</div>'
-              + '<div class="book-author">' + esc(b.author) + '</div>'
-              + (meta ? '<div class="book-note">' + esc(meta) + '</div>' : '')
-              + '</div>'
-              + '</div>';
-          });
-        });
-        el.innerHTML = html;
-        return;
-      }
-
-      if (isSubjectTab) {
-        var grouped2 = {};
-        var ssOrder = [];
-        books.forEach(function(b) {
-          var ss = b.subsubject || 'General';
-          if (!grouped2[ss]) { grouped2[ss] = []; ssOrder.push(ss); }
-          grouped2[ss].push(b);
-        });
-        var html2 = '';
-        ssOrder.forEach(function(ss) {
-          html2 += '<div class="textbook-subject-heading">' + esc(ss) + '</div>';
-          grouped2[ss].forEach(function(b) {
-            var stars = '';
-            if (b.stars) { for (var i = 1; i <= 5; i++) stars += '<span class="' + (i <= b.stars ? 'star-filled' : 'star-empty') + '">★</span>'; }
-            html2 += '<div class="book-row">'
-              + '<div class="book-info">'
-              + '<div class="book-title">' + esc(b.title) + '</div>'
-              + (b.author ? '<div class="book-author">' + esc(b.author) + '</div>' : '')
-              + (b.note ? '<div class="book-note">' + esc(b.note) + '</div>' : '')
-              + (stars ? '<div class="book-stars">' + stars + '</div>' : '')
-              + '</div>'
-              + '</div>';
-          });
-        });
-        el.innerHTML = html2;
-        return;
-      }
-
-      el.innerHTML = books.map(function(b) {
+      function bookRow(b, showMeta) {
         var stars = '';
-        for (var i = 1; i <= 5; i++) {
-          stars += '<span class="' + (i <= b.stars ? 'star-filled' : 'star-empty') + '">★</span>';
-        }
+        if (b.stars) { for (var i = 1; i <= 5; i++) stars += '<span class="' + (i <= b.stars ? 'star-filled' : 'star-empty') + '">★</span>'; }
+        var meta = showMeta ? [b.edition ? b.edition + ' ed.' : '', b.year || ''].filter(Boolean).join(' · ') : '';
         return '<div class="book-row">'
-          + (b.cover ? '<img class="book-cover" src="' + esc(b.cover) + '" alt="' + esc(b.title) + '">' : '<div class="book-cover"></div>')
           + '<div class="book-info">'
           + '<div class="book-title">' + esc(b.title) + '</div>'
-          + '<div class="book-author">' + esc(b.author) + '</div>'
+          + (b.author ? '<div class="book-author">' + esc(b.author) + '</div>' : '')
+          + (meta ? '<div class="book-note">' + esc(meta) + '</div>' : '')
           + (b.note ? '<div class="book-note">' + esc(b.note) + '</div>' : '')
-          + '</div>'
-          + '</div>';
-      }).join('');
+          + (stars ? '<div class="book-stars">' + stars + '</div>' : '')
+          + '</div></div>';
+      }
 
+      var html = '';
+
+      subjectOrder.forEach(function(subject) {
+        var sBooks = readBooks.filter(function(b) { return b.subject === subject; });
+        if (!sBooks.length) return;
+        html += '<div class="bookshelf-cat-heading">' + esc(subject) + '</div>';
+        var grouped = {}, ssOrder = [];
+        sBooks.forEach(function(b) {
+          var ss = b.subsubject || 'General';
+          if (!grouped[ss]) { grouped[ss] = []; ssOrder.push(ss); }
+          grouped[ss].push(b);
+        });
+        ssOrder.forEach(function(ss) {
+          html += '<div class="textbook-subject-heading">' + esc(ss) + '</div>';
+          grouped[ss].forEach(function(b) { html += bookRow(b, false); });
+        });
+      });
+
+      if (textbooks.length) {
+        html += '<div class="bookshelf-cat-heading">Textbooks</div>';
+        var tGrouped = {};
+        textbooks.forEach(function(b) {
+          var s = b.subject || 'Other';
+          if (!tGrouped[s]) tGrouped[s] = [];
+          tGrouped[s].push(b);
+        });
+        textSubOrder.forEach(function(subject) {
+          if (!tGrouped[subject] || !tGrouped[subject].length) return;
+          html += '<div class="textbook-subject-heading">' + esc(subject) + '</div>';
+          tGrouped[subject].forEach(function(b) { html += bookRow(b, true); });
+        });
+      }
+
+      el.innerHTML = html;
     }
 
     // ─────────────────────────────────────────
