@@ -105,8 +105,8 @@ var SITE_CONTENT = {
       "author": "Walter Isaacson",
       "year": "2023",
       "status": "read",
-      "subject": "Business",
-      "subsubject": "Entrepreneurship"
+      "subject": "History",
+      "subsubject": "Biography"
     },
     {
       "title": "The Startup Community Way",
