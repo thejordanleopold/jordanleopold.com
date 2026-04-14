@@ -391,7 +391,7 @@
     .timeline-date {
       white-space: nowrap;
       font-family: 'Alexandria', sans-serif;
-      font-size: 0.7em;
+      font-size: 0.625em;
       color: var(--accent);
       padding-top: 0.2rem;
       font-weight: 300;
@@ -410,9 +410,13 @@
       color: var(--text);
       margin-bottom: 0.1rem;
     }
+    .timeline-company a {
+      color: #000;
+      text-decoration: none;
+    }
     .timeline-role {
       font-family: 'Alexandria', sans-serif;
-      font-size: 0.775em;
+      font-size: 0.625em;
       color: rgba(28,28,28,0.65);
       font-weight: 300;
       margin-bottom: 0.5rem;
@@ -600,7 +604,7 @@
       display: inline-block;
       margin-top: 0.4rem;
       font-family: 'Alexandria', sans-serif;
-      font-size: 0.7em;
+      font-size: 0.625em;
       color: var(--accent);
       text-decoration: none;
     }
@@ -635,7 +639,7 @@
     .entry-date {
       flex: 0 0 4.5rem;
       font-family: 'Alexandria', sans-serif;
-      font-size: 0.7em;
+      font-size: 0.625em;
       color: var(--accent);
       font-weight: 300;
       padding-top: 0.15rem;
@@ -670,7 +674,7 @@
     .entry-links { display: flex; gap: 0.5rem; margin-top: 0.3rem; }
     .entry-link {
       font-family: 'Alexandria', sans-serif;
-      font-size: 0.7em;
+      font-size: 0.625em;
       color: var(--accent);
       text-decoration: none;
       opacity: 0.7;
@@ -693,7 +697,7 @@
     }
     .blog-date {
       font-family: 'Alexandria', sans-serif;
-      font-size: 0.7em;
+      font-size: 0.625em;
       color: var(--accent);
       font-weight: 300;
       margin-bottom: 0.4rem;
@@ -994,9 +998,9 @@
               <h3>Experience</h3>
 
               <div class="timeline-entry">
-                <div class="timeline-date">Apr 2021 – Present</div>
+                <div class="timeline-date">Mar 2021 – Present</div>
                 <div class="timeline-body">
-                  <div class="timeline-company">Startup IQ</div>
+                  <div class="timeline-company"><a href="https://startupiq.pro/" target="_blank" rel="noopener noreferrer">Startup IQ</a></div>
                   <div class="timeline-role">Founder</div>
                 </div>
               </div>
@@ -1004,7 +1008,7 @@
               <div class="timeline-entry">
                 <div class="timeline-date">Feb 2021 – Jan 2022</div>
                 <div class="timeline-body">
-                  <div class="timeline-company">Newchip</div>
+                  <div class="timeline-company"><a href="https://www.crunchbase.com/organization/newchip" target="_blank" rel="noopener noreferrer">Newchip</a></div>
                   <div class="timeline-role">Investor Relations Associate</div>
                 </div>
               </div>
@@ -1012,7 +1016,7 @@
               <div class="timeline-entry">
                 <div class="timeline-date">Nov 2021 – Dec 2021</div>
                 <div class="timeline-body">
-                  <div class="timeline-company">The BFM Fund</div>
+                  <div class="timeline-company"><a href="https://www.bfm.fund/" target="_blank" rel="noopener noreferrer">The BFM Fund</a></div>
                   <div class="timeline-role">Venture Capital Analyst</div>
                 </div>
               </div>
@@ -1020,7 +1024,7 @@
               <div class="timeline-entry">
                 <div class="timeline-date">Sep 2021 – Dec 2021</div>
                 <div class="timeline-body">
-                  <div class="timeline-company">Keyhorse Capital</div>
+                  <div class="timeline-company"><a href="https://www.keyhorse.vc/" target="_blank" rel="noopener noreferrer">Keyhorse Capital</a></div>
                   <div class="timeline-role">Venture Capital Analyst</div>
                 </div>
               </div>
@@ -1028,7 +1032,7 @@
               <div class="timeline-entry">
                 <div class="timeline-date">Dec 2020 – Sep 2021</div>
                 <div class="timeline-body">
-                  <div class="timeline-company">Crunchbase</div>
+                  <div class="timeline-company"><a href="https://www.crunchbase.com" target="_blank" rel="noopener noreferrer">Crunchbase</a></div>
                   <div class="timeline-role">Sales Development Representative</div>
                 </div>
               </div>
@@ -1036,7 +1040,7 @@
               <div class="timeline-entry">
                 <div class="timeline-date">Apr 2020 – Nov 2020</div>
                 <div class="timeline-body">
-                  <div class="timeline-company">Sentry.io</div>
+                  <div class="timeline-company"><a href="https://sentry.io" target="_blank" rel="noopener noreferrer">Sentry.io</a></div>
                   <div class="timeline-role">Sales Development Representative</div>
                 </div>
               </div>
@@ -1044,7 +1048,7 @@
               <div class="timeline-entry">
                 <div class="timeline-date">Feb 2018 – Apr 2019</div>
                 <div class="timeline-body">
-                  <div class="timeline-company">First Republic Bank</div>
+                  <div class="timeline-company"><a href="https://en.wikipedia.org/wiki/First_Republic_Bank" target="_blank" rel="noopener noreferrer">First Republic Bank</a></div>
                   <div class="timeline-role">Digital Banking Sales Associate</div>
                 </div>
               </div>
@@ -1112,9 +1116,9 @@
           <div class="panel" id="panel-social" role="tabpanel">
             <div class="social-btns">
               <button class="social-btn" data-platform="linkedin" data-url="https://www.linkedin.com/in/jordanleopold/">LinkedIn<svg class="social-btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6,3 13,3 13,10"/></svg></button>
-              <button class="social-btn" data-platform="youtube" data-url="https://youtube.com/@jordanleopold">YouTube<svg class="social-btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6,3 13,3 13,10"/></svg></button>
-              <button class="social-btn" data-platform="x" data-url="https://x.com/jordanleopold">X<svg class="social-btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6,3 13,3 13,10"/></svg></button>
-              <button class="social-btn" data-platform="instagram" data-url="https://www.instagram.com/jordan.leopold">Instagram<svg class="social-btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6,3 13,3 13,10"/></svg></button>
+              <button class="social-btn" data-platform="youtube" data-url="https://www.youtube.com/@TheJordanLeopold">YouTube<svg class="social-btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6,3 13,3 13,10"/></svg></button>
+              <button class="social-btn" data-platform="x" data-url="https://x.com/jordansleopold">X<svg class="social-btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6,3 13,3 13,10"/></svg></button>
+              <button class="social-btn" data-platform="instagram" data-url="https://www.instagram.com/startupiq_/">Instagram<svg class="social-btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6,3 13,3 13,10"/></svg></button>
               <button class="social-btn" data-platform="tiktok" data-url="https://tiktok.com/@jordanleopold">TikTok<svg class="social-btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6,3 13,3 13,10"/></svg></button>
             </div>
             <div class="social-section" id="social-linkedin" style="display:none">
