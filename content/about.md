@@ -2,4 +2,4 @@
 github: jordanleopold
 ---
 
-Jordan Leopold is an entrepreneur, venture capital professional, and political advocate based in the San Francisco Bay Area. With a background spanning enterprise sales, early-stage investing, and government affairs, he is currently building CLIENTEL — an agentic AI platform enabling the one-man sales team — while teaching himself software development.
+Jordan is a seasoned startup professional with extensive experience in early-stage venture capital, go-to-market enterprise sales, and political strategy & advocacy. He is a self taught fullstack agentic AI software developer - founder of Startup IQ: The Networking App for Founders Fundraising & Selling.

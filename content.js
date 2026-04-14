@@ -4,25 +4,74 @@
 var GITHUB_USERNAME = "jordanleopold";
 
 var SITE_CONTENT = {
-  "bio": "Jordan Leopold is an entrepreneur, venture capital professional, and political advocate based in the San Francisco Bay Area. With a background spanning enterprise sales, early-stage investing, and government affairs, he is currently building CLIENTEL — an agentic AI platform enabling the one-man sales team — while teaching himself software development.",
+  "bio": "Jordan is a seasoned startup professional with extensive experience in early-stage venture capital, go-to-market enterprise sales, and political strategy & advocacy. He is a self taught fullstack agentic AI software developer - founder of Startup IQ: The Networking App for Founders Fundraising & Selling.",
   "projects": [
     {
       "name": "Startup IQ",
       "desc": "Relationship management platform helping early-stage founders identify investors and catalyze their network into closed funding rounds through live data and AI.",
+      "current": "true",
       "tech": [
-        "Network",
+        "FinTech",
         "React",
         "Node.js"
       ]
     },
     {
-      "name": "CLIENTEL",
-      "desc": "Agentic AI platform enabling the one-man sales team.",
-      "repo": "clientel",
+      "name": "21ST CENTURION",
+      "desc": "Agentic AI plaform for founders, startup teams, and small enterprises.",
+      "current": "true",
       "tech": [
         "AI",
         "Node.js"
       ]
+    },
+    {
+      "name": "Agentic AI Workshop",
+      "desc": "Everything Jordan has learned relating to fullstack agentic AI development.",
+      "repo": "agentic-ai-workshop",
+      "github": "true"
+    },
+    {
+      "name": "Claude Code Skills Distilled",
+      "desc": "42 production-quality Claude Code skills distilled from 17 community repositories.",
+      "repo": "claude-code-skills-distilled",
+      "github": "true"
+    },
+    {
+      "name": "MediaBay",
+      "desc": "Open source online video downloader and editor. Not currently functioning — work in progress.",
+      "repo": "mediabay",
+      "github": "true"
+    },
+    {
+      "name": "People of Change",
+      "desc": "Founded grassroots organization providing baseline needs through community service, having conversations about community issues for policy change.",
+      "past": "true"
+    },
+    {
+      "name": "Haycocoa",
+      "desc": "Hayward Community Coalition using political education and community activation for local policy change.",
+      "past": "true"
+    },
+    {
+      "name": "Kinoir",
+      "desc": "Fashionable skincare for men with melanin.",
+      "past": "true"
+    },
+    {
+      "name": "Hero Ring",
+      "desc": "Smart ring for women to discreetly send a local emergency signal.",
+      "past": "true"
+    },
+    {
+      "name": "Plexys",
+      "desc": "Political campaign platform to direct followers towards political action online.",
+      "past": "true"
+    },
+    {
+      "name": "UniChain",
+      "desc": "Blockchain based degree unit system for universities.",
+      "past": "true"
     }
   ],
   "blog": [],
@@ -82,8 +131,6 @@ var SITE_CONTENT = {
       "title": "Zero to One",
       "author": "Peter Thiel",
       "status": "read",
-      "note": "Changed how I think about startups.",
-      "stars": 5,
       "subject": "Business",
       "subsubject": "Entrepreneurship"
     },

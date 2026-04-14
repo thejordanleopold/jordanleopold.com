@@ -4,8 +4,6 @@
 title: Zero to One
 author: Peter Thiel
 status: read
-note: Changed how I think about startups.
-stars: 5
 subject: Business
 subsubject: Entrepreneurship
 ---
