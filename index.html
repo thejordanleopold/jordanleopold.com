@@ -896,6 +896,28 @@
         top: auto;
         transform: none;
       }
+      /* Carousel */
+      .panel-container {
+        overflow: hidden;
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      .panels-track {
+        display: flex;
+        height: 100%;
+        will-change: transform;
+      }
+      .panels-track.is-snapping {
+        transition: transform 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .panel {
+        flex: none !important;
+        display: block !important;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-top: 1.25rem;
+        padding-bottom: 3.5rem;
+      }
     }
     @media (max-width: 360px) {
       .site-main > .inner { --padding-horizontal: 1rem; --padding-vertical: 1.25rem; --spacing: 1rem; }
@@ -964,6 +986,7 @@
 
         <!-- ── PANEL CONTAINER ── -->
         <div class="panel-container">
+        <div class="panels-track" id="panels-track">
 
           <!-- ABOUT -->
           <div class="panel active" id="panel-about" role="tabpanel">
@@ -1198,6 +1221,7 @@
             </div>
           </div>
 
+        </div><!-- /.panels-track -->
         </div><!-- /.panel-container -->
 
         <!-- Dark mode toggle — bottom-left of card -->
@@ -1226,6 +1250,43 @@
     const rendered = {};
 
     // ─────────────────────────────────────────
+    // CAROUSEL STATE
+    // ─────────────────────────────────────────
+    var TAB_ORDER = ['about','experience','projects','social','events','blog','bookshelf'];
+    var carouselIdx = 0;
+    var carouselTrack = null;
+
+    function isMobile() { return window.innerWidth <= 480; }
+
+    function initCarousel() {
+      carouselTrack = document.getElementById('panels-track');
+      if (!carouselTrack) return;
+      var panels = carouselTrack.querySelectorAll('.panel');
+      var w = carouselTrack.parentElement.offsetWidth;
+      carouselTrack.style.width = (w * panels.length) + 'px';
+      panels.forEach(function(p) { p.style.width = w + 'px'; });
+      carouselTrack.style.transform = 'translateX(0)';
+      carouselIdx = 0;
+    }
+
+    function snapToIndex(idx, animated) {
+      if (!carouselTrack) return;
+      var w = carouselTrack.parentElement.offsetWidth;
+      carouselIdx = Math.max(0, Math.min(idx, TAB_ORDER.length - 1));
+      if (animated) {
+        carouselTrack.classList.add('is-snapping');
+        carouselTrack.addEventListener('transitionend', function() {
+          carouselTrack.classList.remove('is-snapping');
+        }, { once: true });
+      }
+      carouselTrack.style.transform = 'translateX(' + (-carouselIdx * w) + 'px)';
+    }
+
+    window.addEventListener('resize', function() {
+      if (isMobile()) initCarousel();
+    });
+
+    // ─────────────────────────────────────────
     // TAB SWITCHING
     // ─────────────────────────────────────────
     function switchTab(name) {
@@ -1234,9 +1295,18 @@
         b.classList.toggle('active', active);
         b.setAttribute('aria-selected', active ? 'true' : 'false');
       });
-      document.querySelectorAll('.panel').forEach(function(p) {
-        p.classList.toggle('active', p.id === 'panel-' + name);
-      });
+      // Scroll active tab button into view
+      var activeBtn = document.querySelector('.tab-btn[data-tab="' + name + '"]');
+      if (activeBtn) activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+      if (isMobile()) {
+        var idx = TAB_ORDER.indexOf(name);
+        if (idx >= 0) snapToIndex(idx, true);
+      } else {
+        document.querySelectorAll('.panel').forEach(function(p) {
+          p.classList.toggle('active', p.id === 'panel-' + name);
+        });
+      }
       if (!rendered[name]) {
         renderPanel(name);
         rendered[name] = true;
@@ -1252,26 +1322,60 @@
     }
 
     // ─────────────────────────────────────────
-    // SWIPE TO SWITCH TABS (mobile)
+    // SWIPE CAROUSEL (mobile)
     // ─────────────────────────────────────────
     (function() {
       var container = document.querySelector('.panel-container');
       if (!container) return;
-      var tabs = Array.from(document.querySelectorAll('.tab-btn')).map(function(b) { return b.dataset.tab; });
-      var startX = 0, startY = 0;
+      var startX = 0, startY = 0, startTranslateX = 0;
+      var isHorizontal = null;
+
+      function getCurrentTranslateX() {
+        var style = window.getComputedStyle(carouselTrack);
+        var matrix = new DOMMatrix(style.transform);
+        return matrix.m41;
+      }
+
       container.addEventListener('touchstart', function(e) {
+        if (!isMobile() || !carouselTrack) return;
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
+        isHorizontal = null;
+        carouselTrack.classList.remove('is-snapping');
+        startTranslateX = getCurrentTranslateX();
       }, { passive: true });
+
+      container.addEventListener('touchmove', function(e) {
+        if (!isMobile() || !carouselTrack) return;
+        var dx = e.touches[0].clientX - startX;
+        var dy = e.touches[0].clientY - startY;
+
+        if (isHorizontal === null) {
+          if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
+            isHorizontal = Math.abs(dx) > Math.abs(dy);
+          }
+          return;
+        }
+        if (!isHorizontal) return;
+
+        e.preventDefault();
+        var w = container.offsetWidth;
+        var minX = -(TAB_ORDER.length - 1) * w;
+        var rawX = startTranslateX + dx;
+        // Rubber-band resistance at edges
+        if (rawX > 0)    rawX = rawX * 0.18;
+        if (rawX < minX) rawX = minX + (rawX - minX) * 0.18;
+        carouselTrack.style.transform = 'translateX(' + rawX + 'px)';
+      }, { passive: false });
+
       container.addEventListener('touchend', function(e) {
+        if (!isMobile() || !carouselTrack || !isHorizontal) return;
         var dx = e.changedTouches[0].clientX - startX;
-        var dy = e.changedTouches[0].clientY - startY;
-        if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return;
-        var active = document.querySelector('.tab-btn.active');
-        if (!active) return;
-        var idx = tabs.indexOf(active.dataset.tab);
-        if (dx < 0 && idx < tabs.length - 1) switchTab(tabs[idx + 1]);
-        if (dx > 0 && idx > 0) switchTab(tabs[idx - 1]);
+        var w = container.offsetWidth;
+        var newIdx = carouselIdx;
+        if (dx < -(w * 0.2) && carouselIdx < TAB_ORDER.length - 1) newIdx = carouselIdx + 1;
+        else if (dx > (w * 0.2) && carouselIdx > 0) newIdx = carouselIdx - 1;
+        switchTab(TAB_ORDER[newIdx]);
       }, { passive: true });
     })();
 
@@ -1553,6 +1657,7 @@
     // PAGE LOAD FADE-IN
     // ─────────────────────────────────────────
     window.addEventListener('load', function() {
+      if (isMobile()) initCarousel();
       setTimeout(function() {
         document.body.classList.remove('is-loading');
       }, 100);
