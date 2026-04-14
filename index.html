@@ -397,9 +397,20 @@
       display: grid;
       grid-template-columns: subgrid;
       grid-column: 1 / -1;
-      row-gap: 0.3rem;
+      row-gap: 0;
       align-items: start;
     }
+    .timeline-group > .timeline-body {
+      padding-top: 0.3rem;
+      padding-bottom: 0.3rem;
+    }
+    .timeline-group > .timeline-date:first-child + .timeline-body {
+      padding-top: 0;
+    }
+    .timeline-group > .timeline-body:last-child {
+      padding-bottom: 0;
+    }
+    .timeline-group .timeline-role { margin-bottom: 0; }
     .timeline-date {
       white-space: nowrap;
       font-family: 'Alexandria', sans-serif;
@@ -1086,12 +1097,9 @@
               </div>
 
               <div class="timeline-group">
-                <div></div>
-                <div class="timeline-body">
-                  <div class="timeline-company"><a href="https://sentry.io" target="_blank" rel="noopener noreferrer">Sentry.io</a></div>
-                </div>
                 <div class="timeline-date">Apr 2019 – Sep 2019</div>
                 <div class="timeline-body">
+                  <div class="timeline-company"><a href="https://sentry.io" target="_blank" rel="noopener noreferrer">Sentry.io</a></div>
                   <div class="timeline-role">Outbound Sales Development Representative</div>
                 </div>
                 <div class="timeline-date">Jul 2018 – Mar 2019</div>
@@ -1125,12 +1133,9 @@
               </div>
 
               <div class="timeline-group">
-                <div></div>
-                <div class="timeline-body">
-                  <div class="timeline-company">Cal State University East Bay</div>
-                </div>
                 <div class="timeline-date">Jul 2014 – Jul 2015</div>
                 <div class="timeline-body">
+                  <div class="timeline-company">Cal State University East Bay</div>
                   <div class="timeline-role">VP of Finance – Student Government Board</div>
                 </div>
                 <div class="timeline-date">Jul 2013 – Jul 2014</div>
