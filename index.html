@@ -1350,7 +1350,7 @@
     </div><!-- /.site-main -->
   </div><!-- /.site-wrapper -->
 
-  <script src="content.js?v=2"></script>
+  <script src="content.js?v=3"></script>
   <script>
     // ─────────────────────────────────────────
     // CONTENT — edit via content/*.md + node build.js
@@ -1518,7 +1518,8 @@
       var grid = document.getElementById('project-grid');
       if (!CONTENT.projects.length) return;
       var current = CONTENT.projects.filter(function(p) { return p.current; });
-      var github  = CONTENT.projects.filter(function(p) { return !p.current; });
+      var github  = CONTENT.projects.filter(function(p) { return p.github; });
+      var past    = CONTENT.projects.filter(function(p) { return p.past; });
       var html = '';
       if (current.length) {
         html += '<div class="project-section-label">Current</div>';
@@ -1527,6 +1528,10 @@
       if (github.length) {
         html += '<div class="project-section-label">GitHub</div>';
         html += github.map(renderProjectCard).join('');
+      }
+      if (past.length) {
+        html += '<div class="project-section-label">Past</div>';
+        html += past.map(renderProjectCard).join('');
       }
       grid.innerHTML = html;
 
@@ -1543,17 +1548,7 @@
                 if (el) el.textContent = '★ ' + match.stargazers_count;
               }
             });
-            // Show full repo list
-            var section = document.getElementById('github-section');
-            var list = document.getElementById('github-repos');
-            var sorted = repos.sort(function(a,b){ return b.stargazers_count - a.stargazers_count; }).slice(0,6);
-            list.innerHTML = sorted.map(function(r) {
-              return '<div class="github-repo">'
-                + '<a class="repo-name" href="' + r.html_url + '" target="_blank" rel="noopener">' + esc(r.name) + '</a>'
-                + '<span class="repo-meta">★ ' + r.stargazers_count + '</span>'
-                + '</div>';
-            }).join('');
-            section.style.display = '';
+            // star counts only — repo list section stays hidden
           })
           .catch(function() {}); // silent fail
       }
