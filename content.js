@@ -379,6 +379,13 @@ var SITE_CONTENT = {
       "subsubject": "Eastern"
     },
     {
+      "title": "Buddhism 101",
+      "author": "Arnie Kozak",
+      "status": "read",
+      "subject": "Philosophy",
+      "subsubject": "Eastern"
+    },
+    {
       "title": "Tao Te Ching",
       "author": "Lao Tzu",
       "status": "read",
