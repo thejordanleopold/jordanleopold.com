@@ -17,10 +17,9 @@ var SITE_CONTENT = {
       ]
     },
     {
-      "name": "CLIENTEL",
-      "desc": "Agentic AI platform enabling the one-man sales team.",
+      "name": "21st CENTURION",
+      "desc": "Agentic AI Platform for startup teams and small enterprises.",
       "current": true,
-      "repo": "clientel",
       "tech": [
         "AI",
         "Node.js"
