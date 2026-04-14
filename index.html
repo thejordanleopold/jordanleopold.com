@@ -280,7 +280,7 @@
       padding: 0.5rem 0.6rem;
       font-family: 'Alexandria', sans-serif;
       font-size: 0.625em;
-      font-weight: 400;
+      font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: rgba(28,28,28,0.65);
@@ -379,6 +379,11 @@
       row-gap: 0.75rem;
       margin-bottom: 1rem;
     }
+    .resume-section h3,
+    #events-list,
+    #speaking-list {
+      grid-column: 1 / -1;
+    }
     .resume-section h3 {
       grid-column: 1 / -1;
       font-family: 'Bebas Neue', sans-serif;
@@ -387,21 +392,41 @@
       margin-bottom: 0;
       letter-spacing: 0.02em;
     }
-    .timeline-entry { display: contents; }
+    .timeline-entry,
+    .timeline-group {
+      display: grid;
+      grid-template-columns: subgrid;
+      grid-column: 1 / -1;
+      row-gap: 0;
+      align-items: start;
+    }
+    .timeline-entry > .timeline-body,
+    .timeline-group > .timeline-body {
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+    }
+    .timeline-entry > .tg-company,
+    .timeline-group > .tg-company {
+      padding-top: 0;
+      padding-bottom: 0.1rem;
+    }
+    .timeline-entry > .timeline-body:last-child,
+    .timeline-group > .timeline-body:last-child {
+      padding-bottom: 0;
+    }
+    .timeline-entry .timeline-role,
+    .timeline-group .timeline-role { margin-bottom: 0; }
     .timeline-date {
       white-space: nowrap;
       font-family: 'Alexandria', sans-serif;
       font-size: 0.625em;
       color: var(--accent);
-      padding-top: 0.2rem;
       font-weight: 300;
       line-height: 1.4;
-      align-self: start;
     }
     .timeline-body {
       border-left: 2px solid rgba(26,122,118,0.25);
       padding-left: 0.65rem;
-      align-self: start;
     }
     .timeline-company {
       font-family: 'Alexandria', sans-serif;
@@ -434,6 +459,16 @@
 
     /* === SECTION: PROJECTS === */
     .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.875rem; }
+    .project-section-label {
+      grid-column: 1 / -1;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5em;
+      color: #000;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      padding-bottom: 0.15rem;
+      margin-bottom: 0.125rem;
+    }
+    .project-section-label:not(:first-child) { margin-top: 0.5rem; }
     .project-card {
       background: rgba(0,0,0,0.04);
       border: 1px solid rgba(0,0,0,0.08);
@@ -637,15 +672,16 @@
     }
     .list-entry:last-child { border-bottom: none; }
     .entry-date {
-      flex: 0 0 4.5rem;
+      flex: 0 0 5.5rem;
       font-family: 'Alexandria', sans-serif;
       font-size: 0.625em;
       color: var(--accent);
       font-weight: 300;
       padding-top: 0.15rem;
       line-height: 1.4;
+      word-break: break-word;
     }
-    .entry-body { flex: 1; }
+    .entry-body { flex: 1; min-width: 0; }
     .entry-title {
       font-family: 'Alexandria', sans-serif;
       font-size: 0.8em;
@@ -653,12 +689,16 @@
       color: var(--text);
       margin-bottom: 0.1rem;
       line-height: 1.4;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
     .entry-subtitle {
       font-family: 'Alexandria', sans-serif;
       font-size: 0.72em;
       color: rgba(28,28,28,0.55);
       font-weight: 300;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
     .entry-badge {
       flex-shrink: 0;
@@ -720,8 +760,16 @@
     .blog-read-more:hover { text-decoration: underline; }
 
     /* === SECTION: BOOKSHELF === */
-    .bookshelf-filter { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
-    .bookshelf-list { display: flex; flex-direction: column; gap: 1rem; }
+    .bookshelf-list { display: flex; flex-direction: column; gap: 0.625rem; }
+    .bookshelf-cat-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5em;
+      color: var(--text);
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      padding-bottom: 0.15rem;
+      margin-top: 0.75rem;
+    }
+    .bookshelf-cat-heading:first-child { margin-top: 0; }
     .textbook-subject-heading { font-family: system-ui, -apple-system, sans-serif; font-size: 0.65em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-top: 0.5rem; margin-bottom: -0.25rem; }
     .textbook-subject-heading:first-child { margin-top: 0; }
     .book-row {
@@ -826,6 +874,7 @@
     body.dark .resume-entry-org { color: rgba(240,240,240,0.65); }
     body.dark .resume-entry-meta { color: rgba(240,240,240,0.55); }
     body.dark .about-bio { color: rgba(240,240,240,0.82); }
+    body.dark .bookshelf-cat-heading { border-bottom-color: rgba(255,255,255,0.1); }
     body.dark .book-author { color: rgba(240,240,240,0.6); }
     body.dark .book-note { color: rgba(240,240,240,0.7); }
     body.dark .book-cover { background: rgba(255,255,255,0.05); box-shadow: 0 2px 8px rgba(0,0,0,0.5); }
@@ -839,6 +888,7 @@
     body.dark .social-post-date { color: rgba(240,240,240,0.38); }
     body.dark .social-post-text { color: rgba(240,240,240,0.72); }
     body.dark .social-coming-soon { color: rgba(240,240,240,0.35); }
+    body.dark .project-section-label { color: rgba(240,240,240,0.9); border-bottom-color: rgba(255,255,255,0.1); }
     body.dark .project-card { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
     body.dark .project-name { color: rgba(240,240,240,0.9); }
     body.dark .project-desc { color: rgba(240,240,240,0.6); }
@@ -859,6 +909,16 @@
       .image-component.style-1 > .frame { width: 4.25rem; }
     }
     @media (max-width: 480px) {
+      /* Scale video by height so full top-to-bottom is visible, crop sides, center */
+      .site-bg video {
+        width: auto;
+        height: 100dvh;
+        min-width: unset;
+        object-fit: fill;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+      }
       .site-wrapper { padding: 0; }
       .site-main {
         height: 100dvh;
@@ -866,7 +926,7 @@
         border-radius: 0;
         border-left: none;
         border-right: none;
-        background-image: linear-gradient(180deg, rgba(255,255,255,0.93) 0%, rgba(255,255,255,0.97) 100%);
+        background-image: linear-gradient(180deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.70) 35%, rgba(255,255,255,0.90) 100%);
       }
       .site-main > .inner {
         --padding-horizontal: 1.25rem;
@@ -885,6 +945,28 @@
         left: auto;
         top: auto;
         transform: none;
+      }
+      /* Carousel */
+      .panel-container {
+        overflow: hidden;
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      .panels-track {
+        display: flex;
+        height: 100%;
+        will-change: transform;
+      }
+      .panels-track.is-snapping {
+        transition: transform 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .panel {
+        flex: none !important;
+        display: block !important;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-top: 1.25rem;
+        padding-bottom: 3.5rem;
       }
     }
     @media (max-width: 360px) {
@@ -954,9 +1036,11 @@
 
         <!-- ── PANEL CONTAINER ── -->
         <div class="panel-container">
+        <div class="panels-track" id="panels-track">
 
           <!-- ABOUT -->
           <div class="panel active" id="panel-about" role="tabpanel">
+            <h3 class="services-heading">Biography</h3>
             <p class="about-bio" id="about-bio">
               Jordan Leopold is an entrepreneur, venture capital professional, and political advocate based in the San Francisco Bay Area. With a background spanning enterprise sales, early-stage investing, and government affairs, he is currently building CLIENTEL — an agentic AI platform enabling the one-man sales team — while teaching himself software development.
             </p>
@@ -1004,58 +1088,131 @@
               <h3>Experience</h3>
 
               <div class="timeline-entry">
-                <div class="timeline-date">Mar 2021 – Present</div>
-                <div class="timeline-body">
+                <div></div>
+                <div class="timeline-body tg-company">
                   <div class="timeline-company"><a href="https://startupiq.pro/" target="_blank" rel="noopener noreferrer">Startup IQ</a></div>
-                  <div class="timeline-role">Founder</div>
                 </div>
-              </div>
-
-              <div class="timeline-entry">
-                <div class="timeline-date">Feb 2021 – Jan 2022</div>
+                <div class="timeline-date">Mar 2026 – Present</div>
                 <div class="timeline-body">
-                  <div class="timeline-company"><a href="https://www.crunchbase.com/organization/newchip" target="_blank" rel="noopener noreferrer">Newchip</a></div>
-                  <div class="timeline-role">Investor Relations Associate</div>
+                  <div class="timeline-role">Founder · Full-time</div>
                 </div>
               </div>
 
               <div class="timeline-entry">
-                <div class="timeline-date">Nov 2021 – Dec 2021</div>
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company"><a href="https://www.crunchbase.com/organization/newchip" target="_blank" rel="noopener noreferrer">Newchip Accelerator</a></div>
+                </div>
+                <div class="timeline-date">Feb 2022 – Jan 2023</div>
                 <div class="timeline-body">
-                  <div class="timeline-company"><a href="https://www.bfm.fund/" target="_blank" rel="noopener noreferrer">The BFM Fund</a></div>
-                  <div class="timeline-role">Venture Capital Analyst</div>
+                  <div class="timeline-role">Investor Relations Associate – Venture Capital</div>
                 </div>
               </div>
 
               <div class="timeline-entry">
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company"><a href="https://www.keyhorse.vc/" target="_blank" rel="noopener noreferrer">Keyhorse Capital</a></div>
+                </div>
                 <div class="timeline-date">Sep 2021 – Dec 2021</div>
                 <div class="timeline-body">
-                  <div class="timeline-company"><a href="https://www.keyhorse.vc/" target="_blank" rel="noopener noreferrer">Keyhorse Capital</a></div>
-                  <div class="timeline-role">Venture Capital Analyst</div>
+                  <div class="timeline-role">Venture Capital Analyst · Contract</div>
                 </div>
               </div>
 
               <div class="timeline-entry">
-                <div class="timeline-date">Dec 2020 – Sep 2021</div>
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company"><a href="https://www.bfm.fund/" target="_blank" rel="noopener noreferrer">The BFM Fund</a></div>
+                </div>
+                <div class="timeline-date">Jan 2021 – Jun 2021</div>
                 <div class="timeline-body">
+                  <div class="timeline-role">Venture Capital Analyst · Contract</div>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div></div>
+                <div class="timeline-body tg-company">
                   <div class="timeline-company"><a href="https://www.crunchbase.com" target="_blank" rel="noopener noreferrer">Crunchbase</a></div>
-                  <div class="timeline-role">Sales Development Representative</div>
+                </div>
+                <div class="timeline-date">Sep 2019 – Feb 2021</div>
+                <div class="timeline-body">
+                  <div class="timeline-role">Outbound Sales Development Representative</div>
                 </div>
               </div>
 
-              <div class="timeline-entry">
-                <div class="timeline-date">Apr 2020 – Nov 2020</div>
-                <div class="timeline-body">
+              <div class="timeline-group">
+                <div></div>
+                <div class="timeline-body tg-company">
                   <div class="timeline-company"><a href="https://sentry.io" target="_blank" rel="noopener noreferrer">Sentry.io</a></div>
-                  <div class="timeline-role">Sales Development Representative</div>
+                </div>
+                <div class="timeline-date">Apr 2019 – Sep 2019</div>
+                <div class="timeline-body">
+                  <div class="timeline-role">Outbound Sales Development Representative</div>
+                </div>
+                <div class="timeline-date">Jul 2018 – Mar 2019</div>
+                <div class="timeline-body">
+                  <div class="timeline-role">Inbound Sales Development Representative</div>
                 </div>
               </div>
 
               <div class="timeline-entry">
-                <div class="timeline-date">Feb 2018 – Apr 2019</div>
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company">EMR CPR</div>
+                </div>
+                <div class="timeline-date">Mar 2018 – Apr 2018</div>
                 <div class="timeline-body">
+                  <div class="timeline-role">IT Project Manager</div>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company"><a href="https://chanzuckerberg.com" target="_blank" rel="noopener noreferrer">Chan Zuckerberg Initiative</a></div>
+                </div>
+                <div class="timeline-date">Aug 2017 – Oct 2017</div>
+                <div class="timeline-body">
+                  <div class="timeline-role">Project Assistant – Recruiting Team · Contract</div>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div></div>
+                <div class="timeline-body tg-company">
                   <div class="timeline-company"><a href="https://en.wikipedia.org/wiki/First_Republic_Bank" target="_blank" rel="noopener noreferrer">First Republic Bank</a></div>
+                </div>
+                <div class="timeline-date">Sep 2015 – Aug 2017</div>
+                <div class="timeline-body">
                   <div class="timeline-role">Digital Banking Sales Associate</div>
+                </div>
+              </div>
+
+              <div class="timeline-group">
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company">Cal State University East Bay</div>
+                </div>
+                <div class="timeline-date">Jul 2014 – Jul 2015</div>
+                <div class="timeline-body">
+                  <div class="timeline-role">VP of Finance – Student Government Board</div>
+                </div>
+                <div class="timeline-date">Jul 2013 – Jul 2014</div>
+                <div class="timeline-body">
+                  <div class="timeline-role">Director of Legislative Affairs – Student Government Board</div>
+                </div>
+              </div>
+
+              <div class="timeline-entry">
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company">California State Student Association</div>
+                </div>
+                <div class="timeline-date">Jul 2013 – Jul 2014</div>
+                <div class="timeline-body">
+                  <div class="timeline-role">Legislative Lobbying Officer – CSU System Student Government Board</div>
                 </div>
               </div>
 
@@ -1065,17 +1222,23 @@
               <h3>Education</h3>
 
               <div class="timeline-entry">
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company">Cal State University East Bay</div>
+                </div>
                 <div class="timeline-date">2017</div>
                 <div class="timeline-body">
-                  <div class="timeline-company">Cal State University East Bay</div>
                   <div class="timeline-role">Economics &amp; Political Science</div>
                 </div>
               </div>
 
               <div class="timeline-entry">
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company">Impact Academy of Arts &amp; Technology</div>
+                </div>
                 <div class="timeline-date">2011</div>
                 <div class="timeline-body">
-                  <div class="timeline-company">Impact Academy of Arts &amp; Technology</div>
                   <div class="timeline-role">High School Diploma</div>
                 </div>
               </div>
@@ -1086,17 +1249,23 @@
               <h3>Certifications</h3>
 
               <div class="timeline-entry">
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company">UC Berkeley School of Law</div>
+                </div>
                 <div class="timeline-date">Jan 2021</div>
                 <div class="timeline-body">
-                  <div class="timeline-company">UC Berkeley School of Law</div>
                   <div class="timeline-role">Venture Capital University</div>
                 </div>
               </div>
 
               <div class="timeline-entry">
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company">Techstars &amp; Kauffman Fellows</div>
+                </div>
                 <div class="timeline-date">Sep 2020</div>
                 <div class="timeline-body">
-                  <div class="timeline-company">Techstars &amp; Kauffman Fellows</div>
                   <div class="timeline-role">Venture Deals 2020</div>
                 </div>
               </div>
@@ -1112,10 +1281,6 @@
               <p class="placeholder-msg"><!-- FILL: add projects to CONTENT.projects in the script block --></p>
             </div>
 
-            <div class="github-section" id="github-section" style="display:none">
-              <h3>GitHub</h3>
-              <div class="github-repos" id="github-repos"></div>
-            </div>
           </div>
 
           <!-- SOCIAL -->
@@ -1172,22 +1337,13 @@
 
           <!-- BOOKSHELF -->
           <div class="panel" id="panel-bookshelf" role="tabpanel">
-            <div class="bookshelf-filter sub-tab-bar">
-              <button class="sub-tab-btn active" data-shelf="reading">Reading</button>
-              <button class="sub-tab-btn" data-shelf="textbook">Text Books</button>
-              <button class="sub-tab-btn" data-shelf="Business">Business</button>
-              <button class="sub-tab-btn" data-shelf="Personal Dev">Personal Dev</button>
-              <button class="sub-tab-btn" data-shelf="Philosophy">Philosophy</button>
-              <button class="sub-tab-btn" data-shelf="History">History</button>
-              <button class="sub-tab-btn" data-shelf="Politics">Politics</button>
-              <button class="sub-tab-btn" data-shelf="Fiction">Fiction</button>
-            </div>
             <div class="bookshelf-list" id="bookshelf-list">
               <!-- Rendered by JS from CONTENT.books -->
               <p class="placeholder-msg"><!-- FILL: add books to CONTENT.books in the script block --></p>
             </div>
           </div>
 
+        </div><!-- /.panels-track -->
         </div><!-- /.panel-container -->
 
         <!-- Dark mode toggle — bottom-left of card -->
@@ -1200,7 +1356,7 @@
     </div><!-- /.site-main -->
   </div><!-- /.site-wrapper -->
 
-  <script src="content.js"></script>
+  <script src="content.js?v=3"></script>
   <script>
     // ─────────────────────────────────────────
     // CONTENT — edit via content/*.md + node build.js
@@ -1216,6 +1372,43 @@
     const rendered = {};
 
     // ─────────────────────────────────────────
+    // CAROUSEL STATE
+    // ─────────────────────────────────────────
+    var TAB_ORDER = ['about','experience','projects','social','events','blog','bookshelf'];
+    var carouselIdx = 0;
+    var carouselTrack = null;
+
+    function isMobile() { return window.innerWidth <= 480; }
+
+    function initCarousel() {
+      carouselTrack = document.getElementById('panels-track');
+      if (!carouselTrack) return;
+      var panels = carouselTrack.querySelectorAll('.panel');
+      var w = carouselTrack.parentElement.offsetWidth;
+      carouselTrack.style.width = (w * panels.length) + 'px';
+      panels.forEach(function(p) { p.style.width = w + 'px'; });
+      carouselTrack.style.transform = 'translateX(0)';
+      carouselIdx = 0;
+    }
+
+    function snapToIndex(idx, animated) {
+      if (!carouselTrack) return;
+      var w = carouselTrack.parentElement.offsetWidth;
+      carouselIdx = Math.max(0, Math.min(idx, TAB_ORDER.length - 1));
+      if (animated) {
+        carouselTrack.classList.add('is-snapping');
+        carouselTrack.addEventListener('transitionend', function() {
+          carouselTrack.classList.remove('is-snapping');
+        }, { once: true });
+      }
+      carouselTrack.style.transform = 'translateX(' + (-carouselIdx * w) + 'px)';
+    }
+
+    window.addEventListener('resize', function() {
+      if (isMobile()) initCarousel();
+    });
+
+    // ─────────────────────────────────────────
     // TAB SWITCHING
     // ─────────────────────────────────────────
     function switchTab(name) {
@@ -1224,9 +1417,18 @@
         b.classList.toggle('active', active);
         b.setAttribute('aria-selected', active ? 'true' : 'false');
       });
-      document.querySelectorAll('.panel').forEach(function(p) {
-        p.classList.toggle('active', p.id === 'panel-' + name);
-      });
+      // Scroll active tab button into view
+      var activeBtn = document.querySelector('.tab-btn[data-tab="' + name + '"]');
+      if (activeBtn) activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+      if (isMobile()) {
+        var idx = TAB_ORDER.indexOf(name);
+        if (idx >= 0) snapToIndex(idx, true);
+      } else {
+        document.querySelectorAll('.panel').forEach(function(p) {
+          p.classList.toggle('active', p.id === 'panel-' + name);
+        });
+      }
       if (!rendered[name]) {
         renderPanel(name);
         rendered[name] = true;
@@ -1238,30 +1440,106 @@
       if (name === 'social')     renderSocial();
       if (name === 'events')   { renderEvents(); renderSpeaking(); }
       if (name === 'blog')       renderBlog();
-      if (name === 'bookshelf')  renderBookshelf('reading');
+      if (name === 'bookshelf')  renderBookshelf();
     }
+
+    // ─────────────────────────────────────────
+    // SWIPE CAROUSEL (mobile)
+    // ─────────────────────────────────────────
+    (function() {
+      var container = document.querySelector('.panel-container');
+      if (!container) return;
+      var startX = 0, startY = 0, startTranslateX = 0;
+      var isHorizontal = null;
+
+      function getCurrentTranslateX() {
+        var style = window.getComputedStyle(carouselTrack);
+        var matrix = new DOMMatrix(style.transform);
+        return matrix.m41;
+      }
+
+      container.addEventListener('touchstart', function(e) {
+        if (!isMobile() || !carouselTrack) return;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        isHorizontal = null;
+        carouselTrack.classList.remove('is-snapping');
+        startTranslateX = getCurrentTranslateX();
+      }, { passive: true });
+
+      container.addEventListener('touchmove', function(e) {
+        if (!isMobile() || !carouselTrack) return;
+        var dx = e.touches[0].clientX - startX;
+        var dy = e.touches[0].clientY - startY;
+
+        if (isHorizontal === null) {
+          if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
+            isHorizontal = Math.abs(dx) > Math.abs(dy);
+          }
+          return;
+        }
+        if (!isHorizontal) return;
+
+        e.preventDefault();
+        var w = container.offsetWidth;
+        var minX = -(TAB_ORDER.length - 1) * w;
+        var rawX = startTranslateX + dx;
+        // Rubber-band resistance at edges
+        if (rawX > 0)    rawX = rawX * 0.18;
+        if (rawX < minX) rawX = minX + (rawX - minX) * 0.18;
+        carouselTrack.style.transform = 'translateX(' + rawX + 'px)';
+      }, { passive: false });
+
+      container.addEventListener('touchend', function(e) {
+        if (!isMobile() || !carouselTrack || !isHorizontal) return;
+        var dx = e.changedTouches[0].clientX - startX;
+        var w = container.offsetWidth;
+        var newIdx = carouselIdx;
+        if (dx < -(w * 0.2) && carouselIdx < TAB_ORDER.length - 1) newIdx = carouselIdx + 1;
+        else if (dx > (w * 0.2) && carouselIdx > 0) newIdx = carouselIdx - 1;
+        switchTab(TAB_ORDER[newIdx]);
+      }, { passive: true });
+    })();
 
     // ─────────────────────────────────────────
     // PROJECTS
     // ─────────────────────────────────────────
+    function renderProjectCard(p) {
+      var pills = (p.tech || []).map(function(t) {
+        return '<span class="tech-pill">' + esc(t) + '</span>';
+      }).join('');
+      var links = '';
+      if (p.url)  links += '<a class="project-link" href="' + esc(p.url) + '" target="_blank" rel="noopener">↗ Live</a>';
+      if (p.repo) links += '<a class="project-link" href="https://github.com/' + esc(GITHUB_USERNAME) + '/' + esc(p.repo) + '" target="_blank" rel="noopener">⌥ GitHub</a>';
+      return '<div class="project-card">'
+        + '<div class="project-name">' + esc(p.name) + '</div>'
+        + '<div class="project-desc">' + esc(p.desc) + '</div>'
+        + '<div class="tech-pills">' + pills + '</div>'
+        + '<div class="project-links">' + links + '</div>'
+        + '<div class="project-stars" id="stars-' + esc(p.repo || p.name) + '"></div>'
+        + '</div>';
+    }
+
     function renderProjects() {
       var grid = document.getElementById('project-grid');
       if (!CONTENT.projects.length) return;
-      grid.innerHTML = CONTENT.projects.map(function(p) {
-        var pills = (p.tech || []).map(function(t) {
-          return '<span class="tech-pill">' + esc(t) + '</span>';
-        }).join('');
-        var links = '';
-        if (p.url)  links += '<a class="project-link" href="' + esc(p.url) + '" target="_blank" rel="noopener">↗ Live</a>';
-        if (p.repo) links += '<a class="project-link" href="https://github.com/' + esc(GITHUB_USERNAME) + '/' + esc(p.repo) + '" target="_blank" rel="noopener">⌥ GitHub</a>';
-        return '<div class="project-card">'
-          + '<div class="project-name">' + esc(p.name) + '</div>'
-          + '<div class="project-desc">' + esc(p.desc) + '</div>'
-          + '<div class="tech-pills">' + pills + '</div>'
-          + '<div class="project-links">' + links + '</div>'
-          + '<div class="project-stars" id="stars-' + esc(p.repo) + '"></div>'
-          + '</div>';
-      }).join('');
+      var current = CONTENT.projects.filter(function(p) { return p.current; });
+      var github  = CONTENT.projects.filter(function(p) { return p.github; });
+      var past    = CONTENT.projects.filter(function(p) { return p.past; });
+      var html = '';
+      if (current.length) {
+        html += '<div class="project-section-label">Current</div>';
+        html += current.map(renderProjectCard).join('');
+      }
+      if (github.length) {
+        html += '<div class="project-section-label">GitHub</div>';
+        html += github.map(renderProjectCard).join('');
+      }
+      if (past.length) {
+        html += '<div class="project-section-label">Past</div>';
+        html += past.map(renderProjectCard).join('');
+      }
+      grid.innerHTML = html;
 
       // GitHub star counts — fetch async, degrade gracefully
       if (GITHUB_USERNAME !== 'FILL_ME') {
@@ -1276,17 +1554,7 @@
                 if (el) el.textContent = '★ ' + match.stargazers_count;
               }
             });
-            // Show full repo list
-            var section = document.getElementById('github-section');
-            var list = document.getElementById('github-repos');
-            var sorted = repos.sort(function(a,b){ return b.stargazers_count - a.stargazers_count; }).slice(0,6);
-            list.innerHTML = sorted.map(function(r) {
-              return '<div class="github-repo">'
-                + '<a class="repo-name" href="' + r.html_url + '" target="_blank" rel="noopener">' + esc(r.name) + '</a>'
-                + '<span class="repo-meta">★ ' + r.stargazers_count + '</span>'
-                + '</div>';
-            }).join('');
-            section.style.display = '';
+            // star counts only — repo list section stays hidden
           })
           .catch(function() {}); // silent fail
       }
@@ -1331,7 +1599,7 @@
           + '<div class="entry-title">' + esc(e.name) + '</div>'
           + '<div class="entry-subtitle">' + esc(e.location) + '</div>'
           + '</div>'
-          + (e.type ? '<span class="entry-badge">' + esc(e.type) + '</span>' : '')
+          + ''
           + '</div>';
       });
     }
@@ -1377,100 +1645,64 @@
     // ─────────────────────────────────────────
     // BOOKSHELF
     // ─────────────────────────────────────────
-    function renderBookshelf(filter) {
+    function renderBookshelf() {
       var el = document.getElementById('bookshelf-list');
+      if (!CONTENT.books || !CONTENT.books.length) return;
 
-      // Wire shelf sub-tab buttons
-      document.querySelectorAll('.sub-tab-btn[data-shelf]').forEach(function(btn) {
-        btn.onclick = function() {
-          document.querySelectorAll('.sub-tab-btn[data-shelf]').forEach(function(b) { b.classList.remove('active'); });
-          btn.classList.add('active');
-          renderBookshelf(btn.dataset.shelf);
-        };
-      });
+      var readBooks  = CONTENT.books.filter(function(b) { return b.status === 'read'; });
+      var textbooks  = CONTENT.books.filter(function(b) { return b.status === 'textbook'; });
 
-      var SUBJECT_TABS = ['Business', 'Personal Dev', 'Philosophy', 'History', 'Politics', 'Fiction'];
-      var isSubjectTab = SUBJECT_TABS.indexOf(filter) !== -1;
+      var subjectOrder  = ['Business', 'Personal Dev', 'Philosophy', 'History', 'Politics', 'Fiction'];
+      var textSubOrder  = ['Finance', 'Economics', 'Business', 'Policy', 'History', 'Science', 'Technology'];
 
-      var books = isSubjectTab
-        ? CONTENT.books.filter(function(b) { return b.status === 'read' && b.subject === filter; })
-        : CONTENT.books.filter(function(b) { return b.status === filter; });
-
-      if (!books.length) {
-        el.innerHTML = '<p class="placeholder-msg">No books here yet.</p>';
-        return;
-      }
-
-      if (filter === 'textbook') {
-        var subjectOrder = ['Finance', 'Economics', 'Business', 'Policy', 'History', 'Science', 'Technology'];
-        var grouped1 = {};
-        books.forEach(function(b) {
-          var s = b.subject || 'Other';
-          if (!grouped1[s]) grouped1[s] = [];
-          grouped1[s].push(b);
-        });
-        var html = '';
-        subjectOrder.forEach(function(subject) {
-          if (!grouped1[subject] || !grouped1[subject].length) return;
-          html += '<div class="textbook-subject-heading">' + esc(subject) + '</div>';
-          grouped1[subject].forEach(function(b) {
-            var meta = [b.edition ? b.edition + ' ed.' : '', b.year || ''].filter(Boolean).join(' · ');
-            html += '<div class="book-row">'
-              + '<div class="book-info">'
-              + '<div class="book-title">' + esc(b.title) + '</div>'
-              + '<div class="book-author">' + esc(b.author) + '</div>'
-              + (meta ? '<div class="book-note">' + esc(meta) + '</div>' : '')
-              + '</div>'
-              + '</div>';
-          });
-        });
-        el.innerHTML = html;
-        return;
-      }
-
-      if (isSubjectTab) {
-        var grouped2 = {};
-        var ssOrder = [];
-        books.forEach(function(b) {
-          var ss = b.subsubject || 'General';
-          if (!grouped2[ss]) { grouped2[ss] = []; ssOrder.push(ss); }
-          grouped2[ss].push(b);
-        });
-        var html2 = '';
-        ssOrder.forEach(function(ss) {
-          html2 += '<div class="textbook-subject-heading">' + esc(ss) + '</div>';
-          grouped2[ss].forEach(function(b) {
-            var stars = '';
-            if (b.stars) { for (var i = 1; i <= 5; i++) stars += '<span class="' + (i <= b.stars ? 'star-filled' : 'star-empty') + '">★</span>'; }
-            html2 += '<div class="book-row">'
-              + '<div class="book-info">'
-              + '<div class="book-title">' + esc(b.title) + '</div>'
-              + (b.author ? '<div class="book-author">' + esc(b.author) + '</div>' : '')
-              + (b.note ? '<div class="book-note">' + esc(b.note) + '</div>' : '')
-              + (stars ? '<div class="book-stars">' + stars + '</div>' : '')
-              + '</div>'
-              + '</div>';
-          });
-        });
-        el.innerHTML = html2;
-        return;
-      }
-
-      el.innerHTML = books.map(function(b) {
+      function bookRow(b, showMeta) {
         var stars = '';
-        for (var i = 1; i <= 5; i++) {
-          stars += '<span class="' + (i <= b.stars ? 'star-filled' : 'star-empty') + '">★</span>';
-        }
+        if (b.stars) { for (var i = 1; i <= 5; i++) stars += '<span class="' + (i <= b.stars ? 'star-filled' : 'star-empty') + '">★</span>'; }
+        var meta = showMeta ? [b.edition ? b.edition + ' ed.' : '', b.year || ''].filter(Boolean).join(' · ') : '';
         return '<div class="book-row">'
-          + (b.cover ? '<img class="book-cover" src="' + esc(b.cover) + '" alt="' + esc(b.title) + '">' : '<div class="book-cover"></div>')
           + '<div class="book-info">'
           + '<div class="book-title">' + esc(b.title) + '</div>'
-          + '<div class="book-author">' + esc(b.author) + '</div>'
+          + (b.author ? '<div class="book-author">' + esc(b.author) + '</div>' : '')
+          + (meta ? '<div class="book-note">' + esc(meta) + '</div>' : '')
           + (b.note ? '<div class="book-note">' + esc(b.note) + '</div>' : '')
-          + '</div>'
-          + '</div>';
-      }).join('');
+          + (stars ? '<div class="book-stars">' + stars + '</div>' : '')
+          + '</div></div>';
+      }
 
+      var html = '';
+
+      subjectOrder.forEach(function(subject) {
+        var sBooks = readBooks.filter(function(b) { return b.subject === subject; });
+        if (!sBooks.length) return;
+        html += '<div class="bookshelf-cat-heading">' + esc(subject) + '</div>';
+        var grouped = {}, ssOrder = [];
+        sBooks.forEach(function(b) {
+          var ss = b.subsubject || 'General';
+          if (!grouped[ss]) { grouped[ss] = []; ssOrder.push(ss); }
+          grouped[ss].push(b);
+        });
+        ssOrder.forEach(function(ss) {
+          html += '<div class="textbook-subject-heading">' + esc(ss) + '</div>';
+          grouped[ss].forEach(function(b) { html += bookRow(b, false); });
+        });
+      });
+
+      if (textbooks.length) {
+        html += '<div class="bookshelf-cat-heading">Textbooks</div>';
+        var tGrouped = {};
+        textbooks.forEach(function(b) {
+          var s = b.subject || 'Other';
+          if (!tGrouped[s]) tGrouped[s] = [];
+          tGrouped[s].push(b);
+        });
+        textSubOrder.forEach(function(subject) {
+          if (!tGrouped[subject] || !tGrouped[subject].length) return;
+          html += '<div class="textbook-subject-heading">' + esc(subject) + '</div>';
+          tGrouped[subject].forEach(function(b) { html += bookRow(b, true); });
+        });
+      }
+
+      el.innerHTML = html;
     }
 
     // ─────────────────────────────────────────
@@ -1519,6 +1751,7 @@
     // PAGE LOAD FADE-IN
     // ─────────────────────────────────────────
     window.addEventListener('load', function() {
+      if (isMobile()) initCarousel();
       setTimeout(function() {
         document.body.classList.remove('is-loading');
       }, 100);
