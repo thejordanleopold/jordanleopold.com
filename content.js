@@ -386,6 +386,13 @@ var SITE_CONTENT = {
       "subsubject": "Eastern"
     },
     {
+      "title": "The Life of Sariputta",
+      "author": "Thera Nyanaponika",
+      "status": "read",
+      "subject": "Philosophy",
+      "subsubject": "Eastern"
+    },
+    {
       "title": "Tao Te Ching",
       "author": "Lao Tzu",
       "status": "read",
