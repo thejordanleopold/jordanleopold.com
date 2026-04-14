@@ -299,6 +299,13 @@ var SITE_CONTENT = {
       "subsubject": "Relationships"
     },
     {
+      "title": "The 5 Love Languages",
+      "author": "Gary Chapman",
+      "status": "read",
+      "subject": "Personal Dev",
+      "subsubject": "Relationships"
+    },
+    {
       "title": "How to Be a Person",
       "author": "Lindy West & Dan Savage",
       "year": "2012",
