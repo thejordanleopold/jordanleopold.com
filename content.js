@@ -86,6 +86,13 @@ var SITE_CONTENT = {
       "subsubject": "Entrepreneurship"
     },
     {
+      "title": "The Lean Startup",
+      "author": "Eric Ries",
+      "status": "read",
+      "subject": "Business",
+      "subsubject": "Entrepreneurship"
+    },
+    {
       "title": "Creativity, Inc.",
       "author": "Ed Catmull",
       "year": "2014",
