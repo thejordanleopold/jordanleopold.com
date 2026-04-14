@@ -387,12 +387,7 @@
       margin-bottom: 0;
       letter-spacing: 0.02em;
     }
-    .timeline-entry {
-      display: grid;
-      grid-template-columns: subgrid;
-      grid-column: 1 / -1;
-      align-items: start;
-    }
+    .timeline-entry,
     .timeline-group {
       display: grid;
       grid-template-columns: subgrid;
@@ -400,17 +395,21 @@
       row-gap: 0;
       align-items: start;
     }
+    .timeline-entry > .timeline-body,
     .timeline-group > .timeline-body {
       padding-top: 0.25rem;
       padding-bottom: 0.25rem;
     }
+    .timeline-entry > .tg-company,
     .timeline-group > .tg-company {
       padding-top: 0;
       padding-bottom: 0.1rem;
     }
+    .timeline-entry > .timeline-body:last-child,
     .timeline-group > .timeline-body:last-child {
       padding-bottom: 0;
     }
+    .timeline-entry .timeline-role,
     .timeline-group .timeline-role { margin-bottom: 0; }
     .timeline-date {
       white-space: nowrap;
@@ -1058,41 +1057,56 @@
               <h3>Experience</h3>
 
               <div class="timeline-entry">
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company"><a href="https://startupiq.pro/" target="_blank" rel="noopener noreferrer">Startup IQ</a></div>
+                </div>
                 <div class="timeline-date">Mar 2026 – Present</div>
                 <div class="timeline-body">
-                  <div class="timeline-company"><a href="https://startupiq.pro/" target="_blank" rel="noopener noreferrer">Startup IQ</a></div>
                   <div class="timeline-role">Founder · Full-time</div>
                 </div>
               </div>
 
               <div class="timeline-entry">
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company"><a href="https://www.crunchbase.com/organization/newchip" target="_blank" rel="noopener noreferrer">Newchip Accelerator</a></div>
+                </div>
                 <div class="timeline-date">Feb 2022 – Jan 2023</div>
                 <div class="timeline-body">
-                  <div class="timeline-company"><a href="https://www.crunchbase.com/organization/newchip" target="_blank" rel="noopener noreferrer">Newchip Accelerator</a></div>
                   <div class="timeline-role">Investor Relations Associate – Venture Capital</div>
                 </div>
               </div>
 
               <div class="timeline-entry">
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company"><a href="https://www.keyhorse.vc/" target="_blank" rel="noopener noreferrer">Keyhorse Capital</a></div>
+                </div>
                 <div class="timeline-date">Sep 2021 – Dec 2021</div>
                 <div class="timeline-body">
-                  <div class="timeline-company"><a href="https://www.keyhorse.vc/" target="_blank" rel="noopener noreferrer">Keyhorse Capital</a></div>
                   <div class="timeline-role">Venture Capital Analyst · Contract</div>
                 </div>
               </div>
 
               <div class="timeline-entry">
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company"><a href="https://www.bfm.fund/" target="_blank" rel="noopener noreferrer">The BFM Fund</a></div>
+                </div>
                 <div class="timeline-date">Jan 2021 – Jun 2021</div>
                 <div class="timeline-body">
-                  <div class="timeline-company"><a href="https://www.bfm.fund/" target="_blank" rel="noopener noreferrer">The BFM Fund</a></div>
                   <div class="timeline-role">Venture Capital Analyst · Contract</div>
                 </div>
               </div>
 
               <div class="timeline-entry">
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company"><a href="https://www.crunchbase.com" target="_blank" rel="noopener noreferrer">Crunchbase</a></div>
+                </div>
                 <div class="timeline-date">Sep 2019 – Feb 2021</div>
                 <div class="timeline-body">
-                  <div class="timeline-company"><a href="https://www.crunchbase.com" target="_blank" rel="noopener noreferrer">Crunchbase</a></div>
                   <div class="timeline-role">Outbound Sales Development Representative</div>
                 </div>
               </div>
@@ -1113,25 +1127,34 @@
               </div>
 
               <div class="timeline-entry">
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company">EMR CPR</div>
+                </div>
                 <div class="timeline-date">Mar 2018 – Apr 2018</div>
                 <div class="timeline-body">
-                  <div class="timeline-company">EMR CPR</div>
                   <div class="timeline-role">IT Project Manager</div>
                 </div>
               </div>
 
               <div class="timeline-entry">
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company"><a href="https://chanzuckerberg.com" target="_blank" rel="noopener noreferrer">Chan Zuckerberg Initiative</a></div>
+                </div>
                 <div class="timeline-date">Aug 2017 – Oct 2017</div>
                 <div class="timeline-body">
-                  <div class="timeline-company"><a href="https://chanzuckerberg.com" target="_blank" rel="noopener noreferrer">Chan Zuckerberg Initiative</a></div>
                   <div class="timeline-role">Project Assistant – Recruiting Team · Contract</div>
                 </div>
               </div>
 
               <div class="timeline-entry">
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company"><a href="https://en.wikipedia.org/wiki/First_Republic_Bank" target="_blank" rel="noopener noreferrer">First Republic Bank</a></div>
+                </div>
                 <div class="timeline-date">Sep 2015 – Aug 2017</div>
                 <div class="timeline-body">
-                  <div class="timeline-company"><a href="https://en.wikipedia.org/wiki/First_Republic_Bank" target="_blank" rel="noopener noreferrer">First Republic Bank</a></div>
                   <div class="timeline-role">Digital Banking Sales Associate</div>
                 </div>
               </div>
@@ -1152,9 +1175,12 @@
               </div>
 
               <div class="timeline-entry">
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company">California State Student Association</div>
+                </div>
                 <div class="timeline-date">Jul 2013 – Jul 2014</div>
                 <div class="timeline-body">
-                  <div class="timeline-company">California State Student Association</div>
                   <div class="timeline-role">Legislative Lobbying Officer – CSU System Student Government Board</div>
                 </div>
               </div>
@@ -1165,17 +1191,23 @@
               <h3>Education</h3>
 
               <div class="timeline-entry">
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company">Cal State University East Bay</div>
+                </div>
                 <div class="timeline-date">2017</div>
                 <div class="timeline-body">
-                  <div class="timeline-company">Cal State University East Bay</div>
                   <div class="timeline-role">Economics &amp; Political Science</div>
                 </div>
               </div>
 
               <div class="timeline-entry">
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company">Impact Academy of Arts &amp; Technology</div>
+                </div>
                 <div class="timeline-date">2011</div>
                 <div class="timeline-body">
-                  <div class="timeline-company">Impact Academy of Arts &amp; Technology</div>
                   <div class="timeline-role">High School Diploma</div>
                 </div>
               </div>
@@ -1186,17 +1218,23 @@
               <h3>Certifications</h3>
 
               <div class="timeline-entry">
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company">UC Berkeley School of Law</div>
+                </div>
                 <div class="timeline-date">Jan 2021</div>
                 <div class="timeline-body">
-                  <div class="timeline-company">UC Berkeley School of Law</div>
                   <div class="timeline-role">Venture Capital University</div>
                 </div>
               </div>
 
               <div class="timeline-entry">
+                <div></div>
+                <div class="timeline-body tg-company">
+                  <div class="timeline-company">Techstars &amp; Kauffman Fellows</div>
+                </div>
                 <div class="timeline-date">Sep 2020</div>
                 <div class="timeline-body">
-                  <div class="timeline-company">Techstars &amp; Kauffman Fellows</div>
                   <div class="timeline-role">Venture Deals 2020</div>
                 </div>
               </div>
