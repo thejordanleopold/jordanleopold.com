@@ -332,21 +332,21 @@ var SITE_CONTENT = {
       "author": "Sun Tzu",
       "status": "read",
       "subject": "Philosophy",
-      "subsubject": "Classical"
+      "subsubject": "Eastern"
     },
     {
       "title": "The Book of Five Rings",
       "author": "Miyamoto Musashi",
       "status": "read",
       "subject": "Philosophy",
-      "subsubject": "Classical"
+      "subsubject": "Eastern"
     },
     {
       "title": "Musashi's Dokkodo",
       "author": "Miyamoto Musashi",
       "status": "read",
       "subject": "Philosophy",
-      "subsubject": "Classical"
+      "subsubject": "Eastern"
     },
     {
       "title": "Letters from a Stoic",
