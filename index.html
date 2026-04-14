@@ -859,6 +859,16 @@
       .image-component.style-1 > .frame { width: 4.25rem; }
     }
     @media (max-width: 480px) {
+      /* Scale video by height so full top-to-bottom is visible, crop sides, center */
+      .site-bg video {
+        width: auto;
+        height: 100dvh;
+        min-width: unset;
+        object-fit: fill;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+      }
       .site-wrapper { padding: 0; }
       .site-main {
         height: 100dvh;
