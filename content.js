@@ -147,8 +147,8 @@ var SITE_CONTENT = {
       "author": "Walter Isaacson",
       "year": "2023",
       "status": "read",
-      "subject": "History",
-      "subsubject": "Biography"
+      "subject": "Business",
+      "subsubject": "Entrepreneurship"
     },
     {
       "title": "The Startup Community Way",
@@ -201,8 +201,8 @@ var SITE_CONTENT = {
       "author": "Ron Paul",
       "year": "2009",
       "status": "read",
-      "subject": "Politics",
-      "subsubject": "Political Theory"
+      "subject": "Business",
+      "subsubject": "Investing & Finance"
     },
     {
       "title": "Equity Asset Valuation",
@@ -281,13 +281,6 @@ var SITE_CONTENT = {
       "subsubject": "Strategy & Management"
     },
     {
-      "title": "Outwitting the Devil",
-      "author": "Napoleon Hill",
-      "status": "read",
-      "subject": "Personal Dev",
-      "subsubject": "Mindset"
-    },
-    {
       "title": "A New Earth",
       "author": "Eckhart Tolle",
       "year": "2005",
@@ -348,13 +341,6 @@ var SITE_CONTENT = {
       "subsubject": "Relationships"
     },
     {
-      "title": "The 5 Love Languages",
-      "author": "Gary Chapman",
-      "status": "read",
-      "subject": "Personal Dev",
-      "subsubject": "Relationships"
-    },
-    {
       "title": "How to Be a Person",
       "author": "Lindy West & Dan Savage",
       "year": "2012",
@@ -388,21 +374,21 @@ var SITE_CONTENT = {
       "author": "Sun Tzu",
       "status": "read",
       "subject": "Philosophy",
-      "subsubject": "Eastern"
+      "subsubject": "Classical"
     },
     {
       "title": "The Book of Five Rings",
       "author": "Miyamoto Musashi",
       "status": "read",
       "subject": "Philosophy",
-      "subsubject": "Eastern"
+      "subsubject": "Classical"
     },
     {
       "title": "Musashi's Dokkodo",
       "author": "Miyamoto Musashi",
       "status": "read",
       "subject": "Philosophy",
-      "subsubject": "Eastern"
+      "subsubject": "Classical"
     },
     {
       "title": "Letters from a Stoic",
@@ -426,27 +412,6 @@ var SITE_CONTENT = {
       "status": "read",
       "subject": "Philosophy",
       "subsubject": "Classical"
-    },
-    {
-      "title": "The Dhammapada",
-      "author": "Buddha",
-      "status": "read",
-      "subject": "Philosophy",
-      "subsubject": "Eastern"
-    },
-    {
-      "title": "Buddhism 101",
-      "author": "Arnie Kozak",
-      "status": "read",
-      "subject": "Philosophy",
-      "subsubject": "Eastern"
-    },
-    {
-      "title": "The Life of Sariputta",
-      "author": "Thera Nyanaponika",
-      "status": "read",
-      "subject": "Philosophy",
-      "subsubject": "Eastern"
     },
     {
       "title": "Tao Te Ching",
@@ -490,13 +455,6 @@ var SITE_CONTENT = {
       "status": "read",
       "subject": "Philosophy",
       "subsubject": "Eastern"
-    },
-    {
-      "title": "The Power of Now: A Guide to Spiritual Enlightenment",
-      "author": "Eckhart Tolle",
-      "status": "read",
-      "subject": "Philosophy",
-      "subsubject": "Spirituality"
     },
     {
       "title": "How to Manifest",
