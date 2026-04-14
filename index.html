@@ -454,6 +454,16 @@
 
     /* === SECTION: PROJECTS === */
     .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.875rem; }
+    .project-section-label {
+      grid-column: 1 / -1;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5em;
+      color: #000;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      padding-bottom: 0.15rem;
+      margin-bottom: 0.125rem;
+    }
+    .project-section-label:not(:first-child) { margin-top: 0.5rem; }
     .project-card {
       background: rgba(0,0,0,0.04);
       border: 1px solid rgba(0,0,0,0.08);
@@ -859,6 +869,7 @@
     body.dark .social-post-date { color: rgba(240,240,240,0.38); }
     body.dark .social-post-text { color: rgba(240,240,240,0.72); }
     body.dark .social-coming-soon { color: rgba(240,240,240,0.35); }
+    body.dark .project-section-label { color: rgba(240,240,240,0.9); border-bottom-color: rgba(255,255,255,0.1); }
     body.dark .project-card { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
     body.dark .project-name { color: rgba(240,240,240,0.9); }
     body.dark .project-desc { color: rgba(240,240,240,0.6); }
@@ -1487,24 +1498,37 @@
     // ─────────────────────────────────────────
     // PROJECTS
     // ─────────────────────────────────────────
+    function renderProjectCard(p) {
+      var pills = (p.tech || []).map(function(t) {
+        return '<span class="tech-pill">' + esc(t) + '</span>';
+      }).join('');
+      var links = '';
+      if (p.url)  links += '<a class="project-link" href="' + esc(p.url) + '" target="_blank" rel="noopener">↗ Live</a>';
+      if (p.repo) links += '<a class="project-link" href="https://github.com/' + esc(GITHUB_USERNAME) + '/' + esc(p.repo) + '" target="_blank" rel="noopener">⌥ GitHub</a>';
+      return '<div class="project-card">'
+        + '<div class="project-name">' + esc(p.name) + '</div>'
+        + '<div class="project-desc">' + esc(p.desc) + '</div>'
+        + '<div class="tech-pills">' + pills + '</div>'
+        + '<div class="project-links">' + links + '</div>'
+        + '<div class="project-stars" id="stars-' + esc(p.repo || p.name) + '"></div>'
+        + '</div>';
+    }
+
     function renderProjects() {
       var grid = document.getElementById('project-grid');
       if (!CONTENT.projects.length) return;
-      grid.innerHTML = CONTENT.projects.map(function(p) {
-        var pills = (p.tech || []).map(function(t) {
-          return '<span class="tech-pill">' + esc(t) + '</span>';
-        }).join('');
-        var links = '';
-        if (p.url)  links += '<a class="project-link" href="' + esc(p.url) + '" target="_blank" rel="noopener">↗ Live</a>';
-        if (p.repo) links += '<a class="project-link" href="https://github.com/' + esc(GITHUB_USERNAME) + '/' + esc(p.repo) + '" target="_blank" rel="noopener">⌥ GitHub</a>';
-        return '<div class="project-card">'
-          + '<div class="project-name">' + esc(p.name) + '</div>'
-          + '<div class="project-desc">' + esc(p.desc) + '</div>'
-          + '<div class="tech-pills">' + pills + '</div>'
-          + '<div class="project-links">' + links + '</div>'
-          + '<div class="project-stars" id="stars-' + esc(p.repo) + '"></div>'
-          + '</div>';
-      }).join('');
+      var current = CONTENT.projects.filter(function(p) { return p.current; });
+      var github  = CONTENT.projects.filter(function(p) { return !p.current; });
+      var html = '';
+      if (current.length) {
+        html += '<div class="project-section-label">Current</div>';
+        html += current.map(renderProjectCard).join('');
+      }
+      if (github.length) {
+        html += '<div class="project-section-label">GitHub</div>';
+        html += github.map(renderProjectCard).join('');
+      }
+      grid.innerHTML = html;
 
       // GitHub star counts — fetch async, degrade gracefully
       if (GITHUB_USERNAME !== 'FILL_ME') {
