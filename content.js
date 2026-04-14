@@ -159,8 +159,8 @@ var SITE_CONTENT = {
       "author": "Ron Paul",
       "year": "2009",
       "status": "read",
-      "subject": "Business",
-      "subsubject": "Investing & Finance"
+      "subject": "Politics",
+      "subsubject": "Political Theory"
     },
     {
       "title": "Equity Asset Valuation",
