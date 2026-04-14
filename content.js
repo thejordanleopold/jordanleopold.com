@@ -239,6 +239,13 @@ var SITE_CONTENT = {
       "subsubject": "Strategy & Management"
     },
     {
+      "title": "Outwitting the Devil",
+      "author": "Napoleon Hill",
+      "status": "read",
+      "subject": "Personal Dev",
+      "subsubject": "Mindset"
+    },
+    {
       "title": "A New Earth",
       "author": "Eckhart Tolle",
       "year": "2005",
