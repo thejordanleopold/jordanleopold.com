@@ -450,6 +450,13 @@ var SITE_CONTENT = {
       "subsubject": "Eastern"
     },
     {
+      "title": "The Power of Now: A Guide to Spiritual Enlightenment",
+      "author": "Eckhart Tolle",
+      "status": "read",
+      "subject": "Philosophy",
+      "subsubject": "Spirituality"
+    },
+    {
       "title": "How to Manifest",
       "author": "Pema Chödrön",
       "year": "2019",
