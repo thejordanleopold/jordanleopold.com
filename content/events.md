@@ -30,6 +30,20 @@ type: Attended
 ---
 
 ---
+name: Silicon Valley Venture: Pitch & Panel Event at Foothill College
+date: Mar 4, 2026
+location: Los Altos Hills, CA
+type: Attended
+---
+
+---
+name: Oakland x International Women's Day
+date: Mar 8, 2026
+location: Oakland, CA
+type: Attended
+---
+
+---
 name: DevOps Modernization Summit 2026
 date: Mar 11, 2026
 location: Virtual
@@ -38,7 +52,7 @@ type: Attended
 
 ---
 name: The Solopreneur Blueprint: How to start and scale a business without investors
-date: Mar 17, 2026
+date: Mar 18, 2026
 location: Virtual
 type: Attended
 ---
@@ -51,9 +65,16 @@ type: Attended
 ---
 
 ---
+name: n8n SF Meetup - Build And Sell Your First Agent
+date: Mar 31, 2026
+location: San Francisco, CA
+type: Attended
+---
+
+---
 name: TypeScript AI Demo Day
-date: Apr 8, 2026
-location: Virtual
+date: Apr 9, 2026
+location: San Francisco, CA
 type: Attended
 ---
 
@@ -61,5 +82,47 @@ type: Attended
 name: People Power Pitch Competition
 date: Apr 11, 2026
 location: Oakland, CA
+type: Attended
+---
+
+---
+name: VC University - SF Meetup
+date: Apr 15, 2026
+location: San Francisco, CA
+type: Attended
+---
+
+---
+name: Mintlify Gala
+date: Apr 16, 2026
+location: San Francisco, CA
+type: Attended
+---
+
+---
+name: Caffeine & Capital @ Corgi with Startup Intros
+date: Apr 17, 2026
+location: San Francisco, CA
+type: Attended
+---
+
+---
+name: SF Start-Up Coverage (Get Free Views)
+date: Apr 20-21, 2026
+location: San Francisco, CA
+type: Attended
+---
+
+---
+name: Become a Head of AI in a Day
+date: Apr 23, 2026
+location: Virtual
+type: Attended
+---
+
+---
+name: SF Minecraft LAN for AI Builders
+date: Apr 25, 2026
+location: San Francisco, CA
 type: Attended
 ---
