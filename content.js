@@ -177,6 +177,12 @@ var SITE_CONTENT = {
       "date": "Apr 25, 2026",
       "location": "San Francisco, CA",
       "type": "Attended"
+    },
+    {
+      "name": "Hustle Fund Batter Up Pitches",
+      "date": "Apr 27, 2026",
+      "location": "San Francisco, CA",
+      "type": "Attended"
     }
   ],
   "speaking": [],
