@@ -1585,7 +1585,7 @@
     function renderEvents() {
       if (!CONTENT.events.length) return;
       var el = document.getElementById('events-list');
-      var byYear = groupByYear(CONTENT.events);
+      var byYear = groupByYear(CONTENT.events.slice().reverse());
       el.innerHTML = renderYearGroups(byYear, function(e) {
         return '<div class="list-entry">'
           + '<div class="entry-date">' + esc(e.date) + '</div>'
