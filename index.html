@@ -1060,7 +1060,24 @@
     }
 
     @media (max-width: 900px) {
-      .device-slot { display: none; }
+      .project-card--iphone {
+        flex-direction: column;
+        align-items: center;
+        min-height: unset;
+      }
+      .device-slot {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        position: static;
+        height: auto;
+      }
+      .device-slot .device-iphone {
+        position: static;
+        transform: none;
+        animation: none;
+        width: clamp(120px, 35vw, 150px);
+      }
     }
 
     /* iPhone 17 mockup */
