@@ -1062,9 +1062,9 @@
 
     /* On desktop, stretch first iphone card to viewport height so CYPHER stays below fold */
     @media (min-width: 901px) {
-      .project-card--iphone:first-child {
-        min-height: calc(100dvh - 325px);
-      }
+      /* Gap between card text and phone, card text floats to bottom of card */
+      .project-card--iphone { gap: 0.75rem; }
+      .project-card-text { align-self: flex-end; justify-content: flex-start; }
     }
 
     @media (max-width: 900px) {
