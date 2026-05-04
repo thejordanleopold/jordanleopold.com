@@ -9,7 +9,9 @@ var SITE_CONTENT = {
     {
       "name": "Startup IQ",
       "desc": "Relationship management platform helping early-stage founders identify investors and catalyze their network into closed funding rounds through live data and AI.",
+      "url": "https://startupiq.pro",
       "current": "true",
+      "mockup": "iphone",
       "tech": [
         "FinTech",
         "React",
@@ -17,11 +19,14 @@ var SITE_CONTENT = {
       ]
     },
     {
-      "name": "21ST CENTURION",
-      "desc": "Agentic AI plaform for founders, startup teams, and small enterprises.",
+      "name": "CYPHER",
+      "desc": "A modern music production environment for the web.",
+      "url": "https://thecypher.app",
       "current": "true",
+      "mockup": "iphone",
       "tech": [
-        "AI",
+        "Music",
+        "React",
         "Node.js"
       ]
     },

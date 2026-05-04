@@ -3,16 +3,21 @@
 ---
 name: Startup IQ
 desc: Relationship management platform helping early-stage founders identify investors and catalyze their network into closed funding rounds through live data and AI.
+url: https://startupiq.pro
 current: true
+mockup: iphone
 tech: FinTech, React, Node.js
 ---
 
 ---
-name: 21ST CENTURION
-desc: Agentic AI plaform for founders, startup teams, and small enterprises.
+name: CYPHER
+desc: A modern music production environment for the web.
+url: https://thecypher.app
 current: true
-tech: AI, Node.js
+mockup: iphone
+tech: Music, React, Node.js
 ---
+
 
 ---
 name: Agentic AI Workshop
