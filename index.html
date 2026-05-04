@@ -458,9 +458,9 @@
     .timeline-bullets li { margin-bottom: 0.2rem; }
 
     /* === SECTION: PROJECTS === */
-    #panel-projects { padding-top: 8rem; }
+    #panel-projects { padding-top: 2rem; }
     @media (max-width: 480px) { #panel-projects { padding-top: 0; } }
-    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.875rem; }
+    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
     .project-section-label {
       grid-column: 1 / -1;
       font-family: 'Bebas Neue', sans-serif;
@@ -1025,7 +1025,7 @@
       border: none;
       padding: 0;
       overflow: visible;
-      min-height: 433px;      /* match iPhone 17 mockup height (200px wide × 852/393) */
+      min-height: 433px;
     }
     /* Card visual styling lives only on the text portion */
     .project-card-text {
@@ -1059,6 +1059,13 @@
       left: 0;
       width: 200px;
       animation: iphoneSlideIn 0.5s 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+
+    /* On desktop, stretch the first iphone card to fill the viewport so CYPHER sits below fold */
+    @media (min-width: 901px) {
+      .project-card--iphone:first-child {
+        min-height: calc(100dvh - 310px);
+      }
     }
 
     @media (max-width: 900px) {
