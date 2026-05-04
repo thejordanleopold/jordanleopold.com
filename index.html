@@ -1080,58 +1080,58 @@
       }
     }
 
-    /* iPhone 17 mockup */
+    /* iPhone mockup — proportions scaled from logical 393×852 pt → 200px CSS width (0.509×) */
     .device-iphone {
       width: 100%;
       aspect-ratio: 393 / 852;
       background: #1C1C1E;
-      border-radius: 44px;
+      border-radius: 24px;
       border: 2px solid #3A3A3C;
       box-shadow: 0 40px 80px rgba(0,0,0,0.55),
                   inset 0 0 0 1px rgba(255,255,255,0.07);
       position: relative;
       overflow: visible;
     }
-    /* Dynamic Island */
+    /* Dynamic Island — 126×37 pt at 0.509× = 64×19 px, top 11 pt = 6 px */
     .device-dynamic-island {
       position: absolute;
-      top: 14px; left: 50%;
+      top: 6px; left: 50%;
       transform: translateX(-50%);
-      width: 80px; height: 24px;
+      width: 64px; height: 19px;
       background: #000;
-      border-radius: 20px;
+      border-radius: 12px;
       z-index: 2;
     }
-    /* Volume / Action buttons (left side) */
+    /* Action + Volume buttons (left side) */
     .device-iphone::before {
       content: '';
       position: absolute;
-      left: -4px; top: 100px;
-      width: 4px; height: 64px;
+      left: -4px; top: 42px;
+      width: 4px; height: 65px;
       background: #3A3A3C;
       border-radius: 2px 0 0 2px;
-      box-shadow: 0 -44px 0 #3A3A3C; /* Action button above */
+      box-shadow: 0 -22px 0 #3A3A3C; /* Action button above */
     }
     /* Power button (right side) */
     .device-iphone::after {
       content: '';
       position: absolute;
-      right: -4px; top: 120px;
-      width: 4px; height: 52px;
+      right: -4px; top: 62px;
+      width: 4px; height: 35px;
       background: #3A3A3C;
       border-radius: 0 2px 2px 0;
     }
-    /* Camera Control button — iPhone 17 specific */
+    /* Camera Control button (right side, lower) */
     .device-camera-control {
       position: absolute;
-      right: -4px; bottom: 110px;
-      width: 4px; height: 36px;
+      right: -4px; bottom: 56px;
+      width: 4px; height: 15px;
       background: #3A3A3C;
       border-radius: 0 2px 2px 0;
     }
     .device-screen {
       margin: 0;
-      border-radius: 42px;
+      border-radius: 22px;
       overflow: hidden;
       height: 100%;
     }
