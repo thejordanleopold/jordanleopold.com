@@ -1050,21 +1050,21 @@
     }
     /* Phone slides up when the card first renders */
     @keyframes iphoneSlideIn {
-      from { opacity: 0; transform: translateY(calc(-50% + 44px)); }
-      to   { opacity: 1; transform: translateY(-50%); }
+      from { opacity: 0; transform: translateY(44px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
     .device-slot .device-iphone {
       position: absolute;
-      top: 50%;
+      top: 0;
       left: 0;
       width: 200px;
       animation: iphoneSlideIn 0.5s 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
     }
 
-    /* On desktop, stretch the first iphone card to fill the viewport so CYPHER sits below fold */
+    /* On desktop, stretch first iphone card to viewport height so CYPHER stays below fold */
     @media (min-width: 901px) {
       .project-card--iphone:first-child {
-        min-height: calc(100dvh - 310px);
+        min-height: calc(100dvh - 360px);
       }
     }
 
