@@ -458,8 +458,7 @@
     .timeline-bullets li { margin-bottom: 0.2rem; }
 
     /* === SECTION: PROJECTS === */
-    #panel-projects { padding-top: 2rem; }
-    @media (max-width: 480px) { #panel-projects { padding-top: 0; } }
+    #panel-projects { padding-top: 0; }
     .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
     .project-section-label {
       grid-column: 1 / -1;
@@ -1064,7 +1063,7 @@
     /* On desktop, stretch first iphone card to viewport height so CYPHER stays below fold */
     @media (min-width: 901px) {
       .project-card--iphone:first-child {
-        min-height: calc(100dvh - 360px);
+        min-height: calc(100dvh - 325px);
       }
     }
 
