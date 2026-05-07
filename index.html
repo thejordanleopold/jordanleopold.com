@@ -123,6 +123,7 @@
       --border-radius-tr: 1rem;
       --border-radius-br: 1rem;
       --border-radius-bl: 0;
+      --card-bg: rgba(250,250,250,0.97);
       align-items: stretch;
       display: flex;
       flex-grow: 0;
@@ -131,47 +132,52 @@
       max-width: 100%;
       height: 96vh;
       max-height: 96vh;
-      overflow: hidden;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
       position: relative;
       z-index: 1;
-      background-image: linear-gradient(90deg, rgba(255,255,255,0.859) 58%, rgba(255,255,255,0.412) 100%);
-      box-shadow: 0rem 1.75rem 2rem 0rem rgba(0,0,0,0.051);
+      background: var(--card-bg);
+      box-shadow: 0rem 1.75rem 2rem 0rem rgba(0,0,0,0.12);
       border-radius: var(--border-radius-tl) var(--border-radius-tr) var(--border-radius-br) var(--border-radius-bl);
       border-top: solid 1px rgba(0,0,0,0.09);
       border-right: solid 1px rgba(0,0,0,0.09);
       border-bottom: solid 1px rgba(0,0,0,0.09);
       transition: opacity 1s ease 0s, transform 1s ease 0s;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0,0,0,0.15) transparent;
     }
+    .site-main::-webkit-scrollbar { width: 4px; }
+    .site-main::-webkit-scrollbar-track { background: transparent; }
+    .site-main::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 99px; }
     body.is-loading .site-main { opacity: 0; transform: translateX(-1.6875rem); }
 
     .site-main > .inner {
       --padding-horizontal: 2.75rem;
-      --padding-vertical: 2.75rem;
-      --spacing: 1.5rem;
+      --padding-vertical: 1.75rem;
+      --spacing: 1.1rem;
       --width: 35rem;
       display: flex;
       flex-direction: column;
       max-width: 100%;
       width: var(--width);
       padding: var(--padding-vertical) 0 0 var(--padding-horizontal);
-      overflow: hidden;
       position: relative;
+      align-self: flex-start;
+      min-height: 100%;
     }
-    /* Fade at bottom to hint scrollability */
-    .site-main > .inner::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 3.5rem;
-      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.88));
-      pointer-events: none;
-      z-index: 2;
+    /* Sticky header wrapper */
+    .sticky-top {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--card-bg);
+      padding-right: var(--padding-horizontal);
+      padding-bottom: 0.5rem;
     }
     /* Card header and tab bar keep the right padding */
-    .card-header { padding-right: var(--padding-horizontal); }
-    .tab-bar { padding-right: var(--padding-horizontal); }
+    .card-header { padding-right: 0; }
+    .tab-bar { padding-right: 0; }
 
     /* Header section (logo + title + buttons) — always visible */
     .card-header > * { margin-top: var(--spacing); margin-bottom: var(--spacing); }
@@ -292,24 +298,12 @@
 
     /* === PANEL CONTAINER === */
     .panel-container {
-      flex: 1;
-      overflow-y: auto;
-      overflow-x: hidden;
       padding-top: 1.25rem;
-      /* Bleed to right edge of card so scrollbar sits there */
-      padding-bottom: 3.5rem; /* space for fade */
-      scrollbar-width: thin;
-      scrollbar-color: rgba(0,0,0,0.15) transparent;
+      padding-bottom: 4rem;
     }
-    .panel-container::-webkit-scrollbar { width: 4px; }
-    .panel-container::-webkit-scrollbar-track { background: transparent; }
-    .panel-container::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 99px; }
 
     /* Panels restore right padding that .inner no longer provides */
-    .panel { padding-right: var(--padding-horizontal); }
-
-    .panel { display: none; }
-    .panel.active { display: block; animation: fadeIn 150ms ease; }
+    .panel { padding-right: var(--padding-horizontal); padding-top: 1.5rem; }
 
     @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -331,15 +325,20 @@
       font-weight: 400;
       letter-spacing: 0.02em;
       color: var(--text);
-      margin-bottom: 0.875rem;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
     }
-    .services-grid { display: flex; flex-direction: column; gap: 0; }
+    .panel > .services-heading:first-child { margin-top: 0; }
+    #panel-about { padding-top: 0.5rem; }
+    .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .service-item {
-      padding: 0.875rem 0;
-      border-bottom: 1px solid rgba(0,0,0,0.07);
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      padding: 0.875rem;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 0.5rem;
     }
-    .service-item:last-child { border-bottom: none; }
-    .service-item-top { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.3rem; }
     .service-name {
       font-family: 'Alexandria', sans-serif;
       font-size: 0.9em;
@@ -352,9 +351,11 @@
       font-weight: 300;
       color: rgba(28,28,28,0.55);
       line-height: 1.55;
+      flex: 1;
     }
     .service-cta {
-      flex-shrink: 0;
+      align-self: flex-start;
+      margin-top: 0.4rem;
       font-family: 'Alexandria', sans-serif;
       font-size: 0.65em;
       font-weight: 400;
@@ -368,7 +369,7 @@
       transition: opacity 150ms;
     }
     .service-cta:hover { opacity: 0.85; }
-    body.dark .service-item { border-bottom-color: rgba(255,255,255,0.07); }
+    body.dark .service-item { border-color: rgba(255,255,255,0.07); }
     body.dark .service-desc { color: rgba(240,240,240,0.55); }
 
     /* === SECTION: RESUME === */
@@ -389,9 +390,11 @@
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1.5em;
       color: var(--text);
+      margin-top: 2rem;
       margin-bottom: 0;
       letter-spacing: 0.02em;
     }
+    .resume-section:first-child h3 { margin-top: 0; }
     .timeline-entry,
     .timeline-group {
       display: grid;
@@ -459,7 +462,7 @@
 
     /* === SECTION: PROJECTS === */
     #panel-projects { padding-top: 0; }
-    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
     .project-section-label {
       grid-column: 1 / -1;
       font-family: 'Bebas Neue', sans-serif;
@@ -799,12 +802,14 @@
     }
     .bookshelf-list { display: flex; flex-direction: column; gap: 0.625rem; clear: both; }
     .bookshelf-cat-heading {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.5em;
+      font-family: 'Alexandria', sans-serif;
+      font-size: 0.7em;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
       color: var(--text);
-      border-bottom: 1px solid rgba(0,0,0,0.1);
-      padding-bottom: 0.15rem;
-      margin-top: 0.75rem;
+      margin-top: 1.25rem;
+      margin-bottom: 0.25rem;
     }
     .bookshelf-cat-heading:first-child { margin-top: 0; }
     .textbook-subject-heading { font-family: system-ui, -apple-system, sans-serif; font-size: 0.65em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-top: 0.5rem; margin-bottom: -0.25rem; }
@@ -827,7 +832,7 @@
     .book-title {
       font-family: 'Alexandria', sans-serif;
       font-size: 0.8em;
-      font-weight: 400;
+      font-weight: 700;
       color: var(--text);
       margin-bottom: 0.1rem;
       line-height: 1.3;
@@ -888,15 +893,13 @@
     /* === DARK MODE === */
     body.dark { --text: #F0F0F0; --accent: #2EC4BE; }
     body.dark .site-main {
-      /* Solid near-black on left (content area), photo bleeds through on right */
-      background-image: linear-gradient(90deg, rgba(10,10,10,0.98) 52%, rgba(10,10,10,0.72) 100%);
+      --card-bg: rgba(14,14,14,0.98);
       border-top-color: rgba(255,255,255,0.06);
       border-right-color: rgba(255,255,255,0.06);
       border-bottom-color: rgba(255,255,255,0.06);
+      scrollbar-color: rgba(255,255,255,0.18) transparent;
     }
-    body.dark .site-main > .inner::after {
-      background: linear-gradient(to bottom, transparent, rgba(10,10,10,0.95));
-    }
+    body.dark .site-main::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); }
     body.dark .image-component.style-1 > .frame { border-color: rgba(255,255,255,0.12); }
     body.dark .tab-bar { border-bottom-color: rgba(255,255,255,0.25); }
     body.dark .tab-btn { color: rgba(240,240,240,0.5); }
@@ -933,8 +936,7 @@
     body.dark .project-name { color: rgba(240,240,240,0.9); }
     body.dark .project-desc { color: rgba(240,240,240,0.6); }
     body.dark .project-tech-tag { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); color: rgba(240,240,240,0.6); }
-    body.dark .panel-container { scrollbar-color: rgba(255,255,255,0.2) transparent; }
-    body.dark .panel-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); }
+
     body.dark .dark-toggle { border-color: rgba(255,255,255,0.35); color: rgba(240,240,240,0.6); }
     body.dark .dark-toggle:hover { border-color: var(--accent); color: var(--accent); }
     body.dark .dark-toggle .icon-moon { display: none; }
@@ -966,7 +968,6 @@
         border-radius: 0;
         border-left: none;
         border-right: none;
-        background-image: linear-gradient(180deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.70) 35%, rgba(255,255,255,0.90) 100%);
       }
       .site-main > .inner {
         --padding-horizontal: 1.25rem;
@@ -986,28 +987,6 @@
         top: auto;
         transform: none;
       }
-      /* Carousel */
-      .panel-container {
-        overflow: hidden;
-        padding-top: 0;
-        padding-bottom: 0;
-      }
-      .panels-track {
-        display: flex;
-        height: 100%;
-        will-change: transform;
-      }
-      .panels-track.is-snapping {
-        transition: transform 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-      .panel {
-        flex: none !important;
-        display: block !important;
-        overflow-y: auto;
-        overflow-x: hidden;
-        padding-top: 1.25rem;
-        padding-bottom: 3.5rem;
-      }
     }
     @media (max-width: 360px) {
       .site-main > .inner { --padding-horizontal: 1rem; --padding-vertical: 1.25rem; --spacing: 1rem; }
@@ -1025,6 +1004,8 @@
       padding: 0;
       overflow: visible;
       min-height: 433px;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
     }
     /* Card visual styling lives only on the text portion */
     .project-card-text {
@@ -1206,6 +1187,8 @@
     <div class="site-main">
       <div class="inner">
 
+        <!-- ── STICKY TOP (header + tab bar) ── -->
+        <div class="sticky-top">
         <!-- ── CARD HEADER (always visible) ── -->
         <div class="card-header">
 
@@ -1219,50 +1202,62 @@
             <span class="p">Hi, I'm Jordan Leopold.</span>
           </h1>
 
+          <div class="social-btns">
+            <button class="social-btn" data-platform="linkedin" data-url="https://www.linkedin.com/in/jordanleopold/">LinkedIn<svg class="social-btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6,3 13,3 13,10"/></svg></button>
+            <button class="social-btn" data-platform="youtube" data-url="https://www.youtube.com/@TheJordanLeopold">YouTube<svg class="social-btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6,3 13,3 13,10"/></svg></button>
+            <button class="social-btn" data-platform="x" data-url="https://x.com/jordansleopold">X<svg class="social-btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6,3 13,3 13,10"/></svg></button>
+            <button class="social-btn" data-platform="instagram" data-url="https://www.instagram.com/startupiq_/">Instagram<svg class="social-btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6,3 13,3 13,10"/></svg></button>
+            <button class="social-btn" data-platform="tiktok" data-url="https://tiktok.com/@jordanleopold">TikTok<svg class="social-btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6,3 13,3 13,10"/></svg></button>
+          </div>
+
         </div><!-- /.card-header -->
 
         <!-- ── TAB BAR ── -->
         <nav class="tab-bar" role="tablist">
+
           <button class="tab-btn active" data-tab="about" role="tab" aria-selected="true">About</button>
-          <button class="tab-btn" data-tab="experience" role="tab" aria-selected="false">Experience</button>
           <button class="tab-btn" data-tab="projects" role="tab" aria-selected="false">Projects</button>
+          <button class="tab-btn" data-tab="experience" role="tab" aria-selected="false">Experience</button>
           <button class="tab-btn" data-tab="events" role="tab" aria-selected="false">Events</button>
           <button class="tab-btn" data-tab="bookshelf" role="tab" aria-selected="false">Bookshelf</button>
-          <button class="tab-btn" data-tab="social" role="tab" aria-selected="false">Social</button>
         </nav>
+        </div><!-- /.sticky-top -->
 
         <!-- ── PANEL CONTAINER ── -->
         <div class="panel-container">
-        <div class="panels-track" id="panels-track">
 
           <!-- ABOUT -->
-          <div class="panel active" id="panel-about" role="tabpanel">
-            <h3 class="services-heading">Biography</h3>
+          <div class="panel" id="panel-about" role="tabpanel">
+            <h3 class="services-heading">About</h3>
             <p class="about-bio" id="about-bio">
               Jordan Leopold is an entrepreneur, venture capital professional, and political advocate based in the San Francisco Bay Area. With a background spanning enterprise sales, early-stage investing, and government affairs, he is currently building CLIENTEL — an agentic AI platform enabling the one-man sales team — while teaching himself software development.
             </p>
 
             <div class="services-section">
-              <h3 class="services-heading">Services</h3>
-              <div class="services-grid">
+<div class="services-grid">
                 <div class="service-item">
-                  <div class="service-item-top">
-                    <div class="service-name">Startup Sales</div>
-                    <a class="service-cta" href="https://calendly.com/jordanleopold/30" target="_blank" rel="noopener noreferrer">Schedule Free Call</a>
-                  </div>
+                  <div class="service-name">Startup Sales</div>
                   <div class="service-desc">Go-to-market strategy, outbound systems, and product market fit discovery for early stage startups.</div>
+                  <a class="service-cta" href="https://calendly.com/jordanleopold/30" target="_blank" rel="noopener noreferrer">Schedule Free Call</a>
                 </div>
                 <div class="service-item">
-                  <div class="service-item-top">
-                    <div class="service-name">Startup Fundraising</div>
-                    <a class="service-cta" href="https://calendly.com/jordanleopold/30" target="_blank" rel="noopener noreferrer">Schedule Free Call</a>
-                  </div>
-                  <div class="service-desc">Fundraising &amp; investor acquisition strategy, pitch positioning, and investor introductions for early stage startups. Jordan has made over 600 connections between founders &amp; investors.</div>
+                  <div class="service-name">Startup Fundraising</div>
+                  <div class="service-desc">Fundraising &amp; investor acquisition strategy, pitch positioning, and investor introductions for early stage startups.</div>
+                  <a class="service-cta" href="https://calendly.com/jordanleopold/30" target="_blank" rel="noopener noreferrer">Schedule Free Call</a>
                 </div>
               </div>
             </div>
 
           </div><!-- /#panel-about -->
+
+          <!-- PROJECTS -->
+          <div class="panel" id="panel-projects" role="tabpanel">
+            <div class="project-grid" id="project-grid">
+              <!-- Rendered by JS from CONTENT.projects -->
+              <p class="placeholder-msg"><!-- FILL: add projects to CONTENT.projects in the script block --></p>
+            </div>
+
+          </div>
 
           <!-- EXPERIENCE -->
           <div class="panel" id="panel-experience" role="tabpanel">
@@ -1457,19 +1452,10 @@
 
           </div><!-- /#panel-experience -->
 
-          <!-- PROJECTS -->
-          <div class="panel" id="panel-projects" role="tabpanel">
-            <div class="project-grid" id="project-grid">
-              <!-- Rendered by JS from CONTENT.projects -->
-              <p class="placeholder-msg"><!-- FILL: add projects to CONTENT.projects in the script block --></p>
-            </div>
-
-          </div>
-
           <!-- EVENTS -->
           <div class="panel" id="panel-events" role="tabpanel">
             <div class="resume-section">
-              <h3>Attended</h3>
+              <h3>Events Attended</h3>
               <div id="events-list">
                 <!-- Rendered by JS from CONTENT.events -->
                 <p class="placeholder-msg"><!-- FILL: add events to CONTENT.events in the script block --></p>
@@ -1487,6 +1473,9 @@
           <!-- BLOG -->
           <!-- BOOKSHELF -->
           <div class="panel" id="panel-bookshelf" role="tabpanel">
+            <div class="resume-section">
+              <h3>Bookshelf</h3>
+            </div>
             <div class="bookshelf-disclaimer">Inclusion in this library doesn't imply endorsement of the book, its contents, or its author.</div>
             <div class="bookshelf-list" id="bookshelf-list">
               <!-- Rendered by JS from CONTENT.books -->
@@ -1494,33 +1483,7 @@
             </div>
           </div>
 
-          <!-- SOCIAL -->
-          <div class="panel" id="panel-social" role="tabpanel">
-            <div class="social-btns">
-              <button class="social-btn" data-platform="linkedin" data-url="https://www.linkedin.com/in/jordanleopold/">LinkedIn<svg class="social-btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6,3 13,3 13,10"/></svg></button>
-              <button class="social-btn" data-platform="youtube" data-url="https://www.youtube.com/@TheJordanLeopold">YouTube<svg class="social-btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6,3 13,3 13,10"/></svg></button>
-              <button class="social-btn" data-platform="x" data-url="https://x.com/jordansleopold">X<svg class="social-btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6,3 13,3 13,10"/></svg></button>
-              <button class="social-btn" data-platform="instagram" data-url="https://www.instagram.com/startupiq_/">Instagram<svg class="social-btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6,3 13,3 13,10"/></svg></button>
-              <button class="social-btn" data-platform="tiktok" data-url="https://tiktok.com/@jordanleopold">TikTok<svg class="social-btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6,3 13,3 13,10"/></svg></button>
-            </div>
-            <div class="social-section" id="social-linkedin" style="display:none">
-              <p class="social-coming-soon">LinkedIn posts coming soon.</p>
-            </div>
-            <div class="social-section" id="social-youtube" style="display:none">
-              <p class="social-coming-soon">YouTube videos coming soon.</p>
-            </div>
-            <div class="social-section" id="social-x" style="display:none">
-              <p class="social-coming-soon">X posts coming soon.</p>
-            </div>
-            <div class="social-section" id="social-instagram" style="display:none">
-              <p class="social-coming-soon">Instagram feed coming soon.</p>
-            </div>
-            <div class="social-section" id="social-tiktok" style="display:none">
-              <p class="social-coming-soon">TikTok videos coming soon.</p>
-            </div>
-          </div>
 
-        </div><!-- /.panels-track -->
         </div><!-- /.panel-container -->
 
         <!-- Dark mode toggle — bottom-left of card -->
@@ -1544,140 +1507,60 @@
     };
 
     // ─────────────────────────────────────────
-    // LAZY RENDER CACHE
+    // SCROLL NAV
     // ─────────────────────────────────────────
-    const rendered = {};
+    var siteMain = document.querySelector('.site-main');
 
-    // ─────────────────────────────────────────
-    // CAROUSEL STATE
-    // ─────────────────────────────────────────
-    var TAB_ORDER = ['about','experience','projects','events','bookshelf','social'];
-    var carouselIdx = 0;
-    var carouselTrack = null;
-
-    function isMobile() { return window.innerWidth <= 480; }
-
-    function initCarousel() {
-      carouselTrack = document.getElementById('panels-track');
-      if (!carouselTrack) return;
-      var panels = carouselTrack.querySelectorAll('.panel');
-      var w = carouselTrack.parentElement.offsetWidth;
-      carouselTrack.style.width = (w * panels.length) + 'px';
-      panels.forEach(function(p) { p.style.width = w + 'px'; });
-      carouselTrack.style.transform = 'translateX(0)';
-      carouselIdx = 0;
-    }
-
-    function snapToIndex(idx, animated) {
-      if (!carouselTrack) return;
-      var w = carouselTrack.parentElement.offsetWidth;
-      carouselIdx = Math.max(0, Math.min(idx, TAB_ORDER.length - 1));
-      if (animated) {
-        carouselTrack.classList.add('is-snapping');
-        carouselTrack.addEventListener('transitionend', function() {
-          carouselTrack.classList.remove('is-snapping');
-        }, { once: true });
-      }
-      carouselTrack.style.transform = 'translateX(' + (-carouselIdx * w) + 'px)';
-    }
-
-    window.addEventListener('resize', function() {
-      if (isMobile()) initCarousel();
-    });
-
-    // ─────────────────────────────────────────
-    // TAB SWITCHING
-    // ─────────────────────────────────────────
-    function switchTab(name) {
+    function setActiveTab(name) {
       document.querySelectorAll('.tab-btn').forEach(function(b) {
         var active = b.dataset.tab === name;
         b.classList.toggle('active', active);
         b.setAttribute('aria-selected', active ? 'true' : 'false');
       });
-      // Scroll active tab button into view
+      // Scroll tab bar horizontally to keep active tab visible (mobile) — never scroll vertically
+      var tabBar = document.querySelector('.tab-bar');
       var activeBtn = document.querySelector('.tab-btn[data-tab="' + name + '"]');
-      if (activeBtn) activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-
-      if (isMobile()) {
-        var idx = TAB_ORDER.indexOf(name);
-        if (idx >= 0) snapToIndex(idx, true);
-      } else {
-        document.querySelectorAll('.panel').forEach(function(p) {
-          p.classList.toggle('active', p.id === 'panel-' + name);
-        });
+      if (tabBar && activeBtn) {
+        var target = activeBtn.offsetLeft - (tabBar.clientWidth / 2) + (activeBtn.offsetWidth / 2);
+        tabBar.scrollLeft = target;
       }
-      if (!rendered[name]) {
-        renderPanel(name);
-        rendered[name] = true;
-      }
-
     }
 
-    function renderPanel(name) {
-      if (name === 'projects')   renderProjects();
-      if (name === 'social')     renderSocial();
-      if (name === 'events')   { renderEvents(); renderSpeaking(); }
-      if (name === 'blog')       renderBlog();
-      if (name === 'bookshelf')  renderBookshelf();
+    function scrollToPanel(panel) {
+      if (!panel) return;
+      var stickyHeight = (document.querySelector('.sticky-top') || {offsetHeight: 0}).offsetHeight;
+      // Accumulate offsetTop up to siteMain
+      var top = 0;
+      var el = panel;
+      while (el && el !== siteMain) {
+        top += el.offsetTop;
+        el = el.offsetParent;
+      }
+      siteMain.scrollTop = top - stickyHeight;
     }
 
-    // ─────────────────────────────────────────
-    // SWIPE CAROUSEL (mobile)
-    // ─────────────────────────────────────────
-    (function() {
-      var container = document.querySelector('.panel-container');
-      if (!container) return;
-      var startX = 0, startY = 0, startTranslateX = 0;
-      var isHorizontal = null;
+    // Tab click → scroll to section
+    document.querySelectorAll('.tab-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        scrollToPanel(document.getElementById('panel-' + btn.dataset.tab));
+      });
+    });
 
-      function getCurrentTranslateX() {
-        var style = window.getComputedStyle(carouselTrack);
-        var matrix = new DOMMatrix(style.transform);
-        return matrix.m41;
-      }
-
-      container.addEventListener('touchstart', function(e) {
-        if (!isMobile() || !carouselTrack) return;
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-        isHorizontal = null;
-        carouselTrack.classList.remove('is-snapping');
-        startTranslateX = getCurrentTranslateX();
-      }, { passive: true });
-
-      container.addEventListener('touchmove', function(e) {
-        if (!isMobile() || !carouselTrack) return;
-        var dx = e.touches[0].clientX - startX;
-        var dy = e.touches[0].clientY - startY;
-
-        if (isHorizontal === null) {
-          if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
-            isHorizontal = Math.abs(dx) > Math.abs(dy);
-          }
-          return;
-        }
-        if (!isHorizontal) return;
-
-        e.preventDefault();
-        var w = container.offsetWidth;
-        var minX = -(TAB_ORDER.length - 1) * w;
-        var rawX = startTranslateX + dx;
-        // Rubber-band resistance at edges
-        if (rawX > 0)    rawX = rawX * 0.18;
-        if (rawX < minX) rawX = minX + (rawX - minX) * 0.18;
-        carouselTrack.style.transform = 'translateX(' + rawX + 'px)';
-      }, { passive: false });
-
-      container.addEventListener('touchend', function(e) {
-        if (!isMobile() || !carouselTrack || !isHorizontal) return;
-        var dx = e.changedTouches[0].clientX - startX;
-        var w = container.offsetWidth;
-        var newIdx = carouselIdx;
-        if (dx < -(w * 0.2) && carouselIdx < TAB_ORDER.length - 1) newIdx = carouselIdx + 1;
-        else if (dx > (w * 0.2) && carouselIdx > 0) newIdx = carouselIdx - 1;
-        switchTab(TAB_ORDER[newIdx]);
-      }, { passive: true });
-    })();
+    // Scrollspy
+    siteMain.addEventListener('scroll', function() {
+      var stickyEl = document.querySelector('.sticky-top');
+      var offset = (stickyEl ? stickyEl.offsetHeight : 0) + 20;
+      var scrollTop = siteMain.scrollTop;
+      var active = null;
+      document.querySelectorAll('.panel[id]').forEach(function(panel) {
+        var top = 0;
+        var el = panel;
+        while (el && el !== siteMain) { top += el.offsetTop; el = el.offsetParent; }
+        if (top - offset <= scrollTop) active = panel;
+      });
+      if (!active) active = document.querySelector('.panel[id]');
+      if (active) setActiveTab(active.id.replace('panel-', ''));
+    });
 
     // ─────────────────────────────────────────
     // PROJECTS
@@ -1775,23 +1658,9 @@
     function renderSocial() {
       document.querySelectorAll('.social-btn').forEach(function(btn) {
         btn.addEventListener('click', function() {
-          if (btn.classList.contains('active')) {
-            // Second tap — go to external URL
-            window.open(btn.dataset.url, '_blank', 'noopener,noreferrer');
-          } else {
-            // First tap — deactivate all, activate this one, show its section
-            document.querySelectorAll('.social-btn').forEach(function(b) { b.classList.remove('active'); });
-            document.querySelectorAll('.social-section').forEach(function(s) { s.style.display = 'none'; });
-            btn.classList.add('active');
-            var section = document.getElementById('social-' + btn.dataset.platform);
-            if (section) section.style.display = '';
-          }
+          window.open(btn.dataset.url, '_blank', 'noopener,noreferrer');
         });
       });
-
-      // Default to LinkedIn on load
-      var defaultBtn = document.querySelector('.social-btn[data-platform="linkedin"]');
-      if (defaultBtn) defaultBtn.click();
     }
 
     // ─────────────────────────────────────────
@@ -1954,15 +1823,21 @@
     })();
 
     // ─────────────────────────────────────────
-    document.querySelectorAll('.tab-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() { switchTab(btn.dataset.tab); });
-    });
-
-    // ─────────────────────────────────────────
-    // PAGE LOAD FADE-IN
+    // PAGE LOAD
     // ─────────────────────────────────────────
     window.addEventListener('load', function() {
-      if (isMobile()) initCarousel();
+      renderSocial();
+      renderProjects();
+      renderEvents();
+      renderSpeaking();
+      renderBlog();
+      renderBookshelf();
+      setActiveTab('about');
+
+      // Diagnostic — open browser console to see scroll container state
+      console.log('[nav] siteMain:', siteMain);
+      console.log('[nav] scrollHeight:', siteMain.scrollHeight, 'clientHeight:', siteMain.clientHeight, 'canScroll:', siteMain.scrollHeight > siteMain.clientHeight);
+
       setTimeout(function() {
         document.body.classList.remove('is-loading');
       }, 100);

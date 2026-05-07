@@ -10,6 +10,15 @@ tech: FinTech, React, Node.js
 ---
 
 ---
+name: CLIENTEL
+desc: Agentic sales platform that automates outbound prospecting, personalized outreach, and pipeline management for modern sales teams.
+url: https://clientel.co
+current: true
+mockup: iphone
+tech: AI, React, Node.js
+---
+
+---
 name: CYPHER
 desc: A modern music production environment for the web.
 url: https://thecypher.app
