@@ -872,11 +872,12 @@
     /* === DARK MODE TOGGLE === */
     .dark-toggle {
       position: absolute;
-      bottom: 1.5rem;
-      /* centered in the left margin strip */
-      left: calc(var(--padding-horizontal) / 2);
-      transform: translateX(-50%);
-      z-index: 3;
+      top: 0.6rem;
+      right: 0.6rem;
+      bottom: auto;
+      left: auto;
+      transform: none;
+      z-index: 11;
       width: 1.6rem;
       height: 1.6rem;
       border-radius: 50%;
@@ -933,6 +934,7 @@
     body.dark .social-coming-soon { color: rgba(240,240,240,0.35); }
     body.dark .project-section-label { color: rgba(240,240,240,0.9); border-bottom-color: rgba(255,255,255,0.1); }
     body.dark .project-card { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
+    body.dark .project-card--iphone { background: transparent; border-color: transparent; }
     body.dark .project-name { color: rgba(240,240,240,0.9); }
     body.dark .project-desc { color: rgba(240,240,240,0.6); }
     body.dark .project-tech-tag { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); color: rgba(240,240,240,0.6); }
@@ -978,14 +980,9 @@
       .tab-bar::-webkit-scrollbar { display: none; }
       .project-grid { grid-template-columns: 1fr; }
       .buttons-component.style-1 { flex-wrap: wrap; }
-      /* Move dark toggle inside card on mobile */
       .dark-toggle {
-        position: fixed;
-        bottom: 1.25rem;
-        right: 1.25rem;
-        left: auto;
-        top: auto;
-        transform: none;
+        top: 0.6rem;
+        right: 0.6rem;
       }
     }
     @media (max-width: 360px) {
@@ -1222,6 +1219,10 @@
           <button class="tab-btn" data-tab="events" role="tab" aria-selected="false">Events</button>
           <button class="tab-btn" data-tab="bookshelf" role="tab" aria-selected="false">Bookshelf</button>
         </nav>
+        <button id="dark-toggle" class="dark-toggle" aria-label="Toggle dark mode">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="12" height="12"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/></svg>
+        </button>
         </div><!-- /.sticky-top -->
 
         <!-- ── PANEL CONTAINER ── -->
@@ -1494,11 +1495,6 @@
 
         </div><!-- /.panel-container -->
 
-        <!-- Dark mode toggle — bottom-left of card -->
-        <button id="dark-toggle" class="dark-toggle" aria-label="Toggle dark mode">
-          <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="12" height="12"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/></svg>
-        </button>
 
       </div><!-- /.inner -->
     </div><!-- /.site-main -->
