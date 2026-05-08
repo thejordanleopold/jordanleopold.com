@@ -137,11 +137,10 @@
       scroll-behavior: smooth;
       position: relative;
       z-index: 1;
-      background: var(--card-bg);
+      background: linear-gradient(to right, var(--card-bg) 55%, rgba(250,250,250,0.6) 100%);
       box-shadow: 0rem 1.75rem 2rem 0rem rgba(0,0,0,0.12);
       border-radius: var(--border-radius-tl) var(--border-radius-tr) var(--border-radius-br) var(--border-radius-bl);
       border-top: solid 1px rgba(0,0,0,0.09);
-      border-right: solid 1px rgba(0,0,0,0.09);
       border-bottom: solid 1px rgba(0,0,0,0.09);
       transition: opacity 1s ease 0s, transform 1s ease 0s;
       scrollbar-width: thin;
@@ -893,6 +892,7 @@
 
     /* === DARK MODE === */
     body.dark { --text: #F0F0F0; --accent: #2EC4BE; }
+    body.dark .site-main { background: linear-gradient(to right, rgba(18,18,18,0.97) 55%, rgba(18,18,18,0.6) 100%); }
     body.dark .site-main {
       --card-bg: rgba(14,14,14,0.98);
       border-top-color: rgba(255,255,255,0.06);
