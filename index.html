@@ -74,23 +74,26 @@
     .site-bg {
       height: var(--background-height);
       left: 0;
+      overflow: hidden;
       pointer-events: none;
       position: fixed;
       top: 0;
       width: 100vw;
       z-index: 0;
+      background-color: #000;
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
     }
+    /* Scale by height: viewport always filled vertically; wider-than-screen frames crop on the sides (overflow hidden on .site-bg) */
     .site-bg video {
-      bottom: 0;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
       position: absolute;
       top: 0;
-      width: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 100%;
+      width: auto;
+      max-height: 100%;
     }
     .site-bg-fade {
       position: absolute;
@@ -170,18 +173,37 @@
       position: sticky;
       top: 0;
       z-index: 10;
+      isolation: isolate;
       background: transparent;
       margin-left: calc(-1 * var(--padding-horizontal));
       padding-left: var(--padding-horizontal);
       padding-right: var(--padding-horizontal);
       padding-bottom: 0.5rem;
-      transition: background 0.2s ease, backdrop-filter 0.2s ease;
+      transition: background 0.2s ease;
     }
-    /* Only show header background once content has scrolled beneath it */
+    /* Frosted layer when scrolled: full strength left; fades from ~2/3 toward the right (mask + tint gradient) */
     .sticky-top.is-stuck {
-      background: linear-gradient(to right, var(--card-bg) 55%, rgba(250,250,250,0) 100%);
+      background: transparent;
+    }
+    .sticky-top.is-stuck::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 0;
+      pointer-events: none;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
+      background: linear-gradient(to right, var(--card-bg) 0%, var(--card-bg) 58%, rgba(250,250,250,0.35) 76%, rgba(250,250,250,0) 100%);
+      mask-image: linear-gradient(to right, #000 0%, #000 66%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, #000 0%, #000 66%, transparent 100%);
+    }
+    .sticky-top .card-header,
+    .sticky-top .tab-bar {
+      position: relative;
+      z-index: 1;
     }
     /* Card header and tab bar keep the right padding */
     .card-header { padding-right: 0; }
@@ -902,7 +924,11 @@
     /* === DARK MODE === */
     body.dark { --text: #F0F0F0; --accent: #2EC4BE; }
     body.dark .site-main { background: linear-gradient(to right, rgba(18,18,18,0.97) 55%, rgba(18,18,18,0.6) 100%); }
-    body.dark .sticky-top.is-stuck { background: linear-gradient(to right, rgba(18,18,18,0.92) 55%, rgba(18,18,18,0) 100%); }
+    body.dark .sticky-top.is-stuck::before {
+      background: linear-gradient(to right, rgba(18,18,18,0.92) 0%, rgba(18,18,18,0.92) 58%, rgba(18,18,18,0.22) 76%, rgba(18,18,18,0) 100%);
+      mask-image: linear-gradient(to right, #000 0%, #000 66%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, #000 0%, #000 66%, transparent 100%);
+    }
     body.dark .site-main {
       --card-bg: rgba(14,14,14,0.98);
       border-top-color: rgba(255,255,255,0.06);
@@ -1242,12 +1268,12 @@
 <div class="services-grid">
                 <div class="service-item">
                   <div class="service-name">Startup Sales</div>
-                  <div class="service-desc">Go-to-market strategy, outbound systems, and product market fit discovery for early stage startups.</div>
+                  <div class="service-desc">I advise founders on ICP (Ideal Client Profile) discovery and go-to-market sales strategies for early stage startups.</div>
                   <a class="service-cta" href="https://calendly.com/jordanleopold/30" target="_blank" rel="noopener noreferrer">Schedule Free Call</a>
                 </div>
                 <div class="service-item">
                   <div class="service-name">Startup Fundraising</div>
-                  <div class="service-desc">Fundraising &amp; investor acquisition strategy, pitch positioning, and investor introductions for early stage startups.</div>
+                  <div class="service-desc">I advise founders on fundraising strategy, investor acquisition, and pitch refinement for early stage startups.</div>
                   <a class="service-cta" href="https://calendly.com/jordanleopold/30" target="_blank" rel="noopener noreferrer">Schedule Free Call</a>
                 </div>
               </div>
@@ -1573,12 +1599,24 @@
       return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
     }
 
+    /** www.example.com label for project website buttons */
+    function urlDisplayLabel(urlStr) {
+      try {
+        var u = new URL(urlStr);
+        var h = u.hostname;
+        if (h.indexOf('www.') === 0) return h;
+        return 'www.' + h;
+      } catch (e) {
+        return urlStr;
+      }
+    }
+
     function renderProjectCard(p) {
       var pills = (p.tech || []).map(function(t) {
         return '<span class="tech-pill">' + esc(t) + '</span>';
       }).join('');
       var links = '';
-      if (p.url)  links += '<a class="project-link-visit" href="' + esc(p.url) + '" target="_blank" rel="noopener">Visit Website</a>';
+      if (p.url)  links += '<a class="project-link-visit" href="' + esc(p.url) + '" target="_blank" rel="noopener">' + esc(urlDisplayLabel(p.url)) + '</a>';
       if (p.repo) links += '<a class="project-link" href="https://github.com/' + esc(GITHUB_USERNAME) + '/' + esc(p.repo) + '" target="_blank" rel="noopener">⌥ GitHub</a>';
 
       var mockupAttrs = '';

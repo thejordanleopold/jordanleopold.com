@@ -19,6 +19,15 @@ tech: AI, React, Node.js
 ---
 
 ---
+name: NERV
+desc: Personal command center to create AI Agents to handle your life's work.
+url: https://nervagent.com
+current: true
+mockup: iphone
+tech: AI, Agents
+---
+
+---
 name: CYPHER
 desc: A modern music production environment for the web.
 url: https://thecypher.app
