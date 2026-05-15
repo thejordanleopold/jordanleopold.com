@@ -5,7 +5,7 @@ desc: An agentic professional network and CRM.
 url: https://www.centur.app
 current: true
 mockup: iphone
-tech: AI, Network, React
+tech: AI, Network, React, Mastra AI
 ---
 
 

@@ -4,7 +4,7 @@
 var GITHUB_USERNAME = "jordanleopold";
 
 var SITE_CONTENT = {
-  "bio": "Jordan is a seasoned startup professional with experience in early-stage venture capital, go-to-market enterprise sales, and political strategy. He is a self taught design engineer (fullstack AI software) & Founder of Centur",
+  "bio": "Jordan is a seasoned startup professional with experience in early-stage venture capital, go-to-market enterprise sales, and political strategy. He is a self taught AI software engineer (Design Engineer) & Founder of Centur",
   "projects": [
     {
       "name": "Centur",
@@ -15,7 +15,8 @@ var SITE_CONTENT = {
       "tech": [
         "AI",
         "Network",
-        "React"
+        "React",
+        "Mastra AI"
       ]
     },
     {
