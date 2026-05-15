@@ -4,11 +4,12 @@
 var GITHUB_USERNAME = "jordanleopold";
 
 var SITE_CONTENT = {
-  "bio": "Jordan is a seasoned startup professional with experience in early-stage venture capital, go-to-market enterprise sales, and political strategy & advocacy. He is a self taught AI software developer - Founder of Startup IQ, CLIENTEL & CYPHER",
+  "bio": "Jordan is a seasoned startup professional with experience in early-stage venture capital, go-to-market enterprise sales, and political strategy. He is a self taught design engineer (fullstack AI software) & Founder of Centur",
   "projects": [
     {
       "name": "Centur",
       "desc": "An agentic professional network and CRM.",
+      "url": "https://www.centur.app",
       "current": "true",
       "mockup": "iphone",
       "tech": [
