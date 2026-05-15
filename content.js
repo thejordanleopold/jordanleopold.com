@@ -51,7 +51,8 @@ var SITE_CONTENT = {
       "mockup": "iphone",
       "tech": [
         "AI",
-        "Agents"
+        "Agents",
+        "Mastra AI"
       ]
     },
     {

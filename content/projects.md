@@ -33,7 +33,7 @@ desc: Personal command center to create AI Agents to handle your life's work.
 url: https://nervagent.com
 current: true
 mockup: iphone
-tech: AI, Agents
+tech: AI, Agents, Mastra AI
 ---
 
 ---
