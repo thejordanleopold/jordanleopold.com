@@ -7,6 +7,17 @@ var SITE_CONTENT = {
   "bio": "Jordan is a seasoned startup professional with experience in early-stage venture capital, go-to-market enterprise sales, and political strategy & advocacy. He is a self taught AI software developer - Founder of Startup IQ, CLIENTEL & CYPHER",
   "projects": [
     {
+      "name": "Centur",
+      "desc": "An agentic professional network and CRM.",
+      "current": "true",
+      "mockup": "iphone",
+      "tech": [
+        "AI",
+        "Network",
+        "React"
+      ]
+    },
+    {
       "name": "Startup IQ",
       "desc": "Relationship management platform helping early-stage founders identify investors and catalyze their network into closed funding rounds through live data and AI.",
       "url": "https://startupiq.pro",

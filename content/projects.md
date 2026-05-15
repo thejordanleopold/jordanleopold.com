@@ -1,4 +1,12 @@
 # One entry per project. Fields: name, desc, url (optional), repo (optional), github (optional), current (optional), past (optional), tech (comma-separated, optional)
+---
+name: Centur
+desc: An agentic professional network and CRM.
+current: true
+mockup: iphone
+tech: AI, Network, React
+---
+
 
 ---
 name: Startup IQ
